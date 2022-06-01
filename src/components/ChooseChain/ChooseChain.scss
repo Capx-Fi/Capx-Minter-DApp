@@ -1,0 +1,47 @@
+.vesting_steps {
+    .herocontainer {
+        background: radial-gradient(143.33% 143.33% at 82.41% -4.96%,
+                rgba(132, 214, 164, 0.3) 0%,
+                rgba(18, 28, 32, 0.3) 100%);
+
+        .text-container {
+            background: rgba(73, 197, 116, 0.1);
+        }
+
+                .text-container-highlighted {
+                    background: rgba(76, 168, 109, 0.415);
+                }
+    }
+
+    .side-container {
+        .download-template {
+            background: radial-gradient(143.33% 143.33% at 82.41% -4.96%,
+                    rgba(132, 214, 164, 0.3) 0%,
+                    rgba(18, 28, 32, 0.3) 100%);
+
+            .xldiv {
+                background: radial-gradient(143.33% 143.33% at 82.41% -4.96%,
+                        rgba(132, 214, 164, 0.3) 0%,
+                        rgba(18, 28, 32, 0.3) 100%);
+            }
+
+            .mobile-xldiv {
+                border: 0.5px solid #49c475;
+            }
+        }
+
+        .side-button {
+            background: linear-gradient(356.23deg, #96cf03 -65.8%, #f1fff6 89%);
+        }
+
+        
+    }
+}
+
+.side-button {
+    background: linear-gradient(356.23deg, #96cf03 -65.8%, #f1fff6 89%);
+}
+
+.side-button-disabled {
+    background: linear-gradient(356.23deg, #95cf03af -65.8%, #f1fff6b9 89%);
+}
