@@ -1,11 +1,16 @@
-import NextIcon from "../../assets/next-black.svg";
 
-export default function StepControls({ handleClick, currentStep, steps, stepOne }) {
+export default function StepControls({ handleClick, currentStep, steps, stepOne, stepTwo }) {
 
     let disabled = false;
 
   if (currentStep === 1) {
     if (!stepOne) {
+      disabled = true;
+    }
+  }
+
+  if (currentStep === 3) {
+    if (!stepTwo) {
       disabled = true;
     }
   }
@@ -27,7 +32,7 @@ export default function StepControls({ handleClick, currentStep, steps, stepOne 
         onClick={() => handleClick("next")}
       >
         <div className="button_text cursor-pointer text-black text-paragraph-2 leading-paragraph-2 font-bold">
-          {"NEXT"}
+          {currentStep === steps.length ? "CONFIRM" : "NEXT"}
         </div>
       </div>
     </div>

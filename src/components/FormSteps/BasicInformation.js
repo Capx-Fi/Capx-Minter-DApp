@@ -55,7 +55,6 @@ export default function BasicInformation({ setStepOne }) {
     }
     if (isNaN(parseFloat(userData?.tokenDecimal))) {
       console.log("due deci");
-
       valid = false;
     }
     setStepOne(valid);
@@ -86,16 +85,20 @@ export default function BasicInformation({ setStepOne }) {
       } else {
         const toSet = parseFloat(value.trim());
         if (!isNaN(toSet)) {
-          if (toSet > 0 && toSet === parseInt(toSet)) {
-            if (toSet > 18 || toSet < 8) {
+          if (toSet >= 0 && toSet === parseInt(toSet)) {
+            if(toSet === 0){
+              setErrors({ ...errors, [name]: "Value cannot be zero" });
+              setUserData({ ...userData, [name]: "0" });
+            } else if (toSet > 18 || toSet < 8) {
               setErrors({
                 ...errors,
                 [name]: "Decimal precision must be between 8 and 18",
               });
+              setUserData({ ...userData, [name]: toSet });
             } else {
               setErrors({ ...errors, [name]: "" });
+              setUserData({ ...userData, [name]: toSet });
             }
-            setUserData({ ...userData, [name]: toSet });
           }
         }
       }
@@ -107,11 +110,17 @@ export default function BasicInformation({ setStepOne }) {
         const toSet = parseFloat(value.trim());
         if (!isNaN(toSet)) {
           if (
-            toSet > 0 &&
+            toSet >= 0 &&
             toSet < 100000000000000 &&
             toSet === parseInt(toSet)
           ) {
-            setUserData({ ...userData, [name]: toSet });
+            if (toSet === 0) {
+              setErrors({ ...errors, [name]: "Value cannot be zero" });
+              setUserData({ ...userData, [name]: "0" });
+            } else {
+              setErrors({ ...errors, [name]: "" });
+              setUserData({ ...userData, [name]: toSet });
+            }
           }
         }
       }
