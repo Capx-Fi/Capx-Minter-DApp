@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import Web3 from "web3";
 import { useWeb3React } from "@web3-react/core";
 
-export default function BasicInformation({ setStepOne }) {
+export default function BasicInformation({ disableSteps, setDisableSteps }) {
   const { userData, setUserData } = useStepperContext();
   const defaultWeb3 = new Web3(
     "https://rinkeby.infura.io/v3/6351bb49adde41ec86bd60b451b9f1c5"
@@ -57,7 +57,7 @@ export default function BasicInformation({ setStepOne }) {
       console.log("due deci");
       valid = false;
     }
-    setStepOne(valid);
+    setDisableSteps({...disableSteps, first:!valid});
   }, [userData, errors]);
 
   const handleChange = (e) => {
@@ -180,7 +180,7 @@ export default function BasicInformation({ setStepOne }) {
           className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${
             errors?.tokenName?.length > 0
               ? "border-red-500"
-              : infocus?.tokenName && "border-green-400"
+              : infocus?.tokenName && "border-capxGreen"
           } rounded-lg text-gray-100 bg-dark-300 outline-none`}
         />
         <span
@@ -210,7 +210,7 @@ export default function BasicInformation({ setStepOne }) {
           className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${
             errors?.tokenSymbol?.length > 0
               ? "border-red-500"
-              : infocus?.tokenSymbol && "border-green-400"
+              : infocus?.tokenSymbol && "border-capxGreen"
           } rounded-lg text-gray-100 bg-dark-300 outline-none`}
         />
         <span
@@ -240,7 +240,7 @@ export default function BasicInformation({ setStepOne }) {
           className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${
             errors?.tokenDecimal?.length > 0
               ? "border-red-500"
-              : infocus?.tokenDecimal && "border-green-400"
+              : infocus?.tokenDecimal && "border-capxGreen"
           } rounded-lg text-gray-100 bg-dark-300 outline-none`}
         />
         <span
@@ -270,7 +270,7 @@ export default function BasicInformation({ setStepOne }) {
           className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${
             errors?.tokenSupply?.length > 0
               ? "border-red-500"
-              : infocus?.tokenSupply && "border-green-400"
+              : infocus?.tokenSupply && "border-capxGreen"
           } rounded-lg text-gray-100 bg-dark-300 outline-none`}
         />
         <span
@@ -300,7 +300,7 @@ export default function BasicInformation({ setStepOne }) {
           className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${
             errors?.tokenOwner?.length > 0
               ? "border-red-500"
-              : infocus?.tokenOwner && "border-green-400"
+              : infocus?.tokenOwner && "border-capxGreen"
           } rounded-lg text-gray-100 bg-dark-300 outline-none`}
         />
         <span
@@ -353,7 +353,7 @@ export default function BasicInformation({ setStepOne }) {
           className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${
             errors?.description?.length > 0
               ? "border-red-500"
-              : infocus?.description && "border-green-400"
+              : infocus?.description && "border-capxGreen"
           } rounded-lg text-gray-100 bg-dark-300 outline-none`}
         />
         <span
@@ -383,7 +383,7 @@ export default function BasicInformation({ setStepOne }) {
           className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${
             errors?.website?.length > 0
               ? "border-red-500"
-              : infocus?.website && "border-green-400"
+              : infocus?.website && "border-capxGreen"
           } rounded-lg text-gray-100 bg-dark-300 outline-none`}
         />
         <span
@@ -413,7 +413,7 @@ export default function BasicInformation({ setStepOne }) {
           className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${
             errors?.twitter?.length > 0
               ? "border-red-500"
-              : infocus?.twitter && "border-green-400"
+              : infocus?.twitter && "border-capxGreen"
           } rounded-lg text-gray-100 bg-dark-300 outline-none`}
         />
         <span
@@ -443,7 +443,7 @@ export default function BasicInformation({ setStepOne }) {
           className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${
             errors?.telegram?.length > 0
               ? "border-red-500"
-              : infocus?.telegram && "border-green-400"
+              : infocus?.telegram && "border-capxGreen"
           } rounded-lg text-gray-100 bg-dark-300 outline-none`}
         />
         <span

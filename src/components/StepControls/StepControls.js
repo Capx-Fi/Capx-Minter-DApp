@@ -1,21 +1,17 @@
 
-export default function StepControls({ handleClick, currentStep, steps, stepOne, stepTwo }) {
+export default function StepControls({ handleClick, currentStep, steps, disableSteps}) {
 
-    let disabled = false;
+  let disabled = false;
+  if (currentStep === 1 && disableSteps.first) {
+    disabled = true;
+  } else if (currentStep === 2 && disableSteps.second) {
+    disabled = true;
+  } else if (currentStep === 3 && disableSteps.third) {
+    disabled = true;
+  } else if (currentStep === 4 && disableSteps.fourth) {
+    disabled = true;
+  } 
 
-  if (currentStep === 1) {
-    if (!stepOne) {
-      disabled = true;
-    }
-  }
-
-  if (currentStep === 3) {
-    if (!stepTwo) {
-      disabled = true;
-    }
-  }
-    
-  
   return (
     <div className="container mb-16 flex justify-around">
       <div

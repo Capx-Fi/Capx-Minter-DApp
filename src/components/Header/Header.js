@@ -1,5 +1,5 @@
 import "./Header.scss";
-import CapxLogo from "../../assets/capx-mint-logo.svg";
+import CapxLogo from "../../assets/capx-mint-logo-dark.svg";
 import LogoutIcon from "../../assets/logout.svg";
 import { useSnackbar } from "notistack";
 import Web3 from "web3";
@@ -8,7 +8,6 @@ import { useWeb3React, UnsupportedChainIdError } from "@web3-react/core";
 import { injected } from "../../utils/connector";
 import DropDown from "../DropDown/DropDown";
 import { Tooltip, withStyles } from "@material-ui/core";
-
 
 import { useEffect, useState } from "react";
 import { CHAIN_NAMES } from "../../constants/config";
@@ -196,7 +195,7 @@ function Header({hiddenNav, landing}) {
 
 	return (
     <>
-      <header className={`header z-20 border-b border-dark-200`}>
+      <header className={`header z-20`}>
         <a href="/">
           <div>
             <img className={`header_logo`} src={CapxLogo} alt="capx logo" />

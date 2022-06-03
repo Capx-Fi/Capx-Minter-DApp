@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Web3 from "web3";
 import { useWeb3React } from "@web3-react/core";
 
-export default function Configuration({ setStepTwo }) {
+export default function Configuration({ setDisableSteps, disableSteps}) {
   const { userData, setUserData } = useStepperContext();
   const defaultWeb3 = new Web3(
     "https://rinkeby.infura.io/v3/6351bb49adde41ec86bd60b451b9f1c5"
@@ -57,7 +57,7 @@ export default function Configuration({ setStepTwo }) {
       valid = false;
       console.log("due to tokown");
     }
-    setStepTwo(valid);
+    setDisableSteps({...disableSteps, third: !valid});
   }, [userData, errors]);
 
   const handleChange = (e) => {
@@ -81,7 +81,6 @@ export default function Configuration({ setStepTwo }) {
         }
       }
     } else if (name === "autoLPThreshold") {
-
       if (value === "") {
         setErrors({ ...errors, [name]: "" });
         setUserData({ ...userData, [name]: "" });
@@ -134,7 +133,7 @@ export default function Configuration({ setStepTwo }) {
           className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${
             errors?.taxFeePercentage?.length > 0
               ? "border-red-500"
-              : infocus?.taxFeePercentage && "border-green-400"
+              : infocus?.taxFeePercentage && "border-capxGreen"
           } rounded-lg text-gray-100 bg-dark-300 outline-none`}
         />
         <span
@@ -164,7 +163,7 @@ export default function Configuration({ setStepTwo }) {
           className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${
             errors?.burnFeePercentage?.length > 0
               ? "border-red-500"
-              : infocus?.burnFeePercentage && "border-green-400"
+              : infocus?.burnFeePercentage && "border-capxGreen"
           } rounded-lg text-gray-100 bg-dark-300 outline-none`}
         />
         <span
@@ -194,7 +193,7 @@ export default function Configuration({ setStepTwo }) {
           className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${
             errors?.liquidityFeePercentage?.length > 0
               ? "border-red-500"
-              : infocus?.liquidityFeePercentage && "border-green-400"
+              : infocus?.liquidityFeePercentage && "border-capxGreen"
           } rounded-lg text-gray-100 bg-dark-300 outline-none`}
         />
         <span
@@ -224,7 +223,7 @@ export default function Configuration({ setStepTwo }) {
           className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${
             errors?.marketingFeePercentage?.length > 0
               ? "border-red-500"
-              : infocus?.marketingFeePercentage && "border-green-400"
+              : infocus?.marketingFeePercentage && "border-capxGreen"
           } rounded-lg text-gray-100 bg-dark-300 outline-none`}
         />
         <span
@@ -254,7 +253,7 @@ export default function Configuration({ setStepTwo }) {
           className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${
             errors?.autoLPThreshold?.length > 0
               ? "border-red-500"
-              : infocus?.autoLPThreshold && "border-green-400"
+              : infocus?.autoLPThreshold && "border-capxGreen"
           } rounded-lg text-gray-100 bg-dark-300 outline-none`}
         />
         <span
@@ -284,7 +283,7 @@ export default function Configuration({ setStepTwo }) {
           className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${
             errors?.marketingWalletAddress?.length > 0
               ? "border-red-500"
-              : infocus?.marketingWalletAddress && "border-green-400"
+              : infocus?.marketingWalletAddress && "border-capxGreen"
           } rounded-lg text-gray-100 bg-dark-300 outline-none`}
         />
         <span

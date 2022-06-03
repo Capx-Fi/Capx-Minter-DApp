@@ -23,17 +23,22 @@ const FormContainer = ({ setShowForm }) => {
     "Summary",
   ];
 
-  const [stepOne, setStepOne] = useState(true);
-  const [stepTwo, setStepTwo] = useState(true);
+  const [disableSteps, setDisableSteps] = useState({
+    first: true,
+    second: true,
+    third: true,
+    fourth: false,
+  });
+
 
   const displayStep = (step) => {
     switch (step) {
       case 1:
-        return <BasicInformation setStepOne={setStepOne} />;
+        return <BasicInformation disableSteps={disableSteps} setDisableSteps={setDisableSteps}/>;
       case 2:
-        return <TokenType setStepSkip={setStepSkip} />;
-      case 3:
-        return <Configuration setStepTwo={setStepTwo} />;
+        return <TokenType disableSteps={disableSteps} setStepSkip={setStepSkip} setDisableSteps={setDisableSteps}/>;
+      case 3: 
+        return <Configuration disableSteps={disableSteps} setDisableSteps={setDisableSteps} />;
       case 4:
         return <Summary />;
       default:
@@ -44,6 +49,17 @@ const FormContainer = ({ setShowForm }) => {
     let newStep = currentStep;
 
     if (currentStep === 4 && direction === "next") {
+      return;
+    }
+
+    if (currentStep === 4 && direction === "back") {
+      if (stepSkip) {
+        newStep=2;
+      } else {
+        newStep=3;
+      }
+      console.log(currentStep, newStep);
+      setCurrentStep(newStep);
       return;
     }
 
@@ -65,13 +81,13 @@ const FormContainer = ({ setShowForm }) => {
   };
 
   return (
-    <div className="form_container h-screen flex bg-dark-400">
+    <div className="form_container h-screen flex bg-white">
       <Header hiddenNav={true} />
-      <div className="maincontainer flex flex-col justify-center items-center m-auto mt-auto py-32">
-        <div className="upper-container horizontal container rounded-3xl px-14 py-4 pb-12 w-40v bg-opacity-30 text-white relative">
+      <div className="maincontainer text-white flex flex-col justify-center items-center m-auto mt-auto py-32">
+        <div className="upper-container horizontal container rounded-3xl px-14 py-4 pb-12 w-40v bg-opacity-30 relative">
           <Stepper steps={steps} currentStep={currentStep} />
         </div>
-        <div className="herocontainer px-14 w-40v rounded-3xl bg-opacity-30 mt-10 text-white relative">
+        <div className="herocontainer px-14 w-40v rounded-3xl bg-opacity-30 mt-10 relative">
           <div className="horizontal container mt-5 ">
             <div className="p-10 ">
               <UseContextProvider>
@@ -85,8 +101,7 @@ const FormContainer = ({ setShowForm }) => {
           <StepControls
             handleClick={handleClick}
             currentStep={currentStep}
-            stepOne={stepOne}
-            stepTwo={stepTwo}
+            disableSteps={disableSteps}
             steps={steps}
           />
         </div>

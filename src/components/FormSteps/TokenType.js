@@ -2,25 +2,48 @@ import { useStepperContext } from "../../contexts/StepperContext";
 import React, { useState, useEffect } from "react";
 import "./Accordion.scss"
 
-export default function TokenType({setStepSkip}) {
+export default function TokenType({setStepSkip, disableSteps, setDisableSteps}) {
   const { userData, setUserData } = useStepperContext();
-  const [current, setCurrent] = useState("first");
 
   const handleSelect = (name) => {
-    setCurrent(name);
-
+    setUserData({ ...userData, tokenType: name });
     if (name === "first") {
       setStepSkip(true);
+      // if (userData?.taxFeePercentage) {
+      //   setUserData({ ...userData, taxFeePercentage: "" });
+      // }
+      // if (userData?.burnFeePercentage) {
+      //   setUserData({ ...userData, burnFeePercentage: "" });
+      // }
+      // if (userData?.liquidityFeePercentage) {
+      //   setUserData({ ...userData, liquidityFeePercentage: "" });
+      // }
+      // if (userData?.marketingFeePercentage) {
+      //   setUserData({ ...userData, marketingFeePercentage: "" });
+      // }
+      // if (userData?.autoLPThreshold) {
+      //   setUserData({ ...userData, autoLPThreshold: "" });
+      // }
+      // if (userData?.marketingWalletAddress) {
+      //   setUserData({ ...userData, marketingWalletAddress: "" });
+      // }
     } else if(name === "second") {
       setStepSkip(false); 
     }
-
   };
 
+  useEffect(() => {
+    if (userData?.tokenType) {
+      setDisableSteps({ ...disableSteps, second: false });
+    } else {
+      setDisableSteps({ ...disableSteps, second: true });
+    }
+  }, [userData]);
+
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col text-black">
       <div className="font-bold text-heading-2 leading-heading-1 mb-3 ml-2">
-        Choose Token Type
+        <span className="text-white">Choose Token Type</span>
         <div className="accordion2">
           <div className="w-full mt-8 mx-auto">
             <div className="">
@@ -28,7 +51,7 @@ export default function TokenType({setStepSkip}) {
                 <input
                   className="absolute opacity-0"
                   onChange={() => handleSelect("first")}
-                  checked={current === "first"}
+                  checked={userData?.tokenType === "first"}
                   value="first"
                   id="tab-single-one"
                   type="radio"
@@ -57,14 +80,14 @@ export default function TokenType({setStepSkip}) {
                 </div>
               </div>
 
-              <div className="tab w-full overflow-hidden rounded-2xl bg-dark-200 mt-6">
+              <div className="tab w-full overflow-hidden rounded-2xl gradient_bg mt-6">
                 <input
                   className="absolute opacity-0"
                   id="tab-single-two"
                   type="radio"
                   name="second"
                   onChange={() => handleSelect("second")}
-                  checked={current === "second"}
+                  checked={userData?.tokenType === "second"}
                 />
                 <label
                   className="block p-5 leading-caption-1 cursor-pointer"
@@ -79,7 +102,7 @@ export default function TokenType({setStepSkip}) {
                   </span>
                 </label>
                 <div className="tab-content overflow-hidden">
-                  <p className="p-5 bg-dark-200 text-caption-2 leading-caption-2 font-medium">
+                  <p className="p-5 gradient_bg text-caption-2 leading-caption-2 font-medium">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                     Tenetur, architecto, explicabo perferendis nostrum, maxime
                     impedit atque odit sunt pariatur illo obcaecati soluta

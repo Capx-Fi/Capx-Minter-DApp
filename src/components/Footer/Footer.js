@@ -5,7 +5,7 @@ function Footer({centered }) {
     <footer
       className={`${"footer"} ${
         centered ? "centered" : "notcentered"
-      } z-30 text-white`}
+      } z-30`}
     >
       <div className="footer_text">© 2021 CapX All rights reserved.</div>
     </footer>
