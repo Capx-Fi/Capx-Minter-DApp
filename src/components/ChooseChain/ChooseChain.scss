@@ -1,15 +1,18 @@
+.choose-chain{
+    background-color: #F6F6F8;
+}
+
 .vesting_steps {
     .herocontainer {
-        
 
         .text-container {
-            background: white;
-            color: #4e6c01;
+            background: #F0F0F0;
+            
         }
 
                 .text-container-highlighted {
                     background: #e9ffb1;
-                    color: #4e6c01;
+                    
                 }
     }
 
@@ -43,13 +46,17 @@
 }
 
 .create-button-disabled{
-    background: #bee55d;
+    background: #AEAEAE;
 }
 
 .side-button {
     background: #bee55d;
 }
 
+.back-button {
+    background: #F0F0F0;
+}
+
 .side-button-disabled {
-    background: #bee55daa;
+    background: #AEAEAE;
 }

@@ -1,6 +1,6 @@
 .metamaskmodalscreen {
-	@apply h-screen bg-white flex;
-
+	@apply h-screen  flex;
+	background-color: #F6F6F8;
 	&_maincontainer {
 		@apply flex justify-center items-center m-auto mt-32 phone:mt-48 laptop:mt-auto;
 		&_herocontainer {

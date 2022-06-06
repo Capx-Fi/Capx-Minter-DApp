@@ -1,5 +1,10 @@
 .accordion2 {
     /* Tab content - closed */
+  
+        .scrollbar-styling{
+            height: 40vh;
+            overflow-y: scroll;
+        }
 
     .tab-content {
         max-height: 0;
@@ -93,8 +98,12 @@
         /*.text-grey-lightest*/
     }
 
-    .gradient_bg {
-        background: linear-gradient(356.23deg, #8DBC1A 10%, #f1fff6 99%);
+    .accordion_bg {
+        background: #F0F0F0;
+    }
+
+    .accordion_bg_dark{
+        background: #E1E0E0;
     }
 
 

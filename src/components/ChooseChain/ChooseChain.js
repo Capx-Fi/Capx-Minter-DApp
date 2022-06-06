@@ -170,10 +170,10 @@ const ChooseChain = ({setShowForm}) => {
     };
 
   return (
-    <div className="vesting_steps h-screen flex bg-white">
+    <div className="vesting_steps h-screen flex choose-chain">
       <Header />
       <div className="maincontainer flex flex-col justify-center items-center m-auto mt-auto">
-        <div className="herocontainer px-12 py-20 rounded-3xl text-white relative w-60v flex flex-col items-start bg-black">
+        <div className="herocontainer px-12 py-20 rounded-3xl text-black relative w-60v flex flex-col items-start bg-white">
           <div className="title text-50px leading-lh-64 font-bold tracking-tight mt-4 w-full text-center">
             {"Choose your network for token creation"}
           </div>
@@ -182,12 +182,13 @@ const ChooseChain = ({setShowForm}) => {
             <div
               className={`${
                 sortBy === "Ethereum"
-                  ? " text-container-highlighted border-2 border-green-400"
+                  ? " text-container border-2 border-capxGreen"
                   : ""
               } text-container bg-opacity-50 cursor-pointer font-semibold text-2xl px-6 m-4 py-4 rounded-lg w-2/5 h-20 flex items-center justify-between`}
               onClick={() => {
                 chainChange("Ethereum");
               }}
+              
             >
               <div>
                 <img
@@ -211,7 +212,7 @@ const ChooseChain = ({setShowForm}) => {
             <div
               className={`${
                 sortBy === "BSC"
-                  ? " text-container-highlighted border-2 border-green-400"
+                  ? " text-container border-2 border-green-400"
                   : ""
               } text-container  font-semibold text-2xl px-6 m-4 py-4 rounded-lg w-2/5 h-20 flex items-center justify-between`}
               onClick={() => {
@@ -239,7 +240,7 @@ const ChooseChain = ({setShowForm}) => {
             <div
               className={`${
                 sortBy === "Matic"
-                  ? " text-container-highlighted border-2 border-green-400"
+                  ? " text-container border-2 border-green-400"
                   : ""
               } text-container  font-semibold text-2xl px-6 m-4 py-4 rounded-lg w-2/5 h-20 flex items-center justify-between`}
               onClick={() => {
@@ -267,7 +268,7 @@ const ChooseChain = ({setShowForm}) => {
             <div
               className={`${
                 sortBy === "Avalanche"
-                  ? " text-container-highlighted border-2 border-green-400"
+                  ? " text-container border-2 border-green-400"
                   : ""
               } text-container  font-semibold text-2xl px-6 m-4 py-4 rounded-lg w-2/5 h-20 flex items-center justify-between`}
               onClick={() => {
@@ -296,10 +297,14 @@ const ChooseChain = ({setShowForm}) => {
         </div>
         <div
           className={`
-          ${sortBy==="Unknown" ? "pointer-events-none create-button opacity-60" : "bg-capxGreen create-button"} justify-self-end rounded-2xl mt-8 justify-center items-center flex px-4 py-6 w-full cursor-pointer`}
+          ${
+            sortBy === "Unknown"
+              ? "pointer-events-none create-button-disabled opacity-60"
+              : "bg-capxGreen create-button"
+          } justify-self-end rounded-2xl mt-8 justify-center items-center flex px-4 py-6 w-full cursor-pointer`}
           onClick={() => setShowForm(true)}
         >
-          <div className="button_text text-black phone:text-caption-2 screen:text-caption-1 screen:leading-caption-1 twok:text-subheading twok:leading-text-subheading font-bold">
+          <div className={`text-black button_text phone:text-caption-2 screen:text-caption-1 screen:leading-caption-1 twok:text-subheading twok:leading-text-subheading font-bold`}>
             {"Begin Token Creation"}
             <img
               src={NextIcon}

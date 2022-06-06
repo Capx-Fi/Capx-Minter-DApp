@@ -17,6 +17,9 @@ module.exports = {
         azure: "#365CF0",
         greyborder: "#2a383c",
         capxGreen: "#8DBC1A",
+        capxGreenLight: "#CFEE81",
+        capxGreenDark: "#7AA216",
+        greyDark: "#F6F6F8",
         "error-color": {
           100: "#FBDAE1",
           200: "#F27D95",

@@ -15,6 +15,7 @@ import "./FormContainer.scss";
 const FormContainer = ({ setShowForm }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [stepSkip, setStepSkip] = useState(true);
+  const [file, setFile] = useState(null);
 
   const steps = [
     "Basic Information",
@@ -34,13 +35,13 @@ const FormContainer = ({ setShowForm }) => {
   const displayStep = (step) => {
     switch (step) {
       case 1:
-        return <BasicInformation disableSteps={disableSteps} setDisableSteps={setDisableSteps}/>;
+        return <BasicInformation disableSteps={disableSteps} setDisableSteps={setDisableSteps} file={file} setFile={setFile}/>;
       case 2:
         return <TokenType disableSteps={disableSteps} setStepSkip={setStepSkip} setDisableSteps={setDisableSteps}/>;
       case 3: 
         return <Configuration disableSteps={disableSteps} setDisableSteps={setDisableSteps} />;
       case 4:
-        return <Summary />;
+        return <Summary file={file}/>;
       default:
     }
   };
@@ -81,9 +82,9 @@ const FormContainer = ({ setShowForm }) => {
   };
 
   return (
-    <div className="form_container h-screen flex bg-white">
+    <div className="form_container h-screen flex">
       <Header hiddenNav={true} />
-      <div className="maincontainer text-white flex flex-col justify-center items-center m-auto mt-auto py-32">
+      <div className="maincontainer text-black flex flex-col justify-center items-center m-auto mt-auto py-32">
         <div className="upper-container horizontal container rounded-3xl px-14 py-4 pb-12 w-40v bg-opacity-30 relative">
           <Stepper steps={steps} currentStep={currentStep} />
         </div>

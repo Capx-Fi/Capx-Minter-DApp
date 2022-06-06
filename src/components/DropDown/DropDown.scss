@@ -1,5 +1,6 @@
 .header-dropdown-button {
-	@apply flex flex-row w-40 items-center rounded-lg px-2.5 py-2.5 bg-black border text-white text-caption-1 font-semibold border-dark-200 screen:w-32 screen:text-caption-3 screen:py-1.5 desktop:py-2.5 desktop:text-caption-2 desktop:w-36 tablet:text-caption-3;
+	background-color: #F0F0F0;
+	@apply flex flex-row w-40 items-center rounded-lg px-2.5 py-2.5 text-black text-caption-1 font-semibold border-dark-200 screen:w-32 screen:text-caption-3 screen:py-1.5 desktop:py-2.5 desktop:text-caption-2 desktop:w-36 tablet:text-caption-3;
 }
 
 .option {
