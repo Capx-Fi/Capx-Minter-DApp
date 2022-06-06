@@ -17,6 +17,7 @@ const FormContainer = ({ setShowForm }) => {
   const [stepSkip, setStepSkip] = useState(true);
   const [file, setFile] = useState(null);
 
+
   const steps = [
     "Basic Information",
     "Choose Token Type",
@@ -82,11 +83,19 @@ const FormContainer = ({ setShowForm }) => {
   };
 
   return (
-    <div className="form_container h-screen flex">
+    <div className="form_container h-screen flex-col">
       <Header hiddenNav={true} />
-      <div className={` maincontainer text-black flex flex-col justify-center items-center m-auto mt-auto py-32`}>
-        <div className="upper-container horizontal container rounded-3xl px-14 py-4 pb-12 w-40v bg-opacity-30 relative">
-          <Stepper steps={steps} currentStep={currentStep} />
+      <div
+        className={`${
+          currentStep === 2 ? "overflow-y-hidden pt-32 pb-8" : "py-32"
+        } maincontainer text-black flex flex-col justify-center items-center m-auto mt-auto `}
+      >
+        {currentStep === 2 && <div className="h-32 text-transparent" id="specialdiv">
+          HELLO
+        </div>}
+
+        <div className={`mt upper-container horizontal container rounded-3xl px-14 py-4 pb-12 w-40v bg-opacity-30 relative`}>
+          <Stepper steps={steps} currentStep={currentStep}/>
         </div>
         <div className="herocontainer px-14 w-40v rounded-3xl bg-opacity-30 mt-10 relative">
           <div className="horizontal container mt-5 ">
