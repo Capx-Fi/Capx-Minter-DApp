@@ -212,7 +212,7 @@ const ChooseChain = ({setShowForm}) => {
             <div
               className={`${
                 sortBy === "BSC"
-                  ? " text-container border-2 border-green-400"
+                  ? " text-container border-2 border-capxGreen"
                   : ""
               } text-container  font-semibold text-2xl px-6 m-4 py-4 rounded-lg w-2/5 h-20 flex items-center justify-between`}
               onClick={() => {
@@ -240,7 +240,7 @@ const ChooseChain = ({setShowForm}) => {
             <div
               className={`${
                 sortBy === "Matic"
-                  ? " text-container border-2 border-green-400"
+                  ? " text-container border-2 border-capxGreen"
                   : ""
               } text-container  font-semibold text-2xl px-6 m-4 py-4 rounded-lg w-2/5 h-20 flex items-center justify-between`}
               onClick={() => {
@@ -268,7 +268,7 @@ const ChooseChain = ({setShowForm}) => {
             <div
               className={`${
                 sortBy === "Avalanche"
-                  ? " text-container border-2 border-green-400"
+                  ? " text-container border-2 border-capxGreen"
                   : ""
               } text-container  font-semibold text-2xl px-6 m-4 py-4 rounded-lg w-2/5 h-20 flex items-center justify-between`}
               onClick={() => {

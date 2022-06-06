@@ -202,16 +202,16 @@ function Header({hiddenNav, landing}) {
           </div>
         </a>
         {active && !hiddenNav && (
-          <div className="flex flex-row gap-x-2 ml-44">
+          <div className="flex flex-row gap-x-2 ml-32">
             <div className="">
-              <a href="https://liquid.capx.fi">
-                <div className="flex flex-row w-32 justify-center items-center rounded-lg px-2.5 py-2.5 text-white text-paragraph-1 font-semibold border-dark-200">
-                  Vest
+              
+                <div className="flex flex-row w-32 justify-center items-center rounded-lg px-2.5 py-2.5 text-paragraph-1 font-semibold border-dark-200">
+                  <a href="https://liquid.capx.fi">Vest </a>
                 </div>
-              </a>
+             
             </div>
             <div className="">
-              <div className="flex flex-row w-40 justify-center items-center rounded-lg px-2.5 py-2.5 text-white text-paragraph-1 font-semibold border-dark-200">
+              <div className="flex flex-row w-40 justify-center items-center rounded-lg px-2.5 py-2.5 text-paragraph-1 font-semibold border-dark-200">
                 My Tokens
               </div>
             </div>
