@@ -103,7 +103,7 @@ export default function Summary({file}) {
             {featuresToDisplay.substring(1, 2) === "1" ? (
               <div className="w-1/2">
                 <span className="font-bold">Total Supply</span> :{" "}
-                {userData.tokenSupply}
+                {userData.totalSupply}
               </div>
             ) : null}
             {featuresToDisplay.substring(2, 3) === "1" ? (

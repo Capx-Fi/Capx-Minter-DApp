@@ -84,7 +84,7 @@ const FormContainer = ({ setShowForm }) => {
   return (
     <div className="form_container h-screen flex">
       <Header hiddenNav={true} />
-      <div className="maincontainer text-black flex flex-col justify-center items-center m-auto mt-auto py-32">
+      <div className={` maincontainer text-black flex flex-col justify-center items-center m-auto mt-auto py-32`}>
         <div className="upper-container horizontal container rounded-3xl px-14 py-4 pb-12 w-40v bg-opacity-30 relative">
           <Stepper steps={steps} currentStep={currentStep} />
         </div>

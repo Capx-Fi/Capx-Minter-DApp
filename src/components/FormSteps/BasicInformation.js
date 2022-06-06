@@ -4,6 +4,7 @@ import EthLogo from "../../assets/ethereum-logo.svg";
 import { useState, useEffect } from "react";
 import Web3 from "web3";
 import { useWeb3React } from "@web3-react/core";
+import "./BasicInformation.scss";
 
 export default function BasicInformation({ disableSteps, setDisableSteps, file, setFile }) {
   const { userData, setUserData } = useStepperContext();
@@ -17,7 +18,10 @@ export default function BasicInformation({ disableSteps, setDisableSteps, file, 
 
   const handleFileChange = (e) => {
     if (e.target?.files[0]) {
-      setFile(URL.createObjectURL(e.target.files[0]));
+      const extension = e.target.files[0].name.split(".").pop();
+      if (extension === "jpg" || extension === "png" || extension === "jpeg" || extension === "svg") {
+          setFile(URL.createObjectURL(e.target.files[0]));
+      }
     } else {
       setFile(null);
     }
@@ -192,7 +196,9 @@ export default function BasicInformation({ disableSteps, setDisableSteps, file, 
           className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
             errors?.tokenName?.length > 0
               ? "border-red-300"
-              : infocus?.tokenName ? "border-capxGreenLight" : "border-greyDark"
+              : infocus?.tokenName
+              ? "border-capxGreenLight"
+              : "border-greyDark"
           } rounded-lg text-black bg-white outline-none`}
         />
         <span
@@ -222,7 +228,9 @@ export default function BasicInformation({ disableSteps, setDisableSteps, file, 
           className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
             errors?.tokenSymbol?.length > 0
               ? "border-red-300"
-              : infocus?.tokenSymbol ? "border-capxGreenLight" : "border-greyDark"
+              : infocus?.tokenSymbol
+              ? "border-capxGreenLight"
+              : "border-greyDark"
           } rounded-lg text-black bg-white outline-none`}
         />
         <span
@@ -252,7 +260,9 @@ export default function BasicInformation({ disableSteps, setDisableSteps, file, 
           className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
             errors?.tokenDecimal?.length > 0
               ? "border-red-300"
-              : infocus?.tokenDecimal ? "border-capxGreenLight" : "border-greyDark"
+              : infocus?.tokenDecimal
+              ? "border-capxGreenLight"
+              : "border-greyDark"
           } rounded-lg text-black bg-white outline-none`}
         />
         <span
@@ -282,7 +292,9 @@ export default function BasicInformation({ disableSteps, setDisableSteps, file, 
           className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
             errors?.tokenSupply?.length > 0
               ? "border-red-300"
-              : infocus?.tokenSupply ? "border-capxGreenLight" : "border-greyDark"
+              : infocus?.tokenSupply
+              ? "border-capxGreenLight"
+              : "border-greyDark"
           } rounded-lg text-black bg-white outline-none`}
         />
         <span
@@ -312,7 +324,9 @@ export default function BasicInformation({ disableSteps, setDisableSteps, file, 
           className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
             errors?.tokenOwner?.length > 0
               ? "border-red-300"
-              : infocus?.tokenOwner ? "border-capxGreenLight" : "border-greyDark"
+              : infocus?.tokenOwner
+              ? "border-capxGreenLight"
+              : "border-greyDark"
           } rounded-lg text-black bg-white outline-none`}
         />
         <span
@@ -340,13 +354,15 @@ export default function BasicInformation({ disableSteps, setDisableSteps, file, 
               alt="snapshot view"
             />
           </div>
-          <div className="flex items-center gap-x-6">
+          <div className="flex items-center gap-x-6 text-white">
             <div>
-              <input
-                type="file"
-                onChange={handleFileChange}
-                className="block w-full text-sm text-gray-300 mr-4 py-2 px-4 rounded-lg text-sm font-black bg-white"
-              />
+              
+                <input
+                  type="file"
+                  onChange={handleFileChange}
+                  className="custom-file-input"
+                />
+              
             </div>
           </div>
         </div>
@@ -366,7 +382,9 @@ export default function BasicInformation({ disableSteps, setDisableSteps, file, 
           className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
             errors?.description?.length > 0
               ? "border-red-300"
-              : infocus?.description ? "border-capxGreenLight" : "border-greyDark"
+              : infocus?.description
+              ? "border-capxGreenLight"
+              : "border-greyDark"
           } rounded-lg text-black bg-white outline-none`}
         />
         <span
@@ -396,7 +414,9 @@ export default function BasicInformation({ disableSteps, setDisableSteps, file, 
           className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
             errors?.website?.length > 0
               ? "border-red-300"
-              : infocus?.website ? "border-capxGreenLight" : "border-greyDark"
+              : infocus?.website
+              ? "border-capxGreenLight"
+              : "border-greyDark"
           } rounded-lg text-black bg-white outline-none`}
         />
         <span
@@ -426,7 +446,9 @@ export default function BasicInformation({ disableSteps, setDisableSteps, file, 
           className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
             errors?.twitter?.length > 0
               ? "border-red-300"
-              : infocus?.twitter ? "border-capxGreenLight" : "border-greyDark"
+              : infocus?.twitter
+              ? "border-capxGreenLight"
+              : "border-greyDark"
           } rounded-lg text-black bg-white outline-none`}
         />
         <span
@@ -456,7 +478,9 @@ export default function BasicInformation({ disableSteps, setDisableSteps, file, 
           className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
             errors?.telegram?.length > 0
               ? "border-red-300"
-              : infocus?.telegram ? "border-capxGreenLight" : "border-greyDark"
+              : infocus?.telegram
+              ? "border-capxGreenLight"
+              : "border-greyDark"
           } rounded-lg text-black bg-white outline-none`}
         />
         <span

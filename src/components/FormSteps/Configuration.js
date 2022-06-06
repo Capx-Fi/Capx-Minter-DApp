@@ -192,12 +192,12 @@ export default function Configuration({ setDisableSteps, disableSteps}) {
   };
 
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col text-black">
       <div className="font-bold text-heading-2 leading-heading-1 mb-3 ml-2">
         Advanced Token Configuration
       </div>
       {featuresToDisplay.substring(0,1) === "1" ? <div className="mx-2 w-full flex-1 mt-2">
-        <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2 text-white">
+        <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
           Initial Supply
         </div>
         <input
@@ -207,15 +207,15 @@ export default function Configuration({ setDisableSteps, disableSteps}) {
           onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder=""
-          className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${errors?.initialSupply?.length > 0
-              ? "border-red-500"
-              : infocus?.initialSupply && "border-capxGreen"
-            } rounded-lg text-gray-100 bg-dark-300 outline-none`}
+          className={`w-full appearance-none py-2 px-3 my-2 border-2 ${errors?.initialSupply?.length > 0
+              ? "border-red-300"
+              : infocus?.initialSupply ? "border-capxGreenLight" : "border-greyDark"
+            } rounded-lg text-black bg-white outline-none`}
         />
         <span
           className={`${errors?.initialSupply?.length > 0
-              ? "text-red-500 font-semibold"
-              : "text-gray-200"
+              ? "text-red-400 font-semibold"
+              : "text-gray-800"
             } text-s ml-1`}
         >
           {errors?.initialSupply?.length > 0
@@ -225,7 +225,7 @@ export default function Configuration({ setDisableSteps, disableSteps}) {
       </div> : null}
 
       {featuresToDisplay.substring(1, 2) === "1" ? <div className="mx-2 w-full flex-1 mt-2">
-        <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2 text-white">
+        <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
           Total Supply
         </div>
         <input
@@ -237,14 +237,14 @@ export default function Configuration({ setDisableSteps, disableSteps}) {
           disabled={userData?.initialSupply?.length === 0 || errors?.initialSupply?.length > 0}
           placeholder=""
           className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${errors?.totalSupply?.length > 0
-              ? "border-red-500"
-              : infocus?.totalSupply && "border-capxGreen"
-            } rounded-lg text-gray-100 bg-dark-300 outline-none`}
+              ? "border-red-300"
+              : infocus?.totalSupply ? "border-capxGreenLight" : "border-greyDark"
+            } rounded-lg text-black bg-white outline-none`}
         />
         <span
           className={`${errors?.totalSupply?.length > 0
-              ? "text-red-500 font-semibold"
-              : "text-gray-200"
+              ? "text-red-400 font-semibold"
+              : "text-gray-800"
             } text-s ml-1`}
         >
           {(userData?.initialSupply?.length === 0 || errors?.initialSupply?.length > 0) ? "Please enter the initial supply first" : errors?.totalSupply?.length > 0
@@ -254,7 +254,7 @@ export default function Configuration({ setDisableSteps, disableSteps}) {
       </div> : null}
 
       {featuresToDisplay.substring(2, 3) === "1" ? <div className="mx-2 w-full flex-1 mt-2">
-        <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2 text-white">
+        <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
           Tax Fee Percentage
         </div>
         <input
@@ -265,14 +265,14 @@ export default function Configuration({ setDisableSteps, disableSteps}) {
           onBlur={handleBlur}
           placeholder=""
           className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${errors?.taxFeePercentage?.length > 0
-              ? "border-red-500"
-              : infocus?.taxFeePercentage && "border-capxGreen"
-            } rounded-lg text-gray-100 bg-dark-300 outline-none`}
+              ? "border-red-300"
+              : infocus?.taxFeePercentage ? "border-capxGreenLight" : "border-greyDark"
+            } rounded-lg text-black bg-white outline-none`}
         />
         <span
           className={`${errors?.taxFeePercentage?.length > 0
-              ? "text-red-500 font-semibold"
-              : "text-gray-200"
+              ? "text-red-400 font-semibold"
+              : "text-gray-800"
             } text-s ml-1`}
         >
           {errors?.taxFeePercentage?.length > 0
@@ -282,7 +282,7 @@ export default function Configuration({ setDisableSteps, disableSteps}) {
       </div> : null}
 
       {featuresToDisplay.substring(3, 4) === "1" ? <div className="mx-2 w-full flex-1 mt-2">
-        <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2 text-white">
+        <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
           Burn Fee Percentage
         </div>
         <input
@@ -293,14 +293,14 @@ export default function Configuration({ setDisableSteps, disableSteps}) {
           onBlur={handleBlur}
           placeholder=""
           className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${errors?.burnFeePercentage?.length > 0
-              ? "border-red-500"
-              : infocus?.burnFeePercentage && "border-capxGreen"
-            } rounded-lg text-gray-100 bg-dark-300 outline-none`}
+              ? "border-red-300"
+              : infocus?.burnFeePercentage ? "border-capxGreenLight" : "border-greyDark"
+            } rounded-lg text-black bg-white outline-none`}
         />
         <span
           className={`${errors?.burnFeePercentage?.length > 0
-              ? "text-red-500 font-semibold"
-              : "text-gray-200"
+              ? "text-red-400 font-semibold"
+              : "text-gray-800"
             } text-s ml-1`}
         >
           {errors?.burnFeePercentage?.length > 0
@@ -310,7 +310,7 @@ export default function Configuration({ setDisableSteps, disableSteps}) {
       </div> : null}
 
       {featuresToDisplay.substring(4, 5) === "1" ? <div className="mx-2 w-full flex-1 mt-2">
-        <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2 text-white">
+        <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
           Liquidity Fee Percentage
         </div>
         <input
@@ -321,14 +321,14 @@ export default function Configuration({ setDisableSteps, disableSteps}) {
           onBlur={handleBlur}
           placeholder=""
           className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${errors?.liquidityFeePercentage?.length > 0
-              ? "border-red-500"
-              : infocus?.liquidityFeePercentage && "border-capxGreen"
-            } rounded-lg text-gray-100 bg-dark-300 outline-none`}
+              ? "border-red-300"
+              : infocus?.liquidityFeePercentage ? "border-capxGreenLight" : "border-greyDark"
+            } rounded-lg text-black bg-white outline-none`}
         />
         <span
           className={`${errors?.liquidityFeePercentage?.length > 0
-              ? "text-red-500 font-semibold"
-              : "text-gray-200"
+              ? "text-red-400 font-semibold"
+              : "text-gray-800"
             } text-s ml-1`}
         >
           {errors?.liquidityFeePercentage?.length > 0
@@ -338,7 +338,7 @@ export default function Configuration({ setDisableSteps, disableSteps}) {
       </div> : null}
 
       {featuresToDisplay.substring(5, 6) === "1" ? <div className="mx-2 w-full flex-1 mt-2">
-        <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2 text-white">
+        <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
           Marketing Fee Percentage
         </div>
         <input
@@ -349,14 +349,14 @@ export default function Configuration({ setDisableSteps, disableSteps}) {
           onBlur={handleBlur}
           placeholder=""
           className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${errors?.marketingFeePercentage?.length > 0
-              ? "border-red-500"
-              : infocus?.marketingFeePercentage && "border-capxGreen"
-            } rounded-lg text-gray-100 bg-dark-300 outline-none`}
+              ? "border-red-300"
+              : infocus?.marketingFeePercentage ? "border-capxGreenLight" : "border-greyDark"
+            } rounded-lg text-black bg-white outline-none`}
         />
         <span
           className={`${errors?.marketingFeePercentage?.length > 0
-              ? "text-red-500 font-semibold"
-              : "text-gray-200"
+              ? "text-red-400 font-semibold"
+              : "text-gray-800"
             } text-s ml-1`}
         >
           {errors?.marketingFeePercentage?.length > 0
@@ -366,7 +366,7 @@ export default function Configuration({ setDisableSteps, disableSteps}) {
       </div> : null}
 
       {featuresToDisplay.substring(6, 7) === "1" ? <div className="mx-2 w-full flex-1 mt-2">
-        <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2 text-white">
+        <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
           AutoLP Threshold
         </div>
         <input
@@ -377,14 +377,14 @@ export default function Configuration({ setDisableSteps, disableSteps}) {
           onBlur={handleBlur}
           placeholder=""
           className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${errors?.autoLPThreshold?.length > 0
-              ? "border-red-500"
-              : infocus?.autoLPThreshold && "border-capxGreen"
-            } rounded-lg text-gray-100 bg-dark-300 outline-none`}
+              ? "border-red-300"
+              : infocus?.autoLPThreshold ? "border-capxGreenLight" : "border-greyDark"
+            } rounded-lg text-black bg-white outline-none`}
         />
         <span
           className={`${errors?.autoLPThreshold?.length > 0
-              ? "text-red-500 font-semibold"
-              : "text-gray-200"
+              ? "text-red-400 font-semibold"
+              : "text-gray-800"
             } text-s ml-1`}
         >
           {errors?.autoLPThreshold?.length > 0
@@ -394,7 +394,7 @@ export default function Configuration({ setDisableSteps, disableSteps}) {
       </div> : null}
 
        {featuresToDisplay.substring(7) === "1" ? <div className="mx-2 w-full flex-1 mt-2">
-        <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2 text-white">
+        <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
           Marketing Wallet Address
         </div>
         <input
@@ -406,15 +406,15 @@ export default function Configuration({ setDisableSteps, disableSteps}) {
           placeholder="0xf321..."
           className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${
             errors?.marketingWalletAddress?.length > 0
-              ? "border-red-500"
-              : infocus?.marketingWalletAddress && "border-capxGreen"
-          } rounded-lg text-gray-100 bg-dark-300 outline-none`}
+              ? "border-red-300"
+              : infocus?.marketingWalletAddress ? "border-capxGreenLight" : "border-greyDark"
+          } rounded-lg text-black bg-white outline-none`}
         />
         <span
           className={`${
             errors?.marketingWalletAddress?.length > 0
-              ? "text-red-500 font-semibold"
-              : "text-gray-200"
+              ? "text-red-400 font-semibold"
+              : "text-gray-800"
           } text-s ml-1`}
         >
           {errors?.marketingWalletAddress?.length > 0

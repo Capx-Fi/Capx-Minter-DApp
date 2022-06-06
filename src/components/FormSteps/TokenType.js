@@ -24,7 +24,7 @@ export default function TokenType({setStepSkip, disableSteps, setDisableSteps}) 
   }, [userData]);
 
   return (
-    <div className="flex flex-col text-black">
+    <div className="flex flex-col text-black overflow-hidden">
       <div className="font-bold text-heading-2 leading-heading-1 mb-3 ml-2">
         <span className="text-black">Choose Token Type</span>
         <div className="accordion2">

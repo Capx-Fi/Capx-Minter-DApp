@@ -4,8 +4,7 @@
 	&_maincontainer {
 		@apply flex justify-center items-center m-auto mt-32 phone:mt-48 laptop:mt-auto;
 		&_herocontainer {
-			@apply px-12 py-6 phone:px-6 phone:py-16 desktop:px-16 twok:px-20 twok:py-16 desktop:py-8 rounded-lg bg-opacity-70 tablet:rounded-2xl desktop:rounded-4xl text-white relative w-75v screen:w-60v desktop:w-60v twok:w-60v flex flex-col items-start;
-			background: black;
+			@apply px-12 py-6 phone:px-6 phone:py-16 desktop:px-16 twok:px-20 twok:py-16 desktop:py-8 rounded-lg bg-opacity-70 tablet:rounded-2xl desktop:rounded-4xl text-black relative w-75v screen:w-60v desktop:w-60v twok:w-60v flex flex-col items-start bg-white;
 
 			&_cname {
 				@apply flex rounded-lg object-contain w-fit-content bg-opacity-70  px-3 mb-4 py-2.5 text-caption-4 tablet:text-caption-2 leading-caption-4 tablet:leading-caption-2;
