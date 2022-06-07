@@ -99,7 +99,7 @@ const FormContainer = ({ setShowForm }) => {
         </div>
         <div className="herocontainer px-14 w-40v rounded-3xl bg-opacity-30 mt-10 relative">
           <div className="horizontal container mt-5 ">
-            <div className="p-10 ">
+            <div className="p-10 pb-4 ">
               <UseContextProvider>
                 {displayStep(currentStep)}
               </UseContextProvider>

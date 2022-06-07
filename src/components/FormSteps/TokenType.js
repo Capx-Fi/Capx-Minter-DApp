@@ -32,10 +32,12 @@ export default function TokenType({setStepSkip, disableSteps, setDisableSteps}) 
 
   return (
     <div className="flex flex-col text-black">
-      <div className="font-bold text-heading-2 leading-heading-1 mb-3 ml-2">
-        <span className="text-black">Choose Token Type</span>
-        <div className="accordion2">
-          <div className="w-full mt-8 mx-auto">
+      <div className="font-bold text-heading-2 leading-10 ml-2">
+        <div className="titleContainer flex flex-col ">
+          <span className="text-black">Select Features for your Token</span>
+          <span className="text-greylabel text-caption-2">Choose the additional functionality from the 15+ templates below</span>
+        </div><div className="accordion2">
+          <div className="w-full mt-2 mx-auto">
             <div className="scrollbar-styling">
               {tokenTypeData.map((item, index) => {
                 return (
