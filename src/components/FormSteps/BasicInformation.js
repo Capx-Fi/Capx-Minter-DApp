@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Web3 from "web3";
 import { useWeb3React } from "@web3-react/core";
 import "./BasicInformation.scss";
+import { useDropzone } from "react-dropzone";
 
 export default function BasicInformation({ disableSteps, setDisableSteps, file, setFile }) {
   const { userData, setUserData } = useStepperContext();
@@ -142,24 +143,41 @@ export default function BasicInformation({ disableSteps, setDisableSteps, file, 
       }
     } else if (name === "website") {
       const toSet = value.trim();
-      if (toSet.length > 25) {
-        setErrors({ ...errors, [name]: "Please enter a valid URL" });
+      if (
+        !(/^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$/.test(toSet))
+      ) {
+        if (toSet.length > 0) {
+          setErrors({ ...errors, [name]: "Please enter a valid URL" });
+        } else {
+          setErrors({ ...errors, [name]: "" });
+        }
       } else {
         setErrors({ ...errors, [name]: "" });
       }
       setUserData({ ...userData, [name]: toSet });
     } else if (name === "twitter") {
       const toSet = value.trim();
-      if (toSet.length > 25) {
-        setErrors({ ...errors, [name]: "Please enter a valid twitter URL" });
+      if (!(/http(?:s)?:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_]+)/.test(toSet))) {
+        if (toSet.length > 0) {
+          setErrors({
+            ...errors,
+            [name]: "Please enter a valid twitter URL",
+          });
+        } else {
+          setErrors({ ...errors, [name]: "" });
+        }
       } else {
         setErrors({ ...errors, [name]: "" });
       }
       setUserData({ ...userData, [name]: toSet });
     } else if (name === "telegram") {
       const toSet = value.trim();
-      if (toSet.length > 25) {
-        setErrors({ ...errors, [name]: "Please enter a valid telegram link" });
+      if (!(/(https?:\/\/)?(www[.])?(telegram|t)\.me\/([a-zA-Z0-9_-]*)\/?$/.test(toSet))) {
+        if (toSet.length > 0) {
+            setErrors({ ...errors, [name]: "Please enter a valid telegram link" });
+        } else {
+            setErrors({ ...errors, [name]: "" });
+        }
       } else {
         setErrors({ ...errors, [name]: "" });
       }
@@ -442,7 +460,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, file, 
           name="twitter"
           onFocus={handleFocus}
           onBlur={handleBlur}
-          placeholder="eg. twitter.com/abcd"
+          placeholder="eg. www.twitter.com/abcd"
           className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
             errors?.twitter?.length > 0
               ? "border-red-300"

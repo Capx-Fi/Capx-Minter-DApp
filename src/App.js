@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import LoadingScreen from "./containers/LoadingScreen";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import MainForm from "./containers/MainForm/MainForm";
+import MyTokens from "./containers/MyTokens/MyTokens";
+import TokenInfo from "./containers/TokenInfo/TokenInfo";
 
 function App() {
 	const [loading, setLoading] = useState(true);
@@ -12,19 +14,21 @@ function App() {
 	}, []);
 
 	return (
-		<>
-			{loading ? (
-				<LoadingScreen />
-			) : (
-				<Router>
-					<Switch>
-						<Route exact path="/" component={MainForm} />
-						<Route path="*" component={PageNotFound} />
-					</Switch>
-				</Router>
-			)}
-		</>
-	);
+    <>
+      {loading ? (
+        <LoadingScreen />
+      ) : (
+        <Router>
+          <Switch>
+            <Route exact path="/" component={MainForm} />
+            <Route exact path="/tokens" component={MyTokens} />
+            <Route exact path="/tokenOne" component={TokenInfo} />
+            <Route path="*" component={PageNotFound} />
+          </Switch>
+        </Router>
+      )}
+    </>
+  );
 }
 
 export default App;

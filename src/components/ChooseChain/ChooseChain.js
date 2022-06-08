@@ -184,7 +184,7 @@ const ChooseChain = ({setShowForm}) => {
                 sortBy === "Ethereum"
                   ? " text-container border-2 border-capxGreen"
                   : ""
-              } text-container bg-opacity-50 cursor-pointer font-semibold text-2xl px-6 m-4 py-4 rounded-lg w-2/5 h-20 flex items-center justify-between`}
+              } text-container bg-opacity-50 cursor-pointer font-semibold text-2xl px-6 m-4 py-4 rounded-lg cursor-pointer w-2/5 h-20 flex items-center justify-between`}
               onClick={() => {
                 chainChange("Ethereum");
               }}
@@ -214,7 +214,7 @@ const ChooseChain = ({setShowForm}) => {
                 sortBy === "BSC"
                   ? " text-container border-2 border-capxGreen"
                   : ""
-              } text-container  font-semibold text-2xl px-6 m-4 py-4 rounded-lg w-2/5 h-20 flex items-center justify-between`}
+              } text-container font-semibold text-2xl px-6 m-4 py-4 rounded-lg cursor-pointer w-2/5 h-20 flex items-center justify-between`}
               onClick={() => {
                 chainChange("BSC");
               }}
@@ -242,7 +242,7 @@ const ChooseChain = ({setShowForm}) => {
                 sortBy === "Matic"
                   ? " text-container border-2 border-capxGreen"
                   : ""
-              } text-container  font-semibold text-2xl px-6 m-4 py-4 rounded-lg w-2/5 h-20 flex items-center justify-between`}
+              } text-container  font-semibold text-2xl px-6 m-4 py-4 rounded-lg cursor-pointer w-2/5 h-20 flex items-center justify-between`}
               onClick={() => {
                 chainChange("Matic");
               }}
@@ -270,7 +270,7 @@ const ChooseChain = ({setShowForm}) => {
                 sortBy === "Avalanche"
                   ? " text-container border-2 border-capxGreen"
                   : ""
-              } text-container  font-semibold text-2xl px-6 m-4 py-4 rounded-lg w-2/5 h-20 flex items-center justify-between`}
+              } text-container  font-semibold text-2xl px-6 m-4 py-4 rounded-lg cursor-pointer w-2/5 h-20 flex items-center justify-between`}
               onClick={() => {
                 chainChange("Avalanche");
               }}

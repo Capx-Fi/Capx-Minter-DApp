@@ -21,7 +21,7 @@
 		}
 		&_logoutbutton {
 			background-color: #F0F0F0;
-			@apply rounded-lg flex px-1 py-1 tablet:px-1 tablet:py-1 laptop:px-1 laptop:py-1 text-black items-center justify-center text-center phone:w-36 tablet:w-40;
+			@apply rounded-lg flex px-1 py-1 tablet:px-1 tablet:py-1 laptop:px-1 laptop:py-1 text-black items-center justify-center text-center;
 			&_text {
 				@apply text-caption-3 leading-caption-3 tablet:text-caption-3 tablet:leading-caption-3 desktop:text-caption-2 desktop:leading-caption-2 font-medium;
 			}

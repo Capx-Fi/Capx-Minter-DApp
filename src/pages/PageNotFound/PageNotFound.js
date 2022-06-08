@@ -1,9 +1,7 @@
 import Footer from "../../components/Footer/Footer";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import NotFound from "../../assets/404.svg";
-import NextIcon from "../../assets/next.svg";
 import Header from "../../components/Header/Header";
 import ChooseDashboardModal from "../../components/Modal/ChooseDashboardModal/ChooseDashboardModal";
 import "./PageNotFound.scss";

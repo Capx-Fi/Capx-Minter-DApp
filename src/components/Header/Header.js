@@ -8,13 +8,13 @@ import { useWeb3React, UnsupportedChainIdError } from "@web3-react/core";
 import { injected } from "../../utils/connector";
 import DropDown from "../DropDown/DropDown";
 import { Tooltip, withStyles } from "@material-ui/core";
-
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { CHAIN_NAMES } from "../../constants/config";
 
 import { getSortBy } from "../../constants/getChainConfig";
 
-function Header({hiddenNav, landing}) {
+function Header({hiddenNav, landing, createButton}) {
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 	const { active, account, library, connector, activate, deactivate, chainId } =
 		useWeb3React();
@@ -26,11 +26,41 @@ function Header({hiddenNav, landing}) {
 	const handleCloseSelectDashboard = () => {
 		setDashboardModal(false);
 	};
-
+	const [userBalance, setUserBalance] = useState(-1);
 	const provider = window.ethereum;
 	console.log(provider);
 	const web3 = new Web3(provider);
 	console.log(web3);
+
+	const [currentTicker, setCurrentTicker] = useState("");
+
+	useEffect(() => {
+		if (active) {
+			if (sortBy === "Matic") {
+				setCurrentTicker("MATIC");
+			} else if (sortBy === "Avalance") {
+				setCurrentTicker("AVAX");
+			} else if (sortBy === "BSC") {
+				setCurrentTicker("BNB");
+			} else {
+				setCurrentTicker("ETH");
+			}
+		}
+	}
+	, [active, sortBy]);
+
+	useEffect(() => {
+		if (active) {
+			if (account.length > 0) {
+				web3.eth.getBalance(account).then((balance) => {
+					setUserBalance(balance);
+				}).catch((err) => {
+					console.log(err);
+				}
+				);
+			}
+		}
+	}, [active, account]);
 
 	useEffect(() => {
 		setSortBy(chainId && getSortBy(chainId));
@@ -204,17 +234,27 @@ function Header({hiddenNav, landing}) {
         {active && !hiddenNav && (
           <div className="flex flex-row gap-x-2 ml-32">
             <div className="">
-              
-                <div className="flex flex-row w-32 justify-center items-center rounded-lg px-2.5 py-2.5 text-paragraph-1 font-semibold border-dark-200">
-                  <a href="https://liquid.capx.fi">Vest </a>
-                </div>
-             
-            </div>
-            <div className="">
-              <div className="flex flex-row w-40 justify-center items-center rounded-lg px-2.5 py-2.5 text-paragraph-1 font-semibold border-dark-200">
-                My Tokens
+              <div className="flex flex-row w-32 justify-center items-center rounded-lg px-2.5 py-2.5 text-paragraph-1 font-semibold border-dark-200">
+                <a href="https://liquid.capx.fi">Vest </a>
               </div>
             </div>
+            {createButton ? (
+              <div className="">
+                <Link to="/">
+                  <div className="flex flex-row w-40 justify-center items-center rounded-lg px-2.5 py-2.5 text-paragraph-1 font-semibold border-dark-200">
+                    Mint Tokens
+                  </div>
+                </Link>
+              </div>
+            ) : (
+              <div className="">
+                <Link to="/tokens">
+                  <div className="flex flex-row w-40 justify-center items-center rounded-lg px-2.5 py-2.5 text-paragraph-1 font-semibold border-dark-200">
+                    My Tokens
+                  </div>
+                </Link>
+              </div>
+            )}
           </div>
         )}
         {
@@ -225,6 +265,19 @@ function Header({hiddenNav, landing}) {
                   <DropDown sortBy={sortBy} chainChange={chainChange} />
                 </div>
                 <div className="header_navbar_logoutbutton">
+                  {userBalance !== -1 ? (
+                    <div className="pl-2 text-caption-2 leading-caption-2">
+                      {web3.utils
+                        .fromWei(userBalance.toString())
+                        .substring(0, 6)}{" "}
+                      {currentTicker}
+                    </div>
+                  ) : null}
+                  {userBalance !== -1 ? (
+                    <div className="px-1 text-caption-2 leading-caption-2">
+                      |
+                    </div>
+                  ) : null}
                   <div className="header_navbar_logoutbutton_text">
                     {" "}
                     {`${account.substr(0, 6)}...${account.substr(-4)}`}
@@ -243,7 +296,7 @@ function Header({hiddenNav, landing}) {
                   <div className="header_navbar_button">
                     <div
                       onClick={connect}
-                      className="header_navbar_button_text"
+                      className="header_navbar_button_text text-black"
                     >
                       Connect Wallet
                     </div>

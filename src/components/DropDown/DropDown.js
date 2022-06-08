@@ -5,7 +5,7 @@ import EthLogo from "../../assets/ethereum-logo.svg";
 import MaticLogo from "../../assets/matic-logo.svg";
 import BSCLogo from "../../assets/bsc-logo.svg";
 import AvaLogo from "../../assets/avalanche-logo.svg";
-import UnknownLogo from "../../assets/warning.svg"
+import UnknownLogo from "../../assets/warning-black.svg"
 
 function DropDown({ sortBy, chainChange, setShowMenu }) {
 	const [open, setOpen] = useState(false);

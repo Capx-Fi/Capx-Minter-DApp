@@ -1,6 +1,18 @@
 import "./Accordion.scss";
+import { Tooltip, withStyles } from "@material-ui/core";
 
 const Accordion = ({ item, index, handleSelect, userData }) => {
+
+  const HtmlTooltip = withStyles((theme) => ({
+    tooltip: {
+      background: "#2A383C",
+      color: "#F1FAF2",
+      maxWidth: 800,
+      fontSize: theme.typography.pxToRem(12),
+      borderRadius: "4px",
+      zIndex: 100,
+    },
+  }))(Tooltip);
     
     return (
       <div
@@ -29,7 +41,7 @@ const Accordion = ({ item, index, handleSelect, userData }) => {
             {item.description}
           </span>
         </label>
-
+        
         <div className="tab-content overflow-hidden">
           <p className="p-5 accordion_bg_dark text-caption-2 leading-caption-2 font-medium">
             <div className="text-caption-1 leading-caption-1">
@@ -40,7 +52,9 @@ const Accordion = ({ item, index, handleSelect, userData }) => {
                     <div className="w-1/2 flex justify-between" key={index}>
                       <div>{feature}</div>
                       {item.features[feature] ? (
-                        <div className="pr-8 text-green-600">&#10003;</div>
+                        <div className="pr-8 text-green-600">&#10003;
+                          {/* &nbsp; <HtmlTooltip title="info">i</HtmlTooltip> */}
+                        </div>
                       ) : (
                         <div className="pr-8">&#10060;</div>
                       )}
