@@ -3,7 +3,7 @@ import "./Summary.scss"
 import { useStepperContext } from "../../contexts/StepperContext";
 import tokenTypeData from "./TokenTypeData";
 
-export default function Summary({file}) {
+export default function Summary({files}) {
   const { userData, setUserData } = useStepperContext();
   const currentToken = tokenTypeData.find((item) => {
     return item.id === userData.tokenType;
@@ -20,11 +20,19 @@ export default function Summary({file}) {
         <div className="flex flex-row items-stretch w-full gap-x-2">
           <div className="flex items-center px-8">
             <div>
-              <img
-                className="w-16 h-16 rounded-lg"
-                src={file === null ? EthLogo : file}
-                alt="snapshot view"
-              />
+              {files?.length > 0 ? (
+                <img
+                  className="w-16 h-16 rounded-lg"
+                  src={URL.createObjectURL(files[0])}
+                  alt="snapshot view"
+                />
+              ) : (
+                <img
+                  className="w-16 h-16 rounded-lg"
+                  src={EthLogo}
+                  alt="snapshot view"
+                />
+              )}
             </div>
           </div>
           <div className="flex flex-col w-full text-caption-1 leading-paragraph-1">

@@ -3,6 +3,15 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      keyframes: {
+        scaleUp: {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.01)" },
+        }
+      },
+      animation: {
+        scaleUp: "scaleUp 0.4s ease-in-out",
+      },
       colors: {
         "primary-green": {
           100: "#F1FAF2",

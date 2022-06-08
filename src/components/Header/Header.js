@@ -266,7 +266,7 @@ function Header({hiddenNav, landing, createButton}) {
                 </div>
                 <div className="header_navbar_logoutbutton">
                   {userBalance !== -1 ? (
-                    <div className="pl-2 text-caption-2 leading-caption-2">
+                    <div className="text-caption-2 leading-caption-2">
                       {web3.utils
                         .fromWei(userBalance.toString())
                         .substring(0, 6)}{" "}

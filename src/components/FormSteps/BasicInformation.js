@@ -7,7 +7,41 @@ import { useWeb3React } from "@web3-react/core";
 import "./BasicInformation.scss";
 import { useDropzone } from "react-dropzone";
 
-export default function BasicInformation({ disableSteps, setDisableSteps, file, setFile }) {
+
+
+
+export default function BasicInformation({ disableSteps, setDisableSteps, files, setFiles }) {
+   const { getRootProps, getInputProps } = useDropzone({
+    accept: "image/*",
+     onDrop: (acceptedFiles) => {
+       setFiles(
+         acceptedFiles.map((file) =>
+           Object.assign(file, {
+             preview: URL.createObjectURL(file),
+           })
+         )
+       );
+     },
+   });
+
+   const thumbs = files.map((file) => (
+       <div className="flex items-center justify-center" key={file.name}>
+         <img
+           src={file.preview}
+           className="w-16 h-16 block"
+           alt="thubmnail"
+           // Revoke data uri after image is loaded
+         
+         />
+     </div>
+   ));
+
+   useEffect(() => {
+     // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
+     return () => files.forEach((file) => URL.revokeObjectURL(file.preview));
+   }, []);
+
+
   const { userData, setUserData } = useStepperContext();
   const defaultWeb3 = new Web3(
     "https://rinkeby.infura.io/v3/6351bb49adde41ec86bd60b451b9f1c5"
@@ -16,17 +50,6 @@ export default function BasicInformation({ disableSteps, setDisableSteps, file, 
   const { account } = useWeb3React();
   const [infocus, setInfocus] = useState({});
   const [errors, setErrors] = useState({});
-
-  const handleFileChange = (e) => {
-    if (e.target?.files[0]) {
-      const extension = e.target.files[0].name.split(".").pop();
-      if (extension === "jpg" || extension === "png" || extension === "jpeg" || extension === "svg") {
-          setFile(URL.createObjectURL(e.target.files[0]));
-      }
-    } else {
-      setFile(null);
-    }
-  }
 
   const handleFocus = (e) => {
     const { name } = e.target;
@@ -71,11 +94,11 @@ export default function BasicInformation({ disableSteps, setDisableSteps, file, 
       valid = false;
     }
 
-    if (file === null) {
+    if (files === null || files.length === 0) {
       valid = false;
     }
     setDisableSteps({...disableSteps, first:!valid});
-  }, [userData, errors, file]);
+  }, [userData, errors, files]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -200,6 +223,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, file, 
       <div className="font-bold text-heading-2 leading-heading-1 mb-3 ml-2">
         Basic Token Information
       </div>
+
       <div className="mx-2 w-full flex-1 mt-2 text-black">
         <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
           Token Name
@@ -364,24 +388,33 @@ export default function BasicInformation({ disableSteps, setDisableSteps, file, 
         <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
           Token Image
         </div>
-        <div className="my-2 flex flex-row rounded-lg items-center gap-x-6">
-          <div className="shrink-0">
+        <div className="my-2 flex flex-row rounded-lg items-center gap-x-6 mt-4">
+          {files?.length > 0 ? (
             <img
               className="w-16 h-16 rounded-lg"
-              src={file === null ? EthLogo : file}
+              src={URL.createObjectURL(files[0])}
               alt="snapshot view"
             />
-          </div>
+          ) : (
+            <img
+              className="w-16 h-16 rounded-lg"
+              src={EthLogo}
+              alt="snapshot view"
+            />
+          )}
+
           <div className="flex items-center gap-x-6 text-white">
-            <div>
-              
-                <input
-                  type="file"
-                  onChange={handleFileChange}
-                  className="custom-file-input"
-                />
-              
-            </div>
+            <section className="text-black cursor-pointer">
+              <div
+                {...getRootProps({
+                  className:
+                    "border-2 border-grey py-4 px-5 dropzone rounded-lg",
+                })}
+              >
+                <input {...getInputProps()} />
+                <p>Drop the file here, or click to select files</p>
+              </div>
+            </section>
           </div>
         </div>
       </div>

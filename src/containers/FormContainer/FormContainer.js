@@ -15,8 +15,7 @@ import "./FormContainer.scss";
 const FormContainer = ({ setShowForm }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [stepSkip, setStepSkip] = useState(true);
-  const [file, setFile] = useState(null);
-
+  const [files, setFiles] = useState([]);
 
   const steps = [
     "Basic Information",
@@ -36,13 +35,13 @@ const FormContainer = ({ setShowForm }) => {
   const displayStep = (step) => {
     switch (step) {
       case 1:
-        return <BasicInformation disableSteps={disableSteps} setDisableSteps={setDisableSteps} file={file} setFile={setFile}/>;
+        return <BasicInformation disableSteps={disableSteps} setDisableSteps={setDisableSteps} files={files} setFiles={setFiles}/>;
       case 2:
         return <TokenType disableSteps={disableSteps} setStepSkip={setStepSkip} setDisableSteps={setDisableSteps}/>;
       case 3: 
         return <Configuration disableSteps={disableSteps} setDisableSteps={setDisableSteps} />;
       case 4:
-        return <Summary file={file}/>;
+        return <Summary files={files}/>;
       default:
     }
   };

@@ -18,7 +18,8 @@ const Accordion = ({ item, index, handleSelect, userData }) => {
       <div
         className={`${
           userData?.tokenType === item.id ? "pointer-events-none" : ""
-        } tab w-full overflow-hidden rounded-2xl accordion_bg mt-6`}
+        } tab w-full overflow-hidden rounded-2xl accordion_bg mt-6
+        ${userData?.tokenType === item.id ? "animate-scaleUp shadow-md" : ""}`}
       >
         <input
           className="absolute opacity-0"
@@ -41,7 +42,7 @@ const Accordion = ({ item, index, handleSelect, userData }) => {
             {item.description}
           </span>
         </label>
-        
+
         <div className="tab-content overflow-hidden">
           <p className="p-5 accordion_bg_dark text-caption-2 leading-caption-2 font-medium">
             <div className="text-caption-1 leading-caption-1">
@@ -52,7 +53,8 @@ const Accordion = ({ item, index, handleSelect, userData }) => {
                     <div className="w-1/2 flex justify-between" key={index}>
                       <div>{feature}</div>
                       {item.features[feature] ? (
-                        <div className="pr-8 text-green-600">&#10003;
+                        <div className="pr-8 text-green-600">
+                          &#10003;
                           {/* &nbsp; <HtmlTooltip title="info">i</HtmlTooltip> */}
                         </div>
                       ) : (
