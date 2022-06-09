@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Stepper from "../../components/Stepper/Stepper";
 import StepControls from "../../components/StepControls/StepControls";
 import { UseContextProvider } from "../../contexts/StepperContext";
@@ -6,6 +6,7 @@ import BasicInformation from "../../components/FormSteps/BasicInformation";
 import TokenType from "../../components/FormSteps/TokenType";
 import Configuration from "../../components/FormSteps/Configuration";
 import Summary from "../../components/FormSteps/Summary";
+import { useWeb3React } from "@web3-react/core";
 
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
@@ -16,6 +17,11 @@ const FormContainer = ({ setShowForm }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [stepSkip, setStepSkip] = useState(true);
   const [files, setFiles] = useState([]);
+  const {chainId, account} = useWeb3React();
+
+  useEffect(() => {
+    setCurrentStep(1);
+  },[account, chainId]);
 
   const steps = [
     "Basic Information",

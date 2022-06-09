@@ -35,7 +35,7 @@ export default function Summary({files}) {
               )}
             </div>
           </div>
-          <div className="flex flex-col w-full text-caption-1 leading-paragraph-1">
+          <div className="flex flex-col w-full text-caption-1 leading-paragraph-1 justify-center">
             <div>
               {" "}
               <span className="font-bold">Name</span> : {userData.tokenName}{" "}
