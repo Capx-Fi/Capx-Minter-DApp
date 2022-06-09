@@ -34,20 +34,6 @@ function Header({hiddenNav, landing, createButton}) {
 
 	const [currentTicker, setCurrentTicker] = useState("");
 
-	useEffect(() => {
-		if (active) {
-			if (sortBy === "Matic") {
-				setCurrentTicker("MATIC");
-			} else if (sortBy === "Avalance") {
-				setCurrentTicker("AVAX");
-			} else if (sortBy === "BSC") {
-				setCurrentTicker("BNB");
-			} else {
-				setCurrentTicker("ETH");
-			}
-		}
-	}
-	, [active, sortBy]);
 
 	useEffect(() => {
 		if (active) {
@@ -59,8 +45,18 @@ function Header({hiddenNav, landing, createButton}) {
 				}
 				);
 			}
+
+			if (sortBy === "Matic") {
+				setCurrentTicker("MATIC");
+			} else if (sortBy === "Avalanche") {
+				setCurrentTicker("AVAX");
+			} else if (sortBy === "BSC") {
+				setCurrentTicker("BNB");
+			} else {
+				setCurrentTicker("ETH");
+			}
 		}
-	}, [active, account]);
+	}, [active, account, sortBy]);
 
 	useEffect(() => {
 		setSortBy(chainId && getSortBy(chainId));
