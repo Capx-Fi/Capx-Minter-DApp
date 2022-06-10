@@ -14,7 +14,7 @@ import Web3 from "web3";
 
 import "./ChooseChain.scss";
 
-const ChooseChain = ({setShowForm}) => {
+const ChooseChain = ({setShowForm, setChainIdInitial}) => {
     const provider = window.ethereum;
     const web3 = new Web3(provider);
     const [sortBy, setSortBy] = useState("Ethereum");
@@ -302,7 +302,7 @@ const ChooseChain = ({setShowForm}) => {
               ? "pointer-events-none create-button-disabled opacity-60"
               : "bg-capxGreen create-button"
           } justify-self-end rounded-2xl mt-8 justify-center items-center flex px-4 py-6 w-full cursor-pointer`}
-          onClick={() => setShowForm(true)}
+          onClick={() => { setShowForm(true); setChainIdInitial(chainId) }}
         >
           <div className={`text-black button_text phone:text-caption-2 screen:text-caption-1 screen:leading-caption-1 twok:text-subheading twok:leading-text-subheading font-bold`}>
             {"Begin Token Creation"}

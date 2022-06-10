@@ -4,6 +4,7 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import tokenTypeData from "../../components/FormSteps/TokenTypeData";
 import "./TokenInfo.scss";
+import React, { useState } from "react";
 import { useWeb3React } from "@web3-react/core";
 import MetamaskModal from "../../components/Modal/MetamaskModal/MetamaskModal";
 import {CopyToClipboard} from "react-copy-to-clipboard";
@@ -12,6 +13,9 @@ import CrossIcon from "../../assets/modal-cross-grey.svg";
 
 const TokenInfo = () => {
   const { active, account, chainId } = useWeb3React();
+  const [copiedToken, setCopiedToken] = useState(false);
+  const [copiedOwner, setCopiedOwner] = useState(false);
+
   return (
     <>
       {!active ? (
@@ -22,9 +26,15 @@ const TokenInfo = () => {
           <div
             className={`maincontainer text-black flex flex-col justify-center items-center m-auto mt-auto px-24 py-32`}
           >
-            <div className="herocontainer flex flex-col px-10 py-8 w-2/3 rounded-2xl bg-opacity-30 mt-10 relative">
+            <div className="herocontainer flex flex-col px-10 py-8 w-3/4 rounded-2xl bg-opacity-30 mt-10 relative">
               <div className="w-full flex flex-row-reverse">
-                <Link to="/tokens"><img src={CrossIcon} alt="cross" className="block cursor-pointer w-4"></img></Link>
+                <Link to="/tokens">
+                  <img
+                    src={CrossIcon}
+                    alt="cross"
+                    className="block cursor-pointer w-4"
+                  ></img>
+                </Link>
               </div>
               <div className="py-8 px-10">
                 <div className="w-full flex justify-between">
@@ -37,12 +47,24 @@ const TokenInfo = () => {
                       ></img>
                     </div>
                     <div className="flex flex-col">
-                      <div className="text-40px leading-lh-64 font-bold tracking-tight">
-                        CapCoin (CC)
+                      <div className="w-full flex items-center">
+                        <div className="font-bold text-40px tracking-tight">
+                          CapCoin (CC)
+                        </div>
+                        <div>
+                          <img
+                            src={EthLogo}
+                            alt="Ethereum Logo"
+                            className="inline-block ml-4 w-5"
+                          ></img>
+                        </div>
                       </div>
                       <div>
                         0xF4338A1aB2cEC0dd62fA1A27b5ba28d7a8F9350E{" "}
-                        <CopyToClipboard text="0xF4338A1aB2cEC0dd62fA1A27b5ba28d7a8F9350E">
+                        <CopyToClipboard
+                          text="0xF4338A1aB2cEC0dd62fA1A27b5ba28d7a8F9350E"
+                          onCopy={() => setCopiedToken(true)}
+                        >
                           <button className="inline-block">
                             <img
                               src={CopyIcon}
@@ -51,13 +73,21 @@ const TokenInfo = () => {
                             />
                           </button>
                         </CopyToClipboard>
+                        {copiedToken && (
+                          <div className="inline-block text-caption-1 ml-2 text-grey">
+                            Copied
+                          </div>
+                        )}
                       </div>
                       <div>
                         <span className="font-bold block mt-2">
                           Owner Address:
                         </span>
                         0xF4338A1aB2cEC0dd62fA1A27b5ba28d7a8F9350E{" "}
-                        <CopyToClipboard text="0xF4338A1aB2cEC0dd62fA1A27b5ba28d7a8F9350E">
+                        <CopyToClipboard
+                          text="0xF4338A1aB2cEC0dd62fA1A27b5ba28d7a8F9350E"
+                          onCopy={() => setCopiedOwner(true)}
+                        >
                           <button className="inline-block">
                             <img
                               src={CopyIcon}
@@ -66,6 +96,11 @@ const TokenInfo = () => {
                             />
                           </button>
                         </CopyToClipboard>
+                        {copiedOwner && (
+                          <div className="inline-block text-caption-1 ml-2 text-grey">
+                            Copied
+                          </div>
+                        )}
                       </div>
                       <div className="flex mt-4">
                         <div className="w-1/3 flex-col">

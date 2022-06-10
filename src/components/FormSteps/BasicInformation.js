@@ -24,17 +24,6 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
      },
    });
 
-   const thumbs = files.map((file) => (
-       <div className="flex items-center justify-center" key={file.name}>
-         <img
-           src={file.preview}
-           className="w-16 h-16 block"
-           alt="thubmnail"
-           // Revoke data uri after image is loaded
-         
-         />
-     </div>
-   ));
 
    useEffect(() => {
      // Make sure to revoke the data uris to avoid memory leaks, will run on unmount

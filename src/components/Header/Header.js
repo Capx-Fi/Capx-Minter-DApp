@@ -262,28 +262,29 @@ function Header({hiddenNav, landing, createButton}) {
                 </div>
                 <div className="header_navbar_logoutbutton">
                   {userBalance !== -1 ? (
-                    <div className="text-caption-2 leading-caption-2">
-                      {web3.utils
-                        .fromWei(userBalance.toString())
-                        .substring(0, 6)}{" "}
-                      {currentTicker}
+                    <div className="flex items-center balance-div pr-2 pl-2.5 py-1.5 rounded-lg">
+                      <div className="text-caption-2 leading-caption-2">
+                        <span className="font-semibold">
+                          {web3.utils
+                            .fromWei(userBalance.toString())
+                            .substring(0, 6)}{" "}
+                        </span>
+                        {currentTicker}
+                      </div>
                     </div>
                   ) : null}
-                  {userBalance !== -1 ? (
-                    <div className="px-1 text-caption-2 leading-caption-2">
-                      |
+                  <div className="flex items-center pl-2 py-1.5">
+                    <div className="header_navbar_logoutbutton_text">
+                      {" "}
+                      {`${account.substr(0, 6)}...${account.substr(-4)}`}
                     </div>
-                  ) : null}
-                  <div className="header_navbar_logoutbutton_text">
-                    {" "}
-                    {`${account.substr(0, 6)}...${account.substr(-4)}`}
+                    <img
+                      className="header_navbar_logoutbutton_icon"
+                      onClick={disconnect}
+                      src={LogoutIcon}
+                      alt="logout icon"
+                    />
                   </div>
-                  <img
-                    className="header_navbar_logoutbutton_icon"
-                    onClick={disconnect}
-                    src={LogoutIcon}
-                    alt="logout icon"
-                  />
                 </div>
               </>
             ) : (

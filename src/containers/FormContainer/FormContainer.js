@@ -1,26 +1,29 @@
 import { useEffect, useState } from "react";
 import Stepper from "../../components/Stepper/Stepper";
 import StepControls from "../../components/StepControls/StepControls";
-import { UseContextProvider } from "../../contexts/StepperContext";
 import BasicInformation from "../../components/FormSteps/BasicInformation";
 import TokenType from "../../components/FormSteps/TokenType";
 import Configuration from "../../components/FormSteps/Configuration";
 import Summary from "../../components/FormSteps/Summary";
 import { useWeb3React } from "@web3-react/core";
-
+import { useStepperContext } from "../../contexts/StepperContext";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 
 import "./FormContainer.scss";
 
-const FormContainer = ({ setShowForm }) => {
+const FormContainer = ({ setShowForm, chainIdInitial }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [stepSkip, setStepSkip] = useState(true);
   const [files, setFiles] = useState([]);
-  const {chainId, account} = useWeb3React();
+  const { chainId, account } = useWeb3React();
+  const { userData, setUserData } = useStepperContext();
 
   useEffect(() => {
-    setCurrentStep(1);
+    if(chainIdInitial !== chainId) {
+      setShowForm(false);
+      setUserData({});
+    }
   },[account, chainId]);
 
   const steps = [
@@ -105,9 +108,7 @@ const FormContainer = ({ setShowForm }) => {
         <div className="herocontainer px-14 w-40v rounded-3xl bg-opacity-30 mt-10 relative">
           <div className="horizontal container mt-5 ">
             <div className="p-10 pb-4 ">
-              <UseContextProvider>
                 {displayStep(currentStep)}
-              </UseContextProvider>
             </div>
           </div>
 

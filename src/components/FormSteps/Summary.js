@@ -92,13 +92,15 @@ export default function Summary({files}) {
           </div>
           <div className="flex flex-wrap w-full mt-2 gap-y-1">
             <div className="w-full mb-2">
-              <span className="font-bold">Owner</span> : <br></br>
-              {userData.tokenOwner}
+              <span className="font-bold">Owner</span> :{" "}
+              <span className="inline-block">{userData.tokenOwner}</span>
             </div>
             {featuresToDisplay.substring(7) === "1" ? (
               <div className="w-full mb-2">
-                <span className="font-bold">Marketing Address</span> : <br></br>
-                {userData.marketingWalletAddress}
+                <span className="font-bold">Marketing Address</span> :{" "}
+                <span className="inline-block">
+                  {userData.marketingWalletAddress}{" "}
+                </span>
               </div>
             ) : null}
 
