@@ -7,8 +7,7 @@ import { UseContextProvider } from "../../contexts/StepperContext";
 
 import ChooseChain from "../../components/ChooseChain/ChooseChain";
 import MetamaskModal from "../../components/Modal/MetamaskModal/MetamaskModal";
-import FormContainer from "../FormContainer/FormContainer";
-import {useHistory} from "react-router-dom";
+import FormContainerDesktop from "../FormContainer/FormContainerDesktop";
 
 
 function MainForm() {
@@ -22,7 +21,7 @@ function MainForm() {
         <MetamaskModal />
       ) : showForm ? (
         <UseContextProvider>
-          <FormContainer
+          <FormContainerDesktop
             setShowForm={setShowForm}
             chainIdInitial={chainIdInitial}
           />

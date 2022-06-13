@@ -1,17 +1,16 @@
 .accordion2 {
     /* Tab content - closed */
 
-    
   
-        .scrollbar-styling{
-            height: 40vh;
-            overflow-y: scroll;
-            scrollbar-width: none;
-        }
+        // .scrollbar-styling{
+        //     height: 40vh;
+        //     overflow-y: scroll;
+        //     scrollbar-width: none;
+        // }
 
-        .scrollbar-styling::-webkit-scrollbar {
-            display: none;
-        }
+        // .scrollbar-styling::-webkit-scrollbar {
+        //     display: none;
+        // }
 
     .tab-content {
         max-height: 0;
@@ -115,3 +114,4 @@
 
 
 }
+

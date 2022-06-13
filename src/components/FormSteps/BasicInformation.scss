@@ -3,3 +3,48 @@
 .dropzone{
     background-color: rgb(205 236 127 / 15%);
 }
+
+.optional-toggle {
+    input[type=checkbox] {
+        height: 0;
+        width: 0;
+        visibility: hidden;
+    }
+
+    label {
+        cursor: pointer;
+        text-indent: -9999px;
+        width: 50px;
+        height: 25px;
+        background: grey;
+        display: block;
+        border-radius: 100px;
+        position: relative;
+    }
+
+    label:after {
+        content: '';
+        position: absolute;
+        top: 1.5px;
+        left: 1.5px;
+        width: 22.5px;
+        height: 22.5px;
+        background: #fff;
+        border-radius: 22.5px;
+        transition: 0.3s;
+    }
+
+    input:checked+label {
+        background: #8DBC1A;
+    }
+
+    input:checked+label:after {
+        left: calc(100% - 1.5px);
+        transform: translateX(-100%);
+    }
+
+    label:active:after {
+        width: 130px;
+    }
+
+}
