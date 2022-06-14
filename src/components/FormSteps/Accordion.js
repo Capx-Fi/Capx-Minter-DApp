@@ -2,17 +2,6 @@ import "./Accordion.scss";
 import { Tooltip, withStyles } from "@material-ui/core";
 
 const Accordion = ({ item, index, handleSelect, userData }) => {
-
-  const HtmlTooltip = withStyles((theme) => ({
-    tooltip: {
-      background: "#2A383C",
-      color: "#F1FAF2",
-      maxWidth: 800,
-      fontSize: theme.typography.pxToRem(12),
-      borderRadius: "4px",
-      zIndex: 100,
-    },
-  }))(Tooltip);
     
     return (
       <div

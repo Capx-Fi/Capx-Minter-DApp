@@ -10,6 +10,8 @@ import MetamaskModal from "../../components/Modal/MetamaskModal/MetamaskModal";
 import {CopyToClipboard} from "react-copy-to-clipboard";
 import { Link } from "react-router-dom";
 import CrossIcon from "../../assets/modal-cross-grey.svg";
+import { Tooltip } from "@material-ui/core";
+import InfoIcon from "../../assets/info-icon.svg";
 
 const TokenInfo = () => {
   const { active, account, chainId } = useWeb3React();
@@ -164,7 +166,16 @@ const TokenInfo = () => {
                               className="w-1/2 font-bold text-paragraph-2 leading-paragraph-2"
                               key={index}
                             >
-                              <span className="text-capxGreenDark">{item}</span>
+                              <span className="text-capxGreenDark">
+                                {item}
+                                <Tooltip title="Information">
+                                  <img
+                                    src={InfoIcon}
+                                    alt="info"
+                                    className="inline-block w-4 ml-3"
+                                  />
+                                </Tooltip>
+                              </span>
                             </div>
                           ) : null
                       )}
