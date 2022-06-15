@@ -14,15 +14,15 @@ export default function StepControls({
 
 
   let disabled = false;
-  // if (currentStep === 1 && disableSteps.first) {
-  //   disabled = true;
-  // } else if (currentStep === 2 && disableSteps.second) {
-  //   disabled = true;
-  // } else if (currentStep === 3 && disableSteps.third) {
-  //   disabled = true;
-  // } else if (currentStep === 4 && disableSteps.fourth) {
-  //   disabled = true;
-  // }
+  if (currentStep === 1 && disableSteps.first) {
+    disabled = true;
+  } else if (currentStep === 2 && disableSteps.second) {
+    disabled = true;
+  } else if (currentStep === 3 && disableSteps.third) {
+    disabled = true;
+  } else if (currentStep === 4 && disableSteps.fourth) {
+    disabled = true;
+  }
 
   return (
     <div className="container mb-16 flex justify-between px-10">
