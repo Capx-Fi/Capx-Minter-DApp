@@ -1,13 +1,11 @@
 import { useStepperContext } from "../../contexts/StepperContext";
 
 import EthLogo from "../../assets/ethereum-logo.svg";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Web3 from "web3";
 import { useWeb3React } from "@web3-react/core";
 import "./BasicInformation.scss";
 import { useDropzone } from "react-dropzone";
-import Toggle from "react-toggle";
-
 
 export default function BasicInformation({
   disableSteps,
@@ -18,6 +16,18 @@ export default function BasicInformation({
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFiles) => {
+      let file = acceptedFiles[0];
+
+      const reader = new FileReader();
+      reader.onabort = () => console.log("file reading was aborted");
+      reader.onerror = () => console.log("file reading has failed");
+      reader.onload = () => {
+        const binaryStr = reader.result;
+        console.log("IMAGE DATA", binaryStr);
+        setUserData({ ...userData, image64: binaryStr });
+      };
+      reader.readAsDataURL(file);
+
       setFiles(
         acceptedFiles.map((file) =>
           Object.assign(file, {
@@ -72,6 +82,10 @@ export default function BasicInformation({
     }
     if (!(userData?.tokenSymbol && userData?.tokenSymbol?.length > 0)) {
       console.log("due to symbol");
+      valid = false;
+    }
+    if (!(userData?.description && userData?.description?.length > 0)) {
+      console.log("due to desc");
       valid = false;
     }
     if (isNaN(parseFloat(userData?.tokenSupply))) {
@@ -428,7 +442,7 @@ export default function BasicInformation({
         </div>
         <div className="mx-2 w-full flex-1 mt-2">
           <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
-            Description (Optional)
+            Description
           </div>
           <textarea
             rows={3}

@@ -70,6 +70,10 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
       console.log("due to symbol");
       valid = false;
     }
+    if (!(userData?.description && userData?.description?.length > 0)) {
+      console.log("due to desc");
+      valid = false;
+    }
     if (isNaN(parseFloat(userData?.tokenSupply))) {
       valid = false;
       console.log("due to supp");
@@ -410,7 +414,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
 
       <div className="mx-2 w-full flex-1 mt-2">
         <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
-          Description (Optional)
+          Description
         </div>
         <input
           onChange={handleChange}

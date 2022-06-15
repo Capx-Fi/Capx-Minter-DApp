@@ -6,7 +6,7 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import Lottie from "lottie-react";
-import ApproveToChain from "../../../assets/Approve/Approve-to-Chain.json";
+import ApproveToChain from "../../../assets/Approve/Approve-to-Chain.json"; //approving
 import ApproveToChainSuccess from "../../../assets/Approve/Approve-successful.json";
 import ApproveToChainFailure from "../../../assets/Approve/Approve-failed.json";
 const useStyles = makeStyles((theme) => ({

@@ -3,7 +3,7 @@ import Footer from "../../components/Footer/Footer";
 import "./MyTokens.scss";
 import { useWeb3React } from "@web3-react/core";
 import MetamaskModal from "../../components/Modal/MetamaskModal/MetamaskModal";
-import TokenCard from "../../components/TokenCard/TokenCard";
+import TokenCard from "../../components/TokenCard/TokenLoadingCard";
 
 const MyTokens = () => {
   const { active, account, chainId } = useWeb3React();

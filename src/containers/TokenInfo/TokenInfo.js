@@ -4,10 +4,10 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import tokenTypeData from "../../components/FormSteps/TokenTypeData";
 import "./TokenInfo.scss";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useWeb3React } from "@web3-react/core";
 import MetamaskModal from "../../components/Modal/MetamaskModal/MetamaskModal";
-import {CopyToClipboard} from "react-copy-to-clipboard";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Link } from "react-router-dom";
 import CrossIcon from "../../assets/modal-cross-grey.svg";
 import { Tooltip } from "@material-ui/core";
@@ -17,6 +17,22 @@ const TokenInfo = () => {
   const { active, account, chainId } = useWeb3React();
   const [copiedToken, setCopiedToken] = useState(false);
   const [copiedOwner, setCopiedOwner] = useState(false);
+
+  useEffect(() => {
+    if (copiedToken) {
+      setTimeout(() => {
+        setCopiedToken(false);
+      }, 2500);
+    }
+  }, [copiedToken]);
+
+  useEffect(() => {
+    if (copiedOwner) {
+      setTimeout(() => {
+        setCopiedOwner(false);
+      }, 2500);
+    }
+  }, [copiedOwner]);
 
   return (
     <>
@@ -40,87 +56,78 @@ const TokenInfo = () => {
               </div>
               <div className="py-8 px-10">
                 <div className="w-full flex justify-between">
-                  <div className="flex gap-x-4">
-                    <div className="flex items-center">
-                      <img
-                        src={EthLogo}
-                        alt="Ethereum Logo"
-                        className="block ml-4 w-7 mr-7"
-                      ></img>
-                    </div>
-                    <div className="flex flex-col">
-                      <div className="w-full flex items-center">
-                        <div className="font-bold text-40px tracking-tight">
-                          CapCoin (CC)
+                  <div className="w-full flex-col">
+                    <div className="flex gap-x-4">
+                      <div className="flex items-center">
+                        <img
+                          src={EthLogo}
+                          alt="Ethereum Logo"
+                          className="block ml-4 w-9 mr-7"
+                        ></img>
+                      </div>
+                      <div className="flex flex-col">
+                        <div className="w-full flex items-center">
+                          <div className="font-bold text-40px tracking-tight">
+                            CapCoin (CC)
+                          </div>
                         </div>
                         <div>
-                          <img
-                            src={EthLogo}
-                            alt="Ethereum Logo"
-                            className="inline-block ml-4 w-5"
-                          ></img>
+                          {`${"0xF4338A1aB2cEC0dd62fA1A27b5ba28d7a8F9350E".substr(
+                            0,
+                            6
+                          )}...${"0xF4338A1aB2cEC0dd62fA1A27b5ba28d7a8F9350E".substr(
+                            -4
+                          )}`}{" "}
+                          <CopyToClipboard
+                            text="0xF4338A1aB2cEC0dd62fA1A27b5ba28d7a8F9350E"
+                            onCopy={() => setCopiedToken(true)}
+                          >
+                            <button className="inline-block">
+                              <img
+                                src={CopyIcon}
+                                className="w-4 ml-1"
+                                alt="Copy Icon"
+                              />
+                            </button>
+                          </CopyToClipboard>
+                          {
+                            <div className="inline-block text-caption-1 ml-2 text-grey">
+                              <Tooltip
+                                title={
+                                  <span className="text-caption-2 block p-1 font-medium">
+                                    Copied
+                                  </span>
+                                }
+                                open={copiedToken}
+                                arrow
+                              >
+                                <img
+                                  src={InfoIcon}
+                                  alt="info"
+                                  className="inline-block w-4 ml-1 -mt-1"
+                                />
+                              </Tooltip>
+                            </div>
+                          }
                         </div>
                       </div>
-                      <div>
-                        0xF4338A1aB2cEC0dd62fA1A27b5ba28d7a8F9350E{" "}
-                        <CopyToClipboard
-                          text="0xF4338A1aB2cEC0dd62fA1A27b5ba28d7a8F9350E"
-                          onCopy={() => setCopiedToken(true)}
-                        >
-                          <button className="inline-block">
-                            <img
-                              src={CopyIcon}
-                              className="w-4 ml-1"
-                              alt="Copy Icon"
-                            />
-                          </button>
-                        </CopyToClipboard>
-                        {copiedToken && (
-                          <div className="inline-block text-caption-1 ml-2 text-grey">
-                            Copied
-                          </div>
-                        )}
+                    </div>
+                    <div className="flex mt-6 text-paragraph-2">
+                      <div className="w-1/3 flex-col">
+                        <div className="font-bold">Website:</div>
+                        <div>https://www.capx.fi</div>
                       </div>
-                      <div>
-                        <span className="font-bold block mt-2">
-                          Owner Address:
-                        </span>
-                        0xF4338A1aB2cEC0dd62fA1A27b5ba28d7a8F9350E{" "}
-                        <CopyToClipboard
-                          text="0xF4338A1aB2cEC0dd62fA1A27b5ba28d7a8F9350E"
-                          onCopy={() => setCopiedOwner(true)}
-                        >
-                          <button className="inline-block">
-                            <img
-                              src={CopyIcon}
-                              className="w-4 ml-1"
-                              alt="Copy Icon"
-                            />
-                          </button>
-                        </CopyToClipboard>
-                        {copiedOwner && (
-                          <div className="inline-block text-caption-1 ml-2 text-grey">
-                            Copied
-                          </div>
-                        )}
-                      </div>
-                      <div className="flex mt-4">
-                        <div className="w-1/3 flex-col">
-                          <div className="font-bold">Website:</div>
-                          <div>https://capx.fi</div>
-                        </div>
-                        <div className="w-1/3 flex-col">
-                          <div className="font-bold">Telegram:</div>
-                          <div>t.me/capx</div>
-                        </div>{" "}
-                        <div className="w-1/3 flex-col">
-                          <div className="font-bold">Twitter:</div>
-                          <div>www.twitter.com/capx</div>
-                        </div>
+                      <div className="w-1/3 flex-col">
+                        <div className="font-bold">Telegram:</div>
+                        <div>t.me/capx</div>
+                      </div>{" "}
+                      <div className="w-1/3 flex-col">
+                        <div className="font-bold">Twitter:</div>
+                        <div>www.twitter.com/capx</div>
                       </div>
                     </div>
                   </div>
-                  <div className="flex gap-x-4 mt-10">
+                  <div className="flex gap-x-4 mt-12">
                     <div
                       className={`bg-capxGreen create-button rounded-lg justify-center w-52 items-center flex px-6 h-11 cursor-pointer`}
                       onClick={() => console.log("clicked")}
@@ -183,6 +190,48 @@ const TokenInfo = () => {
                   </div>
                 </div>
                 <div className="flex justify-between mt-8">
+                  <div className="text-paragraph-2 leading-paragraph-2">
+                    <span className="block mt-2">Owner Address:</span>
+                    <span className="font-bold text-paragraph-1 leading-paragraph-1">
+                      {`${"0xF4338A1aB2cEC0dd62fA1A27b5ba28d7a8F9350E".substr(
+                        0,
+                        6
+                      )}...${"0xF4338A1aB2cEC0dd62fA1A27b5ba28d7a8F9350E".substr(
+                        -4
+                      )}`}{" "}
+                    </span>
+                    <CopyToClipboard
+                      text="0xF4338A1aB2cEC0dd62fA1A27b5ba28d7a8F9350E"
+                      onCopy={() => setCopiedOwner(true)}
+                    >
+                      <button className="inline-block">
+                        <img
+                          src={CopyIcon}
+                          className="w-4 ml-1"
+                          alt="Copy Icon"
+                        />
+                      </button>
+                    </CopyToClipboard>
+                    {
+                      <div className="inline-block text-caption-1 ml-2 text-grey">
+                        <Tooltip
+                          title={
+                            <span className="text-caption-2 block p-1 font-medium">
+                              Copied
+                            </span>
+                          }
+                          open={copiedOwner}
+                          arrow
+                        >
+                          <img
+                            src={InfoIcon}
+                            alt="info"
+                            className="inline-block w-4 ml-1 -mt-1"
+                          />
+                        </Tooltip>
+                      </div>
+                    }
+                  </div>
                   <div className="flex flex-col text-paragraph-2 leading-paragraph-2">
                     <div>Date Minted</div>
                     <div className="font-bold text-paragraph-1 leading-paragraph-1">

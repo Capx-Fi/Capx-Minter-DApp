@@ -62,6 +62,7 @@ function LockAndApprove({
 		CONTRACT_ABI_CAPX,
 		CONTRACT_ADDRESS_CAPX
 	);
+	
 	useEffect(() => {
 		async function getApproval() {
 			let approvedAmount = null;

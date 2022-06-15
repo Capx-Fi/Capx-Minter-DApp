@@ -1,7 +1,7 @@
 .header {
 
 	.balance-div{
-	background-color: #f0f0f0;
+	background-color: #e5e4e4;
 	}
 
 	@apply desktop:h-20 screen:h-16 h-16 top-0 left-0 fixed flex w-full px-8 tablet:px-12 laptop:px-20 desktop:px-24 justify-between items-center bg-white;
@@ -30,7 +30,7 @@
 				@apply text-caption-3 leading-caption-3 tablet:text-caption-3 tablet:leading-caption-3 desktop:text-caption-2 desktop:leading-caption-2 font-medium;
 			}
 			&_icon {
-				@apply ml-2 h-5 tablet:h-6 desktop:h-8 cursor-pointer;
+				@apply ml-2 h-5 mr-2 tablet:h-6 desktop:h-8 cursor-pointer;
 			}
 		}
 	}

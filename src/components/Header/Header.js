@@ -228,7 +228,7 @@ function Header({hiddenNav, landing, createButton}) {
           </div>
         </a>
         {active && !hiddenNav && (
-          <div className="flex flex-row gap-x-2 ml-32">
+          <div className="flex flex-row gap-x-2 ml-44">
             <div className="">
               <div className="flex flex-row w-32 justify-center items-center rounded-lg px-2.5 py-2.5 text-paragraph-1 font-semibold border-dark-200">
                 <a href="https://liquid.capx.fi">Vest </a>
@@ -261,19 +261,27 @@ function Header({hiddenNav, landing, createButton}) {
                   <DropDown sortBy={sortBy} chainChange={chainChange} />
                 </div>
                 <div className="header_navbar_logoutbutton">
-                  {userBalance !== -1 ? (
-                    <div className="flex items-center balance-div pr-2 pl-2.5 py-1.5 rounded-lg">
-                      <div className="text-caption-2 leading-caption-2">
-                        <span className="font-semibold">
-                          {web3.utils
-                            .fromWei(userBalance.toString())
-                            .substring(0, 6)}{" "}
-                        </span>
-                        {currentTicker}
-                      </div>
-                    </div>
+									{(sortBy !== "Unknown") ? (
+									userBalance !== -1 ?
+											<div className="flex items-center w-32 justify-center balance-div py-1.5 rounded-l-lg">
+											<div className="text-caption-2 font-semibold leading-caption-2 text-center">
+												<span className="">
+													{web3.utils
+														.fromWei(userBalance.toString())
+														.substring(0, 6)}{" "}
+												</span>
+												{currentTicker}
+											</div>
+										</div> : <div className="flex items-center w-32 justify-center balance-div py-1.5 rounded-l-lg">
+											<div className="text-caption-2 text-gray-300 bg-gray-300 animate-pulse font-semibold leading-caption-2 text-center">
+												<span className="">
+													0.4242
+												</span>
+												ETH
+											</div>
+										</div>
                   ) : null}
-                  <div className="flex items-center pl-2 py-1.5">
+                  <div className="flex items-center rounded-l-lg pl-3 py-1.5" style={{background:"#f0f0f0"}}>
                     <div className="header_navbar_logoutbutton_text">
                       {" "}
                       {`${account.substr(0, 6)}...${account.substr(-4)}`}
@@ -290,7 +298,7 @@ function Header({hiddenNav, landing, createButton}) {
             ) : (
               <>
                 {!landing && (
-                  <div className="header_navbar_button">
+                  <div className="header_navbar_button rounded-l-lg">
                     <div
                       onClick={connect}
                       className="header_navbar_button_text text-black"

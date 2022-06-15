@@ -19,12 +19,13 @@ const FormContainer = ({ setShowForm, chainIdInitial }) => {
   const { chainId, account } = useWeb3React();
   const { userData, setUserData } = useStepperContext();
 
+
   useEffect(() => {
-    if(chainIdInitial !== chainId) {
+    if (chainIdInitial !== chainId) {
       setShowForm(false);
       setUserData({});
     }
-  },[account, chainId]);
+  }, [account, chainId]);
 
   const steps = [
     "Basic Information",
@@ -40,17 +41,34 @@ const FormContainer = ({ setShowForm, chainIdInitial }) => {
     fourth: false,
   });
 
-
   const displayStep = (step) => {
     switch (step) {
       case 1:
-        return <BasicInformation disableSteps={disableSteps} setDisableSteps={setDisableSteps} files={files} setFiles={setFiles}/>;
+        return (
+          <BasicInformation
+            disableSteps={disableSteps}
+            setDisableSteps={setDisableSteps}
+            files={files}
+            setFiles={setFiles}
+          />
+        );
       case 2:
-        return <TokenType disableSteps={disableSteps} setStepSkip={setStepSkip} setDisableSteps={setDisableSteps}/>;
-      case 3: 
-        return <Configuration disableSteps={disableSteps} setDisableSteps={setDisableSteps} />;
+        return (
+          <TokenType
+            disableSteps={disableSteps}
+            setStepSkip={setStepSkip}
+            setDisableSteps={setDisableSteps}
+          />
+        );
+      case 3:
+        return (
+          <Configuration
+            disableSteps={disableSteps}
+            setDisableSteps={setDisableSteps}
+          />
+        );
       case 4:
-        return <Summary files={files}/>;
+        return <Summary files={files} />;
       default:
     }
   };
@@ -64,9 +82,9 @@ const FormContainer = ({ setShowForm, chainIdInitial }) => {
 
     if (currentStep === 4 && direction === "back") {
       if (stepSkip) {
-        newStep=2;
+        newStep = 2;
       } else {
-        newStep=3;
+        newStep = 3;
       }
       console.log(currentStep, newStep);
       setCurrentStep(newStep);
@@ -98,18 +116,20 @@ const FormContainer = ({ setShowForm, chainIdInitial }) => {
           currentStep === 2 ? "overflow-y-hidden pt-32 pb-8" : "py-32"
         } maincontainer text-black flex flex-col justify-center items-center m-auto mt-auto `}
       >
-        {currentStep === 2 && <div className="h-32 text-transparent" id="specialdiv">
-          HELLO
-        </div>}
+        {currentStep === 2 && (
+          <div className="h-32 text-transparent" id="specialdiv">
+            HELLO
+          </div>
+        )}
 
-        <div className={`mt upper-container horizontal container rounded-3xl px-14 py-4 pb-12 w-40v bg-opacity-30 relative`}>
-          <Stepper steps={steps} currentStep={currentStep}/>
+        <div
+          className={`mt upper-container horizontal container rounded-3xl px-14 py-4 pb-12 w-40v bg-opacity-30 relative`}
+        >
+          <Stepper steps={steps} currentStep={currentStep} />
         </div>
         <div className="herocontainer px-14 w-40v rounded-3xl bg-opacity-30 mt-10 relative">
           <div className="horizontal container mt-5 ">
-            <div className="p-10 pb-4 ">
-                {displayStep(currentStep)}
-            </div>
+            <div className="p-10 pb-4 ">{displayStep(currentStep)}</div>
           </div>
 
           {/* navigation button */}
@@ -125,6 +145,6 @@ const FormContainer = ({ setShowForm, chainIdInitial }) => {
       <Footer />
     </div>
   );
-};
+};;
 
 export default FormContainer;

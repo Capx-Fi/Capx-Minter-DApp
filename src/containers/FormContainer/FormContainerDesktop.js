@@ -4,20 +4,28 @@ import StepControls from "../../components/StepControls/StepControls";
 import BasicInformation from "../../components/FormSteps/BasicInfoDesktop";
 import TokenType from "../../components/FormSteps/TokenTypeDesktop";
 import Configuration from "../../components/FormSteps/Configuration";
-import Summary from "../../components/FormSteps/Summary";
+import Summary from "../../components/FormSteps/SummaryDesktop";
 import { useWeb3React } from "@web3-react/core";
 import { useStepperContext } from "../../contexts/StepperContext";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-
 import "./FormContainer.scss";
+import ApproveModal from "../../components/Modal/VestAndApproveModal/ApproveModal";
+
+const pinataSDK = require("@pinata/sdk");
+
 
 const FormContainer = ({ setShowForm, chainIdInitial }) => {
+
+  const pinata = pinataSDK(process.env.REACT_APP_PINATA_API_KEY, process.env.REACT_APP_PINATA_API_SECRET);
   const [currentStep, setCurrentStep] = useState(1);
   const [stepSkip, setStepSkip] = useState(true);
   const [files, setFiles] = useState([]);
   const { chainId, account } = useWeb3React();
   const { userData, setUserData } = useStepperContext();
+
+  const [approveModalOpen, setApproveModalOpen] = useState(false);
+  const [approveModalStatus, setApproveModalStatus] = useState(""); //beware on mobile take this component outside
 
   useEffect(() => {
     if (chainIdInitial !== chainId) {
@@ -31,26 +39,26 @@ const FormContainer = ({ setShowForm, chainIdInitial }) => {
     "Choose Token Type",
     "Configuration",
     "Summary",
-    ];
-    
-    const stepsd = [
-        {
-            name: "Basic Information",
-            description: "Enter the basic details for your token",
-        },
-        {
-            name: "Choose Token Type",
-            description: "Select the type of token you want to create",
-        },
-        {
-            name: "Configuration",
-            description: "Advenced configuration of the token",
-        },
-        {
-            name: "Summary",
-            description: "Review your token and confirm",
-        }
-    ];
+  ];
+
+  const stepsd = [
+    {
+      name: "Basic Information",
+      description: "Enter the basic details for your token",
+    },
+    {
+      name: "Choose Token Type",
+      description: "Select the type of token you want to create",
+    },
+    {
+      name: "Configuration",
+      description: "Advenced configuration of the token",
+    },
+    {
+      name: "Summary",
+      description: "Review your token and confirm",
+    },
+  ];
 
   const [disableSteps, setDisableSteps] = useState({
     first: true,
@@ -91,11 +99,29 @@ const FormContainer = ({ setShowForm, chainIdInitial }) => {
     }
   };
 
-  const handleClick = (direction) => {
+  const handleClick = async (direction) => {
     let newStep = currentStep;
 
     if (currentStep === 4 && direction === "next") {
-      return;
+      setApproveModalOpen(true);
+    
+      let pinataHash;
+
+      try {
+        pinataHash = await pinata.pinJSONToIPFS({
+          description: userData.description,
+          image64: userData?.image64
+        });
+      } catch (err) {
+        console.log(err);
+      }
+
+      console.log("PINATA HASH 2", pinataHash);
+
+      setTimeout(() => {
+        setApproveModalOpen(false);
+      }
+      , 4000);
     }
 
     if (currentStep === 4 && direction === "back") {
@@ -128,6 +154,12 @@ const FormContainer = ({ setShowForm, chainIdInitial }) => {
 
   return (
     <div className="form_container h-screen flex-col">
+      <ApproveModal
+        open={approveModalOpen}
+        setOpen={setApproveModalOpen}
+        approveModalStatus={approveModalStatus}
+        setApproveModalStatus={setApproveModalStatus}
+      />
       <Header hiddenNav={true} />
       <div
         className={`py-32 maincontainer text-black flex gap-x-16 justify-between m-auto mt-auto px-24`}
@@ -155,6 +187,6 @@ const FormContainer = ({ setShowForm, chainIdInitial }) => {
       <Footer />
     </div>
   );
-};
+};;
 
 export default FormContainer;

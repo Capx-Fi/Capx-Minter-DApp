@@ -38,6 +38,34 @@ export default function TokenType({
     { label: "Burn Tax" },
   ]);
 
+  const onChangeOptions = (data) => {
+                if (data.length === 0) {
+                  setRelevantTokenTypes(
+                    tokenTypeData.filter((item) => {
+                      return item.id === "f01";
+                    })
+                  );
+                  return;
+                }
+
+                setRelevantTokenTypes(
+                  tokenTypeData.filter((item) => {
+                    let selected = true;
+                    data.forEach((item2) => {
+                      if (
+                        !(
+                          item.features[choiceMap.get(item2.label)] &&
+                          item2.checked
+                        )
+                      ) {
+                        selected = false;
+                      }
+                    });
+                    return selected;
+                  })
+                );
+              }
+
   const handleSelect = (id) => {
 
     setUserData({ ...userData, tokenType: id, checkboxOptions: checkboxOptions, relevantTokenTypes: relevantTokenTypes });
@@ -146,8 +174,21 @@ export default function TokenType({
                   </div>
                 ))
               ) : (
-                <div className="flex items-center justify-center mt-20 w-full text-subheading font-semibold text-gray-400">
+                <div className="flex-col text-center items-center justify-center mt-20 w-full text-subheading font-semibold text-gray-500">
                   <div>No Tokens with these set of features</div>
+                  <div
+                    className="text-paragraph-1 cursor-pointer"
+                    onClick={() => {
+                      const newData = [...checkboxOptions];
+                      newData.forEach((item) => {
+                        item.checked = false;
+                      });
+                      setCheckboxOptions(newData);
+                      onChangeOptions(newData.filter((x) => x.checked));
+                    }}
+                  >
+                    Clear all filters
+                  </div>
                 </div>
               )}
             </div>
