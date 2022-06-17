@@ -14,12 +14,12 @@ import ApproveModal from "../../components/Modal/VestAndApproveModal/ApproveModa
 import { ERC20_ABI } from "../../contracts/ERC20Token";
 import { CAPX_FACTORY } from "../../contracts/CapxFactory";
 import { createNewToken } from "../../contracts/createToken";
-
+import {useHistory} from "react-router-dom";
 const pinataSDK = require("@pinata/sdk");
 
 
 const FormContainer = ({ setShowForm, chainIdInitial }) => {
-
+   const history = useHistory();
   const pinata = pinataSDK(process.env.REACT_APP_PINATA_API_KEY, process.env.REACT_APP_PINATA_API_SECRET);
   const [currentStep, setCurrentStep] = useState(1);
   const [stepSkip, setStepSkip] = useState(true);
@@ -43,6 +43,8 @@ const FormContainer = ({ setShowForm, chainIdInitial }) => {
     "Configuration",
     "Summary",
   ];
+
+  const [success, setSuccess] = useState(false);
 
   const stepsd = [
     {
@@ -102,6 +104,8 @@ const FormContainer = ({ setShowForm, chainIdInitial }) => {
     }
   };
 
+  
+
   const handleClick = async (direction) => {
     let newStep = currentStep;
     if (currentStep === 4 && direction === "next") {
@@ -110,32 +114,38 @@ const FormContainer = ({ setShowForm, chainIdInitial }) => {
       const tokenNumber = parseInt(userData.tokenType.substring(1));
       let pinataHash;
       try {
-        // pinataHash = await pinata.pinJSONToIPFS({
-        //   description: userData.description,
-        //   image64: userData?.image64
-        // });
-        pinataHash = 0;
+        pinataHash = await pinata.pinJSONToIPFS({
+          description: userData.description,
+          image64: userData?.image64,
+          website: userData?.website,
+          twitter: userData?.twitter,
+          telegram: userData?.telegram,
+        });
         console.log(
           "PARAMs",
           account,
           CAPX_FACTORY,
           ERC20_ABI,
-          "0xed4eE86D42082D307a8b973686E02E3076d1265B",
+          process.env.REACT_APP_CAPX_FACTORY_ADDRESS,
           userData.tokenName,
           userData.tokenSymbol,
           userData.tokenOwner,
           userData.tokenDecimal,
-          userData?.initalSupply ? userData.initalSupply : userData.tokenSupply,
-          userData?.finalSupply ? userData.finalSupply : userData.tokenSupply,
+          userData?.initalSupply
+            ? userData.initalSupply * Math.pow(10, userData.tokenDecimal)
+            : userData.tokenSupply * Math.pow(10, userData.tokenDecimal),
+          userData?.finalSupply
+            ? userData.finalSupply * Math.pow(10, userData.tokenDecimal)
+            : userData.tokenSupply * Math.pow(10, userData.tokenDecimal),
           tokenNumber,
           [],
-          0
+          pinataHash?.IpfsHash
         );
         createNewToken(
           account,
           CAPX_FACTORY,
           ERC20_ABI,
-          "0xed4eE86D42082D307a8b973686E02E3076d1265B",
+          process.env.REACT_APP_CAPX_FACTORY_ADDRESS,
           userData.tokenName,
           userData.tokenSymbol,
           userData.tokenOwner,
@@ -144,9 +154,10 @@ const FormContainer = ({ setShowForm, chainIdInitial }) => {
           userData?.finalSupply ? userData.finalSupply : userData.tokenSupply,
           tokenNumber,
           [],
-          0,
+          pinataHash?.IpfsHash,
           setApproveModalStatus,
-          setApproveModalOpen
+          setApproveModalOpen,
+          setSuccess
         );
       } catch (err) {
         console.log(err);
@@ -185,6 +196,13 @@ const FormContainer = ({ setShowForm, chainIdInitial }) => {
     }
     newStep > 0 && newStep <= steps.length && setCurrentStep(newStep);
   };
+
+  useEffect(() => {
+    if (success) {
+      history.push("/tokens");
+    }
+  }
+  , [success]);
 
   return (
     <div className="form_container h-screen flex-col">

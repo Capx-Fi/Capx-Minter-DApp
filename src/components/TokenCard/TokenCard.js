@@ -7,6 +7,22 @@ import CopyIcon from "../../assets/copy-icon.svg";
 import { Tooltip } from "@material-ui/core";
 import InfoIcon from "../../assets/info-icon.svg";
 
+let parseDesc = function (text, limit) {
+  if (text.length > limit) {
+    for (let i = limit; i > 0; i--) {
+      if (
+        text.charAt(i) === " " &&
+        (text.charAt(i - 1) !== "," ||
+          text.charAt(i - 1) !== "." ||
+          text.charAt(i - 1) !== ";")
+      ) {
+        return text.substring(0, i) + "...";
+      }
+    }
+    return text.substring(0, limit) + "...";
+  } else return text;
+};
+
 export default function TokenCard({
   tokenName,
   tokenSymbol,
@@ -20,6 +36,7 @@ export default function TokenCard({
   isOwner,
   tokenCreatedAt,
   tokenDeployer,
+  hashData
 }) {
   const [copied, setCopied] = useState(false);
 
@@ -55,7 +72,7 @@ export default function TokenCard({
         <div className="w-full flex items-center">
           <div className="mt-3 mb-4">
             <img
-              src={EthLogo}
+              src={hashData?.image64}
               alt="Ethereum Logo"
               className="inline-block w-8 mr-7"
             ></img>
@@ -65,23 +82,17 @@ export default function TokenCard({
           </div>
         </div>
         <div>
-          <div className="mt-4 font-semibold text-caption-1 leading-caption-1">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s
+          <div className="mt-4 h-16 flex items-center font-semibold text-caption-1 leading-caption-1">
+            <div>
+              {hashData?.description && parseDesc(hashData.description, 136)}
+            </div>
           </div>
         </div>
         <div className="text-paragraph-2 flex justify-between mt-8 leading-paragraph-2">
           <div className="font-semibold">Token Address:</div>
           <div className="font-semibold">
-            {`${address.substr(
-              0,
-              6
-            )}...${address.substr(-4)}`}
-            <CopyToClipboard
-              text={address}
-              onCopy={() => setCopied(true)}
-            >
+            {`${address.substr(0, 6)}...${address.substr(-4)}`}
+            <CopyToClipboard text={address} onCopy={() => setCopied(true)}>
               <button className="inline-block">
                 <Tooltip
                   title={
@@ -106,15 +117,20 @@ export default function TokenCard({
           <div className="font-semibold">Supply:</div>
           <div className="font-bold">{tokenTokenSupply}</div>
         </div>
-        <Link to={{
-          pathname: "/tokenInformation", state: {
-            tokenName,
-            dateCreatedFormatted,
-            tokenTokenSupply,
-            address,
-            tokenOwner,
-            tokenSymbol
-        }}}>
+        <Link
+          to={{
+            pathname: "/tokenInformation",
+            state: {
+              tokenName,
+              dateCreatedFormatted,
+              tokenTokenSupply,
+              address,
+              tokenOwner,
+              tokenSymbol,
+              hashData,
+            },
+          }}
+        >
           <div className="w-full">
             <div
               className={`bg-capxGreen create-button rounded-xl mt-10 justify-center items-center flex px-4 py-3 w-full cursor-pointer`}

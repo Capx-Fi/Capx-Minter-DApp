@@ -69,7 +69,7 @@ const TokenInfo = () => {
                     <div className="flex gap-x-4">
                       <div className="flex items-center">
                         <img
-                          src={EthLogo}
+                          src={location?.state?.hashData?.image64}
                           alt="Ethereum Logo"
                           className="block ml-4 w-9 mr-7"
                         ></img>
@@ -112,18 +112,27 @@ const TokenInfo = () => {
                       </div>
                     </div>
                     <div className="flex mt-6 text-paragraph-2">
-                      <div className="w-1/3 flex-col">
-                        <div className="font-bold">Website:</div>
-                        <div>https://www.capx.fi</div>
-                      </div>
-                      <div className="w-1/3 flex-col">
-                        <div className="font-bold">Telegram:</div>
-                        <div>t.me/capx</div>
-                      </div>{" "}
-                      <div className="w-1/3 flex-col">
-                        <div className="font-bold">Twitter:</div>
-                        <div>www.twitter.com/capx</div>
-                      </div>
+                      {location?.state?.hashData?.website &&
+                      location.state.hashData.website.length > 0 ? (
+                        <div className="w-1/3 flex-col">
+                          <div className="font-bold">Website:</div>
+                              <div>{location.state.hashData.website}</div>
+                        </div>
+                      ) : null}
+                      {location?.state?.hashData?.twitter &&
+                      location.state.hashData.twitter.length > 0 ? (
+                        <div className="w-1/3 flex-col">
+                          <div className="font-bold">Twitter:</div>
+                              <div>{location.state.hashData.twitter}</div>
+                        </div>
+                      ) : null}
+                      {location?.state?.hashData?.telegram &&
+                      location.state.hashData.telegram.length > 0 ? (
+                        <div className="w-1/3 flex-col">
+                          <div className="font-bold">Telegram:</div>
+                              <div>{location.state.hashData.telegram}</div>
+                        </div>
+                      ) : null}
                     </div>
                   </div>
                   <div className="flex gap-x-4 mt-12">
@@ -154,9 +163,7 @@ const TokenInfo = () => {
                 </div>
                 <div>
                   <div className="mt-2 text-caption-1 leading-caption-1 font-semibold">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s
+                    {location?.state?.hashData?.description}
                   </div>
                 </div>
                 <div className="mt-8">

@@ -1,5 +1,6 @@
 import BigNumber from "bignumber.js";
 import Web3 from "web3";
+import {useHistory} from "react-router-dom";
 
 BigNumber.config({
   ROUNDING_MODE: 3,
@@ -22,11 +23,12 @@ export const createNewToken = async (
     parameters, // list of 6 parameters
     documentHash,
     setApproveModalStatus,
-    setApproveModalOpen
+    setApproveModalOpen,
+    setSuccess
 ) => {
     // Start Loading
     const web3 = new Web3(Web3.givenProvider);
-
+   
     const factory = new web3.eth.Contract(FACTORY_ABI, FACTORY_ADDRESS);
 
     let deployedAddress = null;
@@ -84,7 +86,7 @@ export const createNewToken = async (
             try {
                 checkResult = await token.methods.name().call();
             } catch (error) {
-                console.error("Token Not deployed Properly 3");
+                console.error("Token Not deployed Properly 3", error);
                 setApproveModalStatus("failure");
                 setTimeout(() => {
                   setApproveModalOpen(false);
@@ -113,7 +115,7 @@ export const createNewToken = async (
         }
         setApproveModalStatus("success");
         setTimeout(() => {
-          setApproveModalOpen(false);
+            setSuccess(true);
         }, 3000);
     }
 }
