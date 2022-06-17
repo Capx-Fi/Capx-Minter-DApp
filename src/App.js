@@ -22,7 +22,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={MainForm} />
             <Route exact path="/tokens" component={MyTokens} />
-            <Route exact path="/tokenOne" component={TokenInfo} />
+            <Route exact path="/tokenInformation" component={TokenInfo} />
             <Route path="*" component={PageNotFound} />
           </Switch>
         </Router>

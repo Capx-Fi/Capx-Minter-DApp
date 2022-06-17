@@ -28,9 +28,7 @@ function Header({hiddenNav, landing, createButton}) {
 	};
 	const [userBalance, setUserBalance] = useState(-1);
 	const provider = window.ethereum;
-	console.log(provider);
 	const web3 = new Web3(provider);
-	console.log(web3);
 
 	const [currentTicker, setCurrentTicker] = useState("");
 

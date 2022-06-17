@@ -91,9 +91,6 @@ export default function TokenType({
     }
   }, [userData]);
 
-  useEffect(() => {
-    console.log("RELEVANT", relevantTokenTypes);
-  }, [relevantTokenTypes]);
 
   return (
     <div className="flex flex-col text-black">
@@ -152,7 +149,7 @@ export default function TokenType({
             <div className="flex flex-wrap mt-6">
               {relevantTokenTypes.length > 0 ? (
                 relevantTokenTypes.map((item, index) => (
-                  <div className="w-1/2 py-2 pr-2">
+                  <div className="w-1/2 py-2 pr-2" key={index}>
                     <div
                       className="rounded-lg flex justify-between px-4 mr-2 py-2"
                       style={{ background: "#F0F1F0" }}

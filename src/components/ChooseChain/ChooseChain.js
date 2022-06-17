@@ -37,7 +37,7 @@ const ChooseChain = ({setShowForm, setChainIdInitial}) => {
         try {
           await web3.givenProvider.request({
             method: "wallet_switchEthereumChain",
-            params: [{ chainId: "0x4" }],
+            params: [{ chainId: "0x5" }],
           });
         } catch (error) {}
       } else if (chainName === "Matic") {
@@ -74,7 +74,7 @@ const ChooseChain = ({setShowForm, setChainIdInitial}) => {
                   symbol: "BNB",
                   decimals: 18,
                 },
-                rpcUrls: ["https://bsc-dataseed.binance.org/"],
+                rpcUrls: ["https://data-seed-prebsc-1-s3.binance.org:8545"],
                 blockExplorerUrls: ["https://bscscan.com/"],
               },
             ],

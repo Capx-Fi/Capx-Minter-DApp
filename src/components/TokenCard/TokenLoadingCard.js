@@ -59,7 +59,7 @@ export default function TokenCard() {
         
           <div className="w-full">
             <div
-              className={`bg-capxGreen create-button-disabled rounded-xl mt-10 justify-center items-center flex px-4 py-3 w-full cursor-pointer`}
+              className={`bg-capxGreen cursor-not-allowed create-button-disabled rounded-xl mt-10 justify-center items-center flex px-4 py-3 w-full`}
               onClick={() => console.log("clicked")}
             >
               <div

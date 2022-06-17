@@ -7,17 +7,48 @@ import CopyIcon from "../../assets/copy-icon.svg";
 import { Tooltip } from "@material-ui/core";
 import InfoIcon from "../../assets/info-icon.svg";
 
-export default function TokenCard() {
+export default function TokenCard({
+  tokenName,
+  tokenSymbol,
+  tokenOwner,
+  tokenDecimals,
+  tokenTokenSupply,
+  typeOfToken,
+  address,
+  documentHash,
+  id,
+  isOwner,
+  tokenCreatedAt,
+  tokenDeployer,
+}) {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     if (copied) {
       setTimeout(() => {
         setCopied(false);
-      }, 2500);
+      }, 2000);
     }
   }, [copied]);
 
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const dateCreated = new Date(parseInt(tokenCreatedAt) * 1000);
+  const dateCreatedFormatted = `${monthNames[dateCreated.getMonth()]} ${dateCreated.getDate()}, ${dateCreated.getFullYear()}`
+  
   return (
     <div className="token_card">
       <div className="herocontainer flex flex-col gap-y-2 px-14 py-10 w-27v rounded-2xl bg-opacity-30 mt-10 relative">
@@ -30,7 +61,7 @@ export default function TokenCard() {
             ></img>
           </div>
           <div className="font-bold text-heading-2 leading-heading-2">
-            CapCoin (CC)
+            {tokenName} ({tokenSymbol})
           </div>
         </div>
         <div>
@@ -43,40 +74,47 @@ export default function TokenCard() {
         <div className="text-paragraph-2 flex justify-between mt-8 leading-paragraph-2">
           <div className="font-semibold">Token Address:</div>
           <div className="font-semibold">
-            {`${"0xF4338A1aB2cEC0dd62fA1A27b5ba28d7a8F9350E".substr(
+            {`${address.substr(
               0,
               6
-            )}...${"0xF4338A1aB2cEC0dd62fA1A27b5ba28d7a8F9350E".substr(-4)}`}
+            )}...${address.substr(-4)}`}
             <CopyToClipboard
-              text="0xF4338A1aB2cEC0dd62fA1A27b5ba28d7a8F9350E"
+              text={address}
               onCopy={() => setCopied(true)}
             >
               <button className="inline-block">
-                <img src={CopyIcon} className="w-4 ml-2" alt="Copy Icon" />
+                <Tooltip
+                  title={
+                    <span className="text-caption-2 block p-1 font-medium">
+                      Copied
+                    </span>
+                  }
+                  open={copied}
+                  arrow
+                >
+                  <img src={CopyIcon} className="w-4 ml-2" alt="Copy Icon" />
+                </Tooltip>
               </button>
             </CopyToClipboard>
-            {(
-              <div className="inline-block text-caption-1 ml-2 text-grey">
-                <Tooltip title={<span className="text-caption-2 block p-1 font-medium">Copied</span>} open={copied} arrow>
-                  <img
-                    src={InfoIcon}
-                    alt="info"
-                    className="inline-block w-4 ml-1 -mt-1"
-                  />
-                </Tooltip>
-              </div>
-            )}
           </div>
         </div>
         <div className="flex justify-between text-paragraph-2 leading-paragraph-2">
           <div className="font-semibold">Mint Date:</div>
-          <div className="font-bold">May 24, 2022</div>
+          <div className="font-bold">{dateCreatedFormatted}</div>
         </div>
         <div className="flex justify-between text-paragraph-2 leading-paragraph-2">
           <div className="font-semibold">Supply:</div>
-          <div className="font-bold">1,000,000</div>
+          <div className="font-bold">{tokenTokenSupply}</div>
         </div>
-        <Link to="/tokenOne">
+        <Link to={{
+          pathname: "/tokenInformation", state: {
+            tokenName,
+            dateCreatedFormatted,
+            tokenTokenSupply,
+            address,
+            tokenOwner,
+            tokenSymbol
+        }}}>
           <div className="w-full">
             <div
               className={`bg-capxGreen create-button rounded-xl mt-10 justify-center items-center flex px-4 py-3 w-full cursor-pointer`}

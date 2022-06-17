@@ -11,6 +11,9 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import "./FormContainer.scss";
 import ApproveModal from "../../components/Modal/VestAndApproveModal/ApproveModal";
+import { ERC20_ABI } from "../../contracts/ERC20Token";
+import { CAPX_FACTORY } from "../../contracts/CapxFactory";
+import { createNewToken } from "../../contracts/createToken";
 
 const pinataSDK = require("@pinata/sdk");
 
@@ -101,27 +104,59 @@ const FormContainer = ({ setShowForm, chainIdInitial }) => {
 
   const handleClick = async (direction) => {
     let newStep = currentStep;
-
     if (currentStep === 4 && direction === "next") {
+      setApproveModalStatus("");
       setApproveModalOpen(true);
-    
+      const tokenNumber = parseInt(userData.tokenType.substring(1));
       let pinataHash;
-
       try {
-        pinataHash = await pinata.pinJSONToIPFS({
-          description: userData.description,
-          image64: userData?.image64
-        });
+        // pinataHash = await pinata.pinJSONToIPFS({
+        //   description: userData.description,
+        //   image64: userData?.image64
+        // });
+        pinataHash = 0;
+        console.log(
+          "PARAMs",
+          account,
+          CAPX_FACTORY,
+          ERC20_ABI,
+          "0xed4eE86D42082D307a8b973686E02E3076d1265B",
+          userData.tokenName,
+          userData.tokenSymbol,
+          userData.tokenOwner,
+          userData.tokenDecimal,
+          userData?.initalSupply ? userData.initalSupply : userData.tokenSupply,
+          userData?.finalSupply ? userData.finalSupply : userData.tokenSupply,
+          tokenNumber,
+          [],
+          0
+        );
+        createNewToken(
+          account,
+          CAPX_FACTORY,
+          ERC20_ABI,
+          "0xed4eE86D42082D307a8b973686E02E3076d1265B",
+          userData.tokenName,
+          userData.tokenSymbol,
+          userData.tokenOwner,
+          userData.tokenDecimal,
+          userData?.initalSupply ? userData.initalSupply : userData.tokenSupply,
+          userData?.finalSupply ? userData.finalSupply : userData.tokenSupply,
+          tokenNumber,
+          [],
+          0,
+          setApproveModalStatus,
+          setApproveModalOpen
+        );
       } catch (err) {
         console.log(err);
+        setApproveModalStatus("failure");
+        setTimeout(() => {
+          setApproveModalOpen(false);
+        }, 2500);
+        return;
       }
-
       console.log("PINATA HASH 2", pinataHash);
-
-      setTimeout(() => {
-        setApproveModalOpen(false);
-      }
-      , 4000);
     }
 
     if (currentStep === 4 && direction === "back") {
@@ -130,7 +165,6 @@ const FormContainer = ({ setShowForm, chainIdInitial }) => {
       } else {
         newStep = 3;
       }
-      console.log(currentStep, newStep);
       setCurrentStep(newStep);
       return;
     }

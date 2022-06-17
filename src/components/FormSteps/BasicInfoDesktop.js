@@ -23,7 +23,6 @@ export default function BasicInformation({
       reader.onerror = () => console.log("file reading has failed");
       reader.onload = () => {
         const binaryStr = reader.result;
-        console.log("IMAGE DATA", binaryStr);
         setUserData({ ...userData, image64: binaryStr });
       };
       reader.readAsDataURL(file);
@@ -72,7 +71,6 @@ export default function BasicInformation({
     let valid = true;
     Object.values(errors).forEach((entry) => {
       if (entry !== "") {
-        console.log("due to error");
         valid = false;
       }
     });
@@ -81,23 +79,19 @@ export default function BasicInformation({
       valid = false;
     }
     if (!(userData?.tokenSymbol && userData?.tokenSymbol?.length > 0)) {
-      console.log("due to symbol");
+
       valid = false;
     }
     if (!(userData?.description && userData?.description?.length > 0)) {
-      console.log("due to desc");
       valid = false;
     }
     if (isNaN(parseFloat(userData?.tokenSupply))) {
       valid = false;
-      console.log("due to supp");
     }
     if (!(userData?.tokenOwner && userData?.tokenOwner?.length > 0)) {
       valid = false;
-      console.log("due to tokown");
     }
     if (isNaN(parseFloat(userData?.tokenDecimal))) {
-      console.log("due deci");
       valid = false;
     }
 

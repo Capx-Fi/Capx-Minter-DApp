@@ -13,13 +13,7 @@ import { getSortBy } from "../../constants/getChainConfig";
 function MainForm() {
   const { active, account, chainId } = useWeb3React();
   const [showForm, setShowForm] = useState(false);
-  const [chainIdInitial, setChainIdInitial] = useState(false);
-  const [userBalance, setUserBalance] = useState(-1);
-  const provider = window.ethereum;
-  console.log(provider);
-  const web3 = new Web3(provider);
-
-  
+  const [chainIdInitial, setChainIdInitial] = useState(false);  
   
   return (
     <>

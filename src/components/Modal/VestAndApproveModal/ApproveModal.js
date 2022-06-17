@@ -63,7 +63,7 @@ function ApproveModal({
 
 	const approveMessage = [
 		<p>
-			Your tokens are being approved!
+			Your tokens are being minted!
 			<br />
 			<span
 				className="text-caption-2 phone:text-10px tablet:text-caption-3 breakpoint:text-caption-2"
@@ -116,7 +116,7 @@ function ApproveModal({
 						/>
 						<div className="text-white text-center leading-paragraph-2 screen:text-subheading screen:leading-subheading tablet:text-caption-1 tablet:leading-heading-1 desktop:text-subheading font-semibold w-8/12 laptop:w-6/12 desktop:w-8/12">
 							{approveModalStatus === "success"
-								? "Your tokens are now successfully approved"
+								? "Your tokens are now successfully minted"
 								: approveModalStatus === "failure"
 								? errorMessage
 								: approveMessage}

@@ -12,7 +12,6 @@ export default function Configuration({ setDisableSteps, disableSteps}) {
   );
 
   const featuresToDisplay = tokenTypeData.find( (item) => { return item.id === userData.tokenType } ).advancedFeatures;
-  console.log(featuresToDisplay);
   const { account } = useWeb3React();
   const [infocus, setInfocus] = useState({});
   const [errors, setErrors] = useState({});
@@ -36,53 +35,45 @@ export default function Configuration({ setDisableSteps, disableSteps}) {
 
     Object.values(errors).forEach((entry) => {
       if (entry !== "") {
-        console.log("due to error");
         valid = false;
       }
     });
     
     if (featuresToDisplay.substring(2,3) === "1" && isNaN(parseFloat(userData?.taxFeePercentage))) {
       valid = false;
-      console.log("due to supp");
     }
     if (featuresToDisplay.substring(3,4) === "1" && isNaN(parseFloat(userData?.burnFeePercentage))) {
       valid = false;
-      console.log("due to supp");
     }
     if (
       featuresToDisplay.substring(4, 5) === "1" &&
       isNaN(parseFloat(userData?.liquidityFeePercentage))
     ) {
       valid = false;
-      console.log("due to supp");
     }
     if (
       featuresToDisplay.substring(5, 6) === "1" &&
       isNaN(parseFloat(userData?.marketingFeePercentage))
     ) {
       valid = false;
-      console.log("due to supp");
     }
     if (
       featuresToDisplay.substring(6, 7) === "1" &&
       isNaN(parseFloat(userData?.autoLPThreshold))
     ) {
       valid = false;
-      console.log("due to supp");
     }
     if (
       featuresToDisplay.substring(0, 1) === "1" &&
       isNaN(parseFloat(userData?.initialSupply))
     ) {
       valid = false;
-      console.log("due to supp");
     }
      if (
        featuresToDisplay.substring(1, 2) === "1" &&
        isNaN(parseFloat(userData?.totalSupply))
      ) {
        valid = false;
-       console.log("due to supp");
      }
     if (
       featuresToDisplay.substring(7) === "1" &&
@@ -92,7 +83,6 @@ export default function Configuration({ setDisableSteps, disableSteps}) {
       )
     ) {
       valid = false;
-      console.log("due to tokown");
     }
     setDisableSteps({...disableSteps, third: !valid});
   }, [userData, errors]);

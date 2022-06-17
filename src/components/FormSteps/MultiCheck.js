@@ -11,7 +11,6 @@ const MultiselectCheckbox = ({onChange, data, setData }) => {
       checked: !data[index].checked,
     });
 
-    console.log("NEWDATA", newData, index);
     setData(newData);
     onChange(newData.filter((x) => x.checked));
   };

@@ -10,7 +10,6 @@ export default function TokenType({
   setDisableSteps,
 }) {
   const { userData, setUserData } = useStepperContext();
-  console.log(tokenTypeData);
 
   // useEffect(() => {
   //   document.getElementById(`specialdiv`).scrollIntoView();

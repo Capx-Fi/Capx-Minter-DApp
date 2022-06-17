@@ -12,17 +12,26 @@ import { Link } from "react-router-dom";
 import CrossIcon from "../../assets/modal-cross-grey.svg";
 import { Tooltip } from "@material-ui/core";
 import InfoIcon from "../../assets/info-icon.svg";
+import { useLocation, useHistory } from "react-router-dom";
 
 const TokenInfo = () => {
   const { active, account, chainId } = useWeb3React();
   const [copiedToken, setCopiedToken] = useState(false);
   const [copiedOwner, setCopiedOwner] = useState(false);
+  const location = useLocation();
+  const history = useHistory();
+
+  if (location?.state) {
+    
+  } else {
+    history.push("/tokens");
+  }
 
   useEffect(() => {
     if (copiedToken) {
       setTimeout(() => {
         setCopiedToken(false);
-      }, 2500);
+      }, 2000);
     }
   }, [copiedToken]);
 
@@ -30,7 +39,7 @@ const TokenInfo = () => {
     if (copiedOwner) {
       setTimeout(() => {
         setCopiedOwner(false);
-      }, 2500);
+      }, 2000);
     }
   }, [copiedOwner]);
 
@@ -68,30 +77,20 @@ const TokenInfo = () => {
                       <div className="flex flex-col">
                         <div className="w-full flex items-center">
                           <div className="font-bold text-40px tracking-tight">
-                            CapCoin (CC)
+                            {location?.state?.tokenName} (
+                            {location?.state?.tokenSymbol})
                           </div>
                         </div>
                         <div>
-                          {`${"0xF4338A1aB2cEC0dd62fA1A27b5ba28d7a8F9350E".substr(
+                          {`${location?.state?.address?.substr(
                             0,
                             6
-                          )}...${"0xF4338A1aB2cEC0dd62fA1A27b5ba28d7a8F9350E".substr(
-                            -4
-                          )}`}{" "}
+                          )}...${location?.state?.address?.substr(-4)}`}{" "}
                           <CopyToClipboard
-                            text="0xF4338A1aB2cEC0dd62fA1A27b5ba28d7a8F9350E"
+                            text={location?.state?.address}
                             onCopy={() => setCopiedToken(true)}
                           >
                             <button className="inline-block">
-                              <img
-                                src={CopyIcon}
-                                className="w-4 ml-1"
-                                alt="Copy Icon"
-                              />
-                            </button>
-                          </CopyToClipboard>
-                          {
-                            <div className="inline-block text-caption-1 ml-2 text-grey">
                               <Tooltip
                                 title={
                                   <span className="text-caption-2 block p-1 font-medium">
@@ -102,13 +101,13 @@ const TokenInfo = () => {
                                 arrow
                               >
                                 <img
-                                  src={InfoIcon}
-                                  alt="info"
-                                  className="inline-block w-4 ml-1 -mt-1"
+                                  src={CopyIcon}
+                                  className="w-4 ml-1"
+                                  alt="Copy Icon"
                                 />
                               </Tooltip>
-                            </div>
-                          }
+                            </button>
+                          </CopyToClipboard>
                         </div>
                       </div>
                     </div>
@@ -193,27 +192,16 @@ const TokenInfo = () => {
                   <div className="text-paragraph-2 leading-paragraph-2">
                     <span className="block mt-2">Owner Address:</span>
                     <span className="font-bold text-paragraph-1 leading-paragraph-1">
-                      {`${"0xF4338A1aB2cEC0dd62fA1A27b5ba28d7a8F9350E".substr(
+                      {`${location?.state?.tokenOwner?.substr(
                         0,
                         6
-                      )}...${"0xF4338A1aB2cEC0dd62fA1A27b5ba28d7a8F9350E".substr(
-                        -4
-                      )}`}{" "}
+                      )}...${location?.state?.tokenOwner?.substr(-4)}`}{" "}
                     </span>
                     <CopyToClipboard
-                      text="0xF4338A1aB2cEC0dd62fA1A27b5ba28d7a8F9350E"
+                      text={location?.state?.tokenOwner}
                       onCopy={() => setCopiedOwner(true)}
                     >
                       <button className="inline-block">
-                        <img
-                          src={CopyIcon}
-                          className="w-4 ml-1"
-                          alt="Copy Icon"
-                        />
-                      </button>
-                    </CopyToClipboard>
-                    {
-                      <div className="inline-block text-caption-1 ml-2 text-grey">
                         <Tooltip
                           title={
                             <span className="text-caption-2 block p-1 font-medium">
@@ -224,24 +212,24 @@ const TokenInfo = () => {
                           arrow
                         >
                           <img
-                            src={InfoIcon}
-                            alt="info"
-                            className="inline-block w-4 ml-1 -mt-1"
+                            src={CopyIcon}
+                            className="w-4 ml-1"
+                            alt="Copy Icon"
                           />
                         </Tooltip>
-                      </div>
-                    }
+                      </button>
+                    </CopyToClipboard>
                   </div>
                   <div className="flex flex-col text-paragraph-2 leading-paragraph-2">
                     <div>Date Minted</div>
                     <div className="font-bold text-paragraph-1 leading-paragraph-1">
-                      May 24, 2022
+                      {location?.state?.dateCreatedFormatted}
                     </div>
                   </div>
                   <div className="flex flex-col text-paragraph-2 leading-paragraph-2">
                     <div>Total Supply</div>
                     <div className="font-bold text-paragraph-1 leading-paragraph-1">
-                      1,000,000
+                      {location?.state?.tokenTokenSupply}
                     </div>
                   </div>
                 </div>
