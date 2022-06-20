@@ -14,6 +14,15 @@ export default function TokenType({
   // useEffect(() => {
   //   document.getElementById(`specialdiv`).scrollIntoView();
   // }, []);
+  useEffect(() => {
+    if (userData.tokenType) {
+      if (userData.tokenType.substring(0, 1) === "f") {
+        setStepSkip(true);
+      } else {
+        setStepSkip(false);
+      }
+    }
+  }, []);
 
   const handleSelect = (id) => {
     // document.getElementById(`specialdiv`).scrollIntoView();

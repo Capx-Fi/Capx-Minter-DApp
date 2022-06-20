@@ -1,9 +1,8 @@
 import EthLogo from "../../assets/ethereum-logo.svg";
 import "./Summary.scss";
 import { useStepperContext } from "../../contexts/StepperContext";
-import tokenTypeData from "./TokenTypeData";
 
-export default function Summary({ files }) {
+export default function Summary({ files, tokenTypeData }) {
   const { userData, setUserData } = useStepperContext();
   const currentToken = tokenTypeData.find((item) => {
     return item.id === userData.tokenType;

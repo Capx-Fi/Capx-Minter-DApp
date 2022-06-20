@@ -63,6 +63,7 @@ export default function TokenCard({
     "December",
   ];
 
+
   const dateCreated = new Date(parseInt(tokenCreatedAt) * 1000);
   const dateCreatedFormatted = `${monthNames[dateCreated.getMonth()]} ${dateCreated.getDate()}, ${dateCreated.getFullYear()}`
   
@@ -84,7 +85,7 @@ export default function TokenCard({
         <div>
           <div className="mt-4 h-16 flex items-center font-semibold text-caption-1 leading-caption-1">
             <div>
-              {hashData?.description && parseDesc(hashData.description, 136)}
+              {hashData?.description && parseDesc(hashData.description, 138)}
             </div>
           </div>
         </div>
@@ -128,6 +129,7 @@ export default function TokenCard({
               tokenOwner,
               tokenSymbol,
               hashData,
+              typeOfToken
             },
           }}
         >

@@ -14,13 +14,15 @@ import ApproveModal from "../../components/Modal/VestAndApproveModal/ApproveModa
 import { ERC20_ABI } from "../../contracts/ERC20Token";
 import { CAPX_FACTORY } from "../../contracts/CapxFactory";
 import { createNewToken } from "../../contracts/createToken";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 const pinataSDK = require("@pinata/sdk");
 
-
-const FormContainer = ({ setShowForm, chainIdInitial }) => {
-   const history = useHistory();
-  const pinata = pinataSDK(process.env.REACT_APP_PINATA_API_KEY, process.env.REACT_APP_PINATA_API_SECRET);
+const FormContainer = ({ setShowForm, chainIdInitial, tokenTypeData }) => {
+  const history = useHistory();
+  const pinata = pinataSDK(
+    process.env.REACT_APP_PINATA_API_KEY,
+    process.env.REACT_APP_PINATA_API_SECRET
+  );
   const [currentStep, setCurrentStep] = useState(1);
   const [stepSkip, setStepSkip] = useState(true);
   const [files, setFiles] = useState([]);
@@ -89,6 +91,7 @@ const FormContainer = ({ setShowForm, chainIdInitial }) => {
             disableSteps={disableSteps}
             setStepSkip={setStepSkip}
             setDisableSteps={setDisableSteps}
+            tokenTypeData={tokenTypeData}
           />
         );
       case 3:
@@ -96,15 +99,14 @@ const FormContainer = ({ setShowForm, chainIdInitial }) => {
           <Configuration
             disableSteps={disableSteps}
             setDisableSteps={setDisableSteps}
+            tokenTypeData={tokenTypeData}
           />
         );
       case 4:
-        return <Summary files={files} />;
+        return <Summary files={files} tokenTypeData={tokenTypeData} />;
       default:
     }
   };
-
-  
 
   const handleClick = async (direction) => {
     let newStep = currentStep;
@@ -121,6 +123,7 @@ const FormContainer = ({ setShowForm, chainIdInitial }) => {
           twitter: userData?.twitter,
           telegram: userData?.telegram,
         });
+
         console.log(
           "PARAMs",
           account,
@@ -138,7 +141,20 @@ const FormContainer = ({ setShowForm, chainIdInitial }) => {
             ? userData.finalSupply * Math.pow(10, userData.tokenDecimal)
             : userData.tokenSupply * Math.pow(10, userData.tokenDecimal),
           tokenNumber,
-          [],
+          [
+            userData?.taxFeePercentage ? userData.taxFeePercentage : 0,
+            userData?.burnFeePercentage ? userData.burnFeePercentage : 0,
+            userData?.liquidityFeePercentage
+              ? userData.liquidityFeePercentage
+              : 0,
+            userData?.marketingFeePercentage
+              ? userData.marketingFeePercentage
+              : 0,
+            userData?.autoLPThreshold ? userData.autoLPThreshold : 0,
+            userData?.marketingWalletAddress
+              ? userData.marketingWalletAddress
+              : "0x0000000000000000000000000000000000000000",
+          ],
           pinataHash?.IpfsHash
         );
         createNewToken(
@@ -153,7 +169,20 @@ const FormContainer = ({ setShowForm, chainIdInitial }) => {
           userData?.initalSupply ? userData.initalSupply : userData.tokenSupply,
           userData?.finalSupply ? userData.finalSupply : userData.tokenSupply,
           tokenNumber,
-          [],
+          [
+            userData?.taxFeePercentage ? userData.taxFeePercentage : 0,
+            userData?.burnFeePercentage ? userData.burnFeePercentage : 0,
+            userData?.liquidityFeePercentage
+              ? userData.liquidityFeePercentage
+              : 0,
+            userData?.marketingFeePercentage
+              ? userData.marketingFeePercentage
+              : 0,
+            userData?.autoLPThreshold ? userData.autoLPThreshold : 0,
+            userData?.marketingWalletAddress
+              ? userData.marketingWalletAddress
+              : "0x0000000000000000000000000000000000000000",
+          ],
           pinataHash?.IpfsHash,
           setApproveModalStatus,
           setApproveModalOpen,
@@ -201,8 +230,7 @@ const FormContainer = ({ setShowForm, chainIdInitial }) => {
     if (success) {
       history.push("/tokens");
     }
-  }
-  , [success]);
+  }, [success]);
 
   return (
     <div className="form_container h-screen flex-col">
@@ -239,6 +267,6 @@ const FormContainer = ({ setShowForm, chainIdInitial }) => {
       <Footer />
     </div>
   );
-};;
+};
 
 export default FormContainer;

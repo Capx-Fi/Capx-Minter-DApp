@@ -34,13 +34,15 @@ export const createNewToken = async (
     let deployedAddress = null;
     if (typeOfToken > 12) {
         try {
+            console.log("OWNER", tokenOwner);
+            console.log("P5", parameters[5]);
             deployedAddress = await factory.methods
               .createReflectiveToken(
                 tokenName,
                 tokenSymbol,
                 tokenDecimals,
                 tokenInitialSupply,
-                [tokenOwner, parameters[6]],
+                [tokenOwner, parameters[5]],
                 parameters.slice(0, 5),
                 typeOfToken,
                 documentHash

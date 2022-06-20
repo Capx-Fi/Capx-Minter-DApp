@@ -2,7 +2,6 @@ import EthLogo from "../../assets/ethereum-logo.svg";
 import CopyIcon from "../../assets/copy-icon.svg";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-import tokenTypeData from "../../components/FormSteps/TokenTypeData";
 import "./TokenInfo.scss";
 import React, { useState, useEffect } from "react";
 import { useWeb3React } from "@web3-react/core";
@@ -14,15 +13,19 @@ import { Tooltip } from "@material-ui/core";
 import InfoIcon from "../../assets/info-icon.svg";
 import { useLocation, useHistory } from "react-router-dom";
 
-const TokenInfo = () => {
+const TokenInfo = ({ tokenTypeData }) => {
   const { active, account, chainId } = useWeb3React();
   const [copiedToken, setCopiedToken] = useState(false);
   const [copiedOwner, setCopiedOwner] = useState(false);
   const location = useLocation();
   const history = useHistory();
 
+  let tokenIndex = parseInt(location?.state?.typeOfToken) - 1;
+  if (isNaN(tokenIndex)) {
+    tokenIndex = 0;
+  }
+
   if (location?.state) {
-    
   } else {
     history.push("/tokens");
   }
@@ -116,21 +119,21 @@ const TokenInfo = () => {
                       location.state.hashData.website.length > 0 ? (
                         <div className="w-1/3 flex-col">
                           <div className="font-bold">Website:</div>
-                              <div>{location.state.hashData.website}</div>
+                          <div>{location.state.hashData.website}</div>
                         </div>
                       ) : null}
                       {location?.state?.hashData?.twitter &&
                       location.state.hashData.twitter.length > 0 ? (
                         <div className="w-1/3 flex-col">
                           <div className="font-bold">Twitter:</div>
-                              <div>{location.state.hashData.twitter}</div>
+                          <div>{location.state.hashData.twitter}</div>
                         </div>
                       ) : null}
                       {location?.state?.hashData?.telegram &&
                       location.state.hashData.telegram.length > 0 ? (
                         <div className="w-1/3 flex-col">
                           <div className="font-bold">Telegram:</div>
-                              <div>{location.state.hashData.telegram}</div>
+                          <div>{location.state.hashData.telegram}</div>
                         </div>
                       ) : null}
                     </div>
@@ -171,12 +174,12 @@ const TokenInfo = () => {
                     <div className="font-bold text-subheading leading-subheading mb-4">
                       Token Features
                     </div>
-                    <div className="flex flex-wrap w-full mt-2 gap-y-2">
-                      {Object.keys(tokenTypeData[0].features).map(
+                    <div className="flex flex-wrap w-full mt-4 gap-y-3">
+                      {Object.keys(tokenTypeData[tokenIndex].features).map(
                         (item, index) =>
-                          tokenTypeData[0].features[item] ? (
+                          tokenTypeData[tokenIndex].features[item] ? (
                             <div
-                              className="w-1/2 font-bold text-paragraph-2 leading-paragraph-2"
+                              className="w-1/3 font-bold text-paragraph-2 leading-paragraph-2"
                               key={index}
                             >
                               <span className="text-capxGreenDark">

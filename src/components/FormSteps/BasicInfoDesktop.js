@@ -6,6 +6,8 @@ import Web3 from "web3";
 import { useWeb3React } from "@web3-react/core";
 import "./BasicInformation.scss";
 import { useDropzone } from "react-dropzone";
+import { Converter } from "any-number-to-words";
+
 
 export default function BasicInformation({
   disableSteps,
@@ -13,6 +15,7 @@ export default function BasicInformation({
   files,
   setFiles,
 }) {
+  const converter = new Converter();
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFiles) => {
@@ -46,6 +49,13 @@ export default function BasicInformation({
   const defaultWeb3 = new Web3(
     "https://rinkeby.infura.io/v3/6351bb49adde41ec86bd60b451b9f1c5"
   );
+
+  const shortenedNumber = (number) => {
+    if(isNaN(number)) return number;
+    if (number > 1000) {
+      return number - number%(Math.pow(10, Math.floor(Math.log10(number))-1));
+    }
+  }
 
   const { account } = useWeb3React();
   const [infocus, setInfocus] = useState({});
@@ -362,7 +372,9 @@ export default function BasicInformation({
           >
             {errors?.tokenSupply?.length > 0
               ? errors.tokenSupply
-              : "Choose initial supply for your token"}
+              : `${isNaN(
+                  parseFloat(userData?.tokenSupply)
+              ) ? "Choose initial supply for your token" : "About " + converter.toWords(parseFloat(userData?.tokenSupply))}`}
           </span>
         </div>
       </div>

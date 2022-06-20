@@ -17,6 +17,8 @@ const MyTokens = () => {
   const [ipfsFetched, setIpfsFetched] = useState([]);
   const [ipfsLoaded, setIpfsLoaded] = useState(false);
 
+  
+
   useEffect(() => {
     async function fetchData() {
       if (active) {
@@ -28,27 +30,19 @@ const MyTokens = () => {
           setTokensData
         );
 
-        console.log("FETCHED TOKENBS", result);
         let ipfsStatus = [];
         result?.forEach(() => {
           ipfsStatus.push({ fetched: false });
         });
+        console.log(result);
         setIpfsFetched(ipfsStatus);
         setTokensData(result);
       }
     }
 
-    async function fetchDataTypes() {
-      if (active) {
-        let result = await queryTokenForAddressTypes(
-          "https://api.thegraph.com/subgraphs/name/varun-capx/tokenminter"
-        );
-        console.log("RESULT2", result);
-      }
-    }
+   
     fetchData();
 
-    // fetchDataTypes();
   }, [active]);
 
   const fetchIpfs = async (index) => {

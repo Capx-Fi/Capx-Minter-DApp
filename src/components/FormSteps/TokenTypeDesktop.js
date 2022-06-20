@@ -1,6 +1,5 @@
 import { useStepperContext } from "../../contexts/StepperContext";
 import React, { useState, useEffect } from "react";
-import tokenTypeData from "./TokenTypeData";
 import "./Accordion.scss";
 import MultiselectCheckbox from "./MultiCheck";
 import NextIcon from "../../assets/next-black.svg";
@@ -25,6 +24,7 @@ export default function TokenType({
   setStepSkip,
   disableSteps,
   setDisableSteps,
+  tokenTypeData
 }) {
   const { userData, setUserData } = useStepperContext();
   const [checkboxOptions, setCheckboxOptions] = useState(userData?.checkboxOptions ? userData.checkboxOptions : [
@@ -155,7 +155,7 @@ export default function TokenType({
                       style={{ background: "#F0F1F0" }}
                     >
                       <div className="text-caption-1 font-semibold w-3/5 leading-caption-1 h-14 flex items-center">
-                        <div className="block">{item.name}</div>
+                        <div className="block">{item.name.substring(0,12)}</div>
                       </div>
                       <div
                         className="flex items-center cursor-pointer"

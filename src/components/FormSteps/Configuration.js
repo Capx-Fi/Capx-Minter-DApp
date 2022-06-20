@@ -3,9 +3,8 @@ import { useStepperContext } from "../../contexts/StepperContext";
 import { useState, useEffect } from "react";
 import Web3 from "web3";
 import { useWeb3React } from "@web3-react/core";
-import tokenTypeData from "./TokenTypeData";
 
-export default function Configuration({ setDisableSteps, disableSteps}) {
+export default function Configuration({ setDisableSteps, disableSteps, tokenTypeData}) {
   const { userData, setUserData } = useStepperContext();
   const defaultWeb3 = new Web3(
     "https://rinkeby.infura.io/v3/6351bb49adde41ec86bd60b451b9f1c5"

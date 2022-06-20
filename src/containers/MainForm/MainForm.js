@@ -10,7 +10,7 @@ import MetamaskModal from "../../components/Modal/MetamaskModal/MetamaskModal";
 import FormContainerDesktop from "../FormContainer/FormContainerDesktop";
 import { getSortBy } from "../../constants/getChainConfig";
 
-function MainForm() {
+function MainForm({tokenTypeData}) {
   const { active, account, chainId } = useWeb3React();
   const [showForm, setShowForm] = useState(false);
   const [chainIdInitial, setChainIdInitial] = useState(false);  
@@ -26,7 +26,8 @@ function MainForm() {
             <UseContextProvider>
           <FormContainerDesktop
             setShowForm={setShowForm}
-            chainIdInitial={chainIdInitial}
+                chainIdInitial={chainIdInitial}
+                tokenTypeData={tokenTypeData}
           />
             </UseContextProvider>
           </>
