@@ -10,13 +10,51 @@ import { queryTokenForAddress } from "../../contracts/queryToken";
 import { queryTokenForAddressTypes } from "../../contracts/queryTypesOfToken";
 import { ERC20_ABI } from "../../contracts/ERC20Token";
 import Fade from "react-reveal/Fade";
+import { Link, useHistory, useLocation } from "react-router-dom";
+
 
 const MyTokens = () => {
+  const history = useHistory();
   const { active, account, chainId } = useWeb3React();
   const [tokensData, setTokensData] = useState(-1);
   const [ipfsFetched, setIpfsFetched] = useState([]);
   const [ipfsLoaded, setIpfsLoaded] = useState(false);
+  const location = useLocation();
+  const [reload, setReload] = useState(false);
 
+  const extraCard = (
+      <div className="token_card">
+        <div className="herocontainer flex flex-col gap-y-2 px-14 py-10 w-27v rounded-2xl bg-opacity-30 mt-10 relative">
+          <div className="w-full flex items-center">
+            <div className="font-bold text-heading-2 leading-heading-2 mt-4">
+              Token not found?
+            </div>
+          </div>
+          <div>
+            <div className="mt-16 mb-1.5 h-16 flex items-center font-semibold text-subheading tracking-tight leading-subheading">
+              <div className="w-10/12">
+                If you have just minted your token, please allow some time for it to reflect. 
+              </div>
+            </div>
+          </div>
+          <a>
+            <div className="w-full mt-32">
+            <div
+              onClick={() => {setReload(!reload)}}
+                className={`bg-capxGreen create-button rounded-xl mt-10 justify-center items-center flex px-4 py-3 w-full cursor-pointer`}
+              >
+                <div
+                  className={`text-black button_text twok:text-paragraph-1 twok:leading-paragraph-1 font-semibold`}
+                >
+                  {"Reload"}
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    );
+  
   
 
   useEffect(() => {
@@ -43,7 +81,7 @@ const MyTokens = () => {
    
     fetchData();
 
-  }, [active]);
+  }, [active, reload]);
 
   const fetchIpfs = async (index) => {
     if (ipfsFetched[index].fetched) {
@@ -123,8 +161,9 @@ const MyTokens = () => {
                       tokenDeployer={token.tokenDeployer}
                     />
                   </Fade>
+                 
                 )) : <div className="mt-20 text-gray-600 text-heading-2 font-semibold leading-heading-2">No tokens here! If you have just created it, please wait for it to reflect.</div>
-              )}
+              )}{tokensData !== -1 && ipfsLoaded && location?.state?.newlyCreated && extraCard}
             </div>
           </div>
           <Footer />

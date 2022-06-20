@@ -27,6 +27,11 @@ const MultiselectCheckbox = ({onChange, data, setData }) => {
               onClick={() => toggle(index)}
               // className="mr-2 text-capxGreen focus:ring-0 shadow-none focus:shadow-none ring-offset-0"
               className="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-green-300 h-4 w-4 rounded mr-2"
+              style={{
+                color: "green",
+                border: "1px solid green",
+                backgroundColor: "green",
+              }}
             />
             {item.label}
             <Tooltip title="Information">

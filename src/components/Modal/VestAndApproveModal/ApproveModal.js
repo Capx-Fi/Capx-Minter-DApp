@@ -38,6 +38,10 @@ const useStyles = makeStyles((theme) => ({
 			borderRadius: "16px",
 		},
 	},
+	backDrop: {
+		backdropFilter: "blur(5px)",
+		backgroundColor: "rgba(0,0,0,0.5)",
+	}
 }));
 function ApproveModal({
 	imageData,
@@ -95,6 +99,9 @@ function ApproveModal({
 			BackdropComponent={Backdrop}
 			BackdropProps={{
 				timeout: 500,
+				classes: {
+					root: classes.backDrop,
+				},
 			}}
 		>
 			<Fade in={open}>

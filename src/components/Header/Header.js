@@ -229,7 +229,7 @@ function Header({hiddenNav, landing, createButton}) {
           <div className="flex flex-row gap-x-2 ml-44">
             <div className="">
               <div className="flex flex-row w-32 justify-center items-center rounded-lg px-2.5 py-2.5 text-paragraph-1 font-semibold border-dark-200">
-                <a href="https://liquid.capx.fi">Vest </a>
+                <a href="https://liquid.capx.fi" target="_blank">Vest </a>
               </div>
             </div>
             {createButton ? (

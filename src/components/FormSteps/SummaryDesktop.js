@@ -1,12 +1,16 @@
 import EthLogo from "../../assets/ethereum-logo.svg";
 import "./Summary.scss";
 import { useStepperContext } from "../../contexts/StepperContext";
+import { Tooltip } from "@material-ui/core";
+import InfoIcon from "../../assets/info-icon.svg";
 
 export default function Summary({ files, tokenTypeData }) {
   const { userData, setUserData } = useStepperContext();
   const currentToken = tokenTypeData.find((item) => {
     return item.id === userData.tokenType;
   });
+
+  console.log(userData);
 
   const featuresToDisplay = currentToken.advancedFeatures;
 
@@ -79,6 +83,13 @@ export default function Summary({ files, tokenTypeData }) {
                 currentToken.features[item] ? (
                   <div className="w-1/2" key={index}>
                     {item}
+                    <Tooltip title="Information">
+                      <img
+                        src={InfoIcon}
+                        alt="info"
+                        className="inline-block w-4 ml-2.5 -mt-0.5"
+                      />
+                    </Tooltip>
                   </div>
                 ) : null
               )}
@@ -108,7 +119,7 @@ export default function Summary({ files, tokenTypeData }) {
 
             <div className="w-1/2">
               <span className="font-bold">Initial Supply</span> :{" "}
-              {featuresToDisplay.substring(0, 1) === "1"
+              {featuresToDisplay.substring(1, 2) === "1"
                 ? userData.initialSupply
                 : userData.tokenSupply}
             </div>

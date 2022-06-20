@@ -114,31 +114,31 @@ const TokenInfo = ({ tokenTypeData }) => {
                         </div>
                       </div>
                     </div>
-                    <div className="flex mt-6 text-paragraph-2">
+                    <div className="flex mt-6 text-paragraph-2 justify-between w-4/5">
                       {location?.state?.hashData?.website &&
                       location.state.hashData.website.length > 0 ? (
-                        <div className="w-1/3 flex-col">
+                        <div className="flex-col">
                           <div className="font-bold">Website:</div>
                           <div>{location.state.hashData.website}</div>
                         </div>
                       ) : null}
                       {location?.state?.hashData?.twitter &&
                       location.state.hashData.twitter.length > 0 ? (
-                        <div className="w-1/3 flex-col">
+                        <div className="flex-col">
                           <div className="font-bold">Twitter:</div>
                           <div>{location.state.hashData.twitter}</div>
                         </div>
                       ) : null}
                       {location?.state?.hashData?.telegram &&
                       location.state.hashData.telegram.length > 0 ? (
-                        <div className="w-1/3 flex-col">
+                        <div className="flex-col">
                           <div className="font-bold">Telegram:</div>
                           <div>{location.state.hashData.telegram}</div>
                         </div>
                       ) : null}
                     </div>
                   </div>
-                  <div className="flex gap-x-4 mt-12">
+                  <div className="flex gap-x-4 mt-2">
                     <div
                       className={`bg-capxGreen create-button rounded-lg justify-center w-52 items-center flex px-6 h-11 cursor-pointer`}
                       onClick={() => console.log("clicked")}
@@ -231,15 +231,15 @@ const TokenInfo = ({ tokenTypeData }) => {
                     </CopyToClipboard>
                   </div>
                   <div className="flex flex-col text-paragraph-2 leading-paragraph-2">
-                    <div>Date Minted</div>
-                    <div className="font-bold text-paragraph-1 leading-paragraph-1">
-                      {location?.state?.dateCreatedFormatted}
-                    </div>
-                  </div>
-                  <div className="flex flex-col text-paragraph-2 leading-paragraph-2">
                     <div>Total Supply</div>
                     <div className="font-bold text-paragraph-1 leading-paragraph-1">
                       {location?.state?.tokenTokenSupply}
+                    </div>
+                  </div>
+                  <div className="flex flex-col text-paragraph-2 leading-paragraph-2">
+                    <div>Date Minted</div>
+                    <div className="font-bold text-paragraph-1 leading-paragraph-1">
+                      {location?.state?.dateCreatedFormatted}
                     </div>
                   </div>
                 </div>

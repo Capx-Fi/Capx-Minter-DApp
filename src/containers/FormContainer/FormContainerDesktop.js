@@ -228,7 +228,12 @@ const FormContainer = ({ setShowForm, chainIdInitial, tokenTypeData }) => {
 
   useEffect(() => {
     if (success) {
-      history.push("/tokens");
+      history.push({
+        pathname: "/tokens",
+        state: {
+          newlyCreated: true
+        }
+      });
     }
   }, [success]);
 

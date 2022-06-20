@@ -55,7 +55,6 @@ function App() {
       console.log("FPRMATTED", formattedTokenTypes);
       setTokensData(formattedTokenTypes);
     }
-
     fetchDataTypes();
   }, []);
 

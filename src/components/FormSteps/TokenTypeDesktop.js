@@ -155,7 +155,7 @@ export default function TokenType({
                       style={{ background: "#F0F1F0" }}
                     >
                       <div className="text-caption-1 font-semibold w-3/5 leading-caption-1 h-14 flex items-center">
-                        <div className="block">{item.name.substring(0,12)}</div>
+                        <div className="block">{item.name.substring(4,22)}</div>
                       </div>
                       <div
                         className="flex items-center cursor-pointer"
@@ -174,7 +174,7 @@ export default function TokenType({
                 <div className="flex-col text-center items-center justify-center mt-20 w-full text-subheading font-semibold text-gray-500">
                   <div>No Tokens with these set of features</div>
                   <div
-                    className="text-paragraph-1 cursor-pointer"
+                    className="text-paragraph-1 cursor-pointer text-black"
                     onClick={() => {
                       const newData = [...checkboxOptions];
                       newData.forEach((item) => {
