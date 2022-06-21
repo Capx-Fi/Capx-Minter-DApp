@@ -40,7 +40,7 @@ const MyTokens = () => {
           <a>
             <div className="w-full mt-32">
             <div
-              onClick={() => {setReload(!reload)}}
+              onClick={() => { setTokensData(-1); setReload(!reload); window.scrollTo(0, 0); }}
                 className={`bg-capxGreen create-button rounded-xl mt-10 justify-center items-center flex px-4 py-3 w-full cursor-pointer`}
               >
                 <div
@@ -142,8 +142,8 @@ const MyTokens = () => {
                   <TokenLoadingCard />
                   <TokenLoadingCard />
                 </>
-              ) : (
-                tokensData?.length > 0 ? tokensData?.map((token, index) => (
+              ) : tokensData?.length > 0 ? (
+                tokensData?.map((token, index) => (
                   <Fade>
                     <TokenCard
                       key={index}
@@ -161,9 +161,19 @@ const MyTokens = () => {
                       tokenDeployer={token.tokenDeployer}
                     />
                   </Fade>
-                 
-                )) : <div className="mt-20 text-gray-600 text-heading-2 font-semibold leading-heading-2">No tokens here! If you have just created it, please wait for it to reflect.</div>
-              )}{tokensData !== -1 && ipfsLoaded && location?.state?.newlyCreated && extraCard}
+                ))
+              ) : (
+                <div className="mt-20 text-gray-600 text-heading-2 font-semibold leading-heading-2">
+                  No tokens here! If you have just created it, please wait for
+                  it to reflect.
+                </div>
+              )}
+              <Fade>
+                {tokensData !== -1 &&
+                  ipfsLoaded &&
+                  location?.state?.newlyCreated &&
+                  extraCard}
+              </Fade>
             </div>
           </div>
           <Footer />

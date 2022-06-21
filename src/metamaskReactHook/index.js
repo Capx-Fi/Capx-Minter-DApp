@@ -1,2 +1,2 @@
 export { MetamaskStateProvider }  from "./store";
-export { default as useMetamask }        from "./useMetamask";
+export { default as useMetamask }  from "./useMetamask";

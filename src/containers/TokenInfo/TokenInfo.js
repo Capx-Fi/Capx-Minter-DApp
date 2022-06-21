@@ -25,6 +25,8 @@ const TokenInfo = ({ tokenTypeData }) => {
     tokenIndex = 0;
   }
 
+  console.log("TYTPE", tokenTypeData, tokenIndex);
+
   if (location?.state) {
   } else {
     history.push("/tokens");
@@ -119,21 +121,21 @@ const TokenInfo = ({ tokenTypeData }) => {
                       location.state.hashData.website.length > 0 ? (
                         <div className="flex-col">
                           <div className="font-bold">Website:</div>
-                          <div>{location.state.hashData.website}</div>
+                              <div><a href={location.state.hashData.website} target="_blank">{location.state.hashData.website}</a></div>
                         </div>
                       ) : null}
                       {location?.state?.hashData?.twitter &&
                       location.state.hashData.twitter.length > 0 ? (
                         <div className="flex-col">
                           <div className="font-bold">Twitter:</div>
-                          <div>{location.state.hashData.twitter}</div>
+                          <div><a href={location.state.hashData.twitter} target="_blank">{location.state.hashData.twitter}</a></div>
                         </div>
                       ) : null}
                       {location?.state?.hashData?.telegram &&
                       location.state.hashData.telegram.length > 0 ? (
                         <div className="flex-col">
                           <div className="font-bold">Telegram:</div>
-                          <div>{location.state.hashData.telegram}</div>
+                          <div><a href={location.state.hashData.telegram} target="_blank">{location.state.hashData.telegram}</a></div>
                         </div>
                       ) : null}
                     </div>

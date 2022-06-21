@@ -14,7 +14,6 @@ import React, { useState } from "react";
 
 function MetamaskModal() {
 	const { t } = useTranslation();
-	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 	const isMetamask = window.ethereum && window.ethereum.isMetaMask;
 	const { active, account, library, connector, activate } = useWeb3React();
 	const { error } = useWeb3React();
@@ -25,15 +24,11 @@ function MetamaskModal() {
 		try {
 			await activate(injected);
 			if (unsupportedChainIdError) {
-				enqueueSnackbar(`Please connect to the ${CHAIN_NAMES} Mainnet Chain.`, {
-					variant: "error",
-				});
+				
 			}
 		} catch (ex) {
 			if (error instanceof UnsupportedChainIdError) {
-				enqueueSnackbar(`Please connect to the ${CHAIN_NAMES} Mainnet Chain.`, {
-					variant: "error",
-				});
+				
 			}
 			alert(ex);
 		}

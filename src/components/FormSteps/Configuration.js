@@ -185,7 +185,7 @@ export default function Configuration({ setDisableSteps, disableSteps, tokenType
       <div className="font-bold text-heading-2 leading-heading-1 mb-3 ml-2">
         Advanced Token Configuration
       </div>
-      {featuresToDisplay.substring(0,1) === "1" ? <div className="mx-2 w-full flex-1 mt-2">
+      {featuresToDisplay.substring(1,2) === "1" ? <div className="mx-2 w-full flex-1 mt-2">
         <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
           Initial Supply
         </div>

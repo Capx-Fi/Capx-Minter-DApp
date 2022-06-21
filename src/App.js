@@ -52,6 +52,9 @@ function App() {
           advancedFeatures: tokenType.advancedFeatures,
         };
       });
+      formattedTokenTypes.sort((a, b) => {
+        return a.id.localeCompare(b.id);
+      });
       console.log("FPRMATTED", formattedTokenTypes);
       setTokensData(formattedTokenTypes);
     }

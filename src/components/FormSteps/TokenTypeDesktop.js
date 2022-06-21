@@ -68,7 +68,17 @@ export default function TokenType({
 
   const handleSelect = (id) => {
 
-    setUserData({ ...userData, tokenType: id, checkboxOptions: checkboxOptions, relevantTokenTypes: relevantTokenTypes });
+    setUserData({
+      ...userData, tokenType: id, checkboxOptions: checkboxOptions, relevantTokenTypes: relevantTokenTypes,
+      taxFeePercentage: undefined,
+      burnFeePercentage: undefined,
+      marketingFeePercentage: undefined,
+      liquidityFeePercentage: undefined,
+      autoLPThreshold: undefined,
+      marketingWalletAddress: undefined,
+      initialSupply: undefined,
+      totalSupply: undefined,
+    });
     if (id.substring(0, 1) === "f") {
       setStepSkip(true);
     } else {

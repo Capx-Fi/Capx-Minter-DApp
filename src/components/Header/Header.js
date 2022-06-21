@@ -15,7 +15,6 @@ import { CHAIN_NAMES } from "../../constants/config";
 import { getSortBy } from "../../constants/getChainConfig";
 
 function Header({hiddenNav, landing, createButton}) {
-	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 	const { active, account, library, connector, activate, deactivate, chainId } =
 		useWeb3React();
 	const { metaState, getChain } = useMetamask();
@@ -65,9 +64,7 @@ function Header({hiddenNav, landing, createButton}) {
 			await activate(injected);
 		} catch (ex) {
 			if (ex instanceof UnsupportedChainIdError) {
-				enqueueSnackbar(`Please connect to the ${CHAIN_NAMES} Mainnet Chain.`, {
-					variant: "error",
-				});
+			
 			}
 		}
 	}
