@@ -1,13 +1,12 @@
 import { useStepperContext } from "../../../contexts/StepperContext";
 
-import EthLogo from "../../../assets/ethereum-logo.svg";
+import UnknownLogo from "../../../assets/Unknown.svg";
 import { useState, useEffect } from "react";
 import Web3 from "web3";
 import { useWeb3React } from "@web3-react/core";
 import "../BasicInformation.scss";
 import { useDropzone } from "react-dropzone";
 import { Converter } from "any-number-to-words";
-
 
 export default function BasicInformation({
   disableSteps,
@@ -424,7 +423,7 @@ export default function BasicInformation({
             ) : (
               <img
                 className="w-16 h-16 rounded-lg"
-                src={EthLogo}
+                src={UnknownLogo}
                 alt="snapshot view"
               />
             )}
@@ -507,7 +506,7 @@ export default function BasicInformation({
                 name="website"
                 onFocus={handleFocus}
                 onBlur={handleBlur}
-                placeholder="www.capx.fi"
+                placeholder="eg. www.capx.fi"
                 className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
                   errors?.website?.length > 0
                     ? "border-red-300"
