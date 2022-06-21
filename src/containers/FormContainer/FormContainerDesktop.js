@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import Stepper from "../../components/Stepper/StepperDesktop";
 import StepControls from "../../components/StepControls/StepControls";
-import BasicInformation from "../../components/FormSteps/BasicInfoDesktop";
-import TokenType from "../../components/FormSteps/TokenTypeDesktop";
+import BasicInformation from "../../components/FormSteps/Desktop/BasicInfoDesktop";
+import TokenType from "../../components/FormSteps/Desktop/TokenTypeDesktop";
 import Configuration from "../../components/FormSteps/Configuration";
-import Summary from "../../components/FormSteps/SummaryDesktop";
+import Summary from "../../components/FormSteps/Desktop/SummaryDesktop";
 import { useWeb3React } from "@web3-react/core";
 import { useStepperContext } from "../../contexts/StepperContext";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import "./FormContainer.scss";
-import ApproveModal from "../../components/Modal/VestAndApproveModal/ApproveModal";
+import MintModal from "../../components/Modal/MintModal/MintModal";
 import { ERC20_ABI } from "../../contracts/ERC20Token";
 import { CAPX_FACTORY } from "../../contracts/CapxFactory";
-import { createNewToken } from "../../contracts/createToken";
+import { createNewToken } from "../../utils/createToken";
 import { useHistory } from "react-router-dom";
 const pinataSDK = require("@pinata/sdk");
 
@@ -29,8 +29,8 @@ const FormContainer = ({ setShowForm, chainIdInitial, tokenTypeData }) => {
   const { chainId, account } = useWeb3React();
   const { userData, setUserData } = useStepperContext();
 
-  const [approveModalOpen, setApproveModalOpen] = useState(false);
-  const [approveModalStatus, setApproveModalStatus] = useState(""); //beware on mobile take this component outside
+  const [mintModalOpen, setMintModalOpen] = useState(false);
+  const [mintModalStatus, setMintModalStatus] = useState(""); //beware on mobile take this component outside
 
   useEffect(() => {
     if (chainIdInitial !== chainId) {
@@ -111,8 +111,8 @@ const FormContainer = ({ setShowForm, chainIdInitial, tokenTypeData }) => {
   const handleClick = async (direction) => {
     let newStep = currentStep;
     if (currentStep === 4 && direction === "next") {
-      setApproveModalStatus("");
-      setApproveModalOpen(true);
+      setMintModalStatus("");
+      setMintModalOpen(true);
       const tokenNumber = parseInt(userData.tokenType.substring(1));
       let pinataHash;
       try {
@@ -184,15 +184,15 @@ const FormContainer = ({ setShowForm, chainIdInitial, tokenTypeData }) => {
               : "0x0000000000000000000000000000000000000000",
           ],
           pinataHash?.IpfsHash,
-          setApproveModalStatus,
-          setApproveModalOpen,
+          setMintModalStatus,
+          setMintModalOpen,
           setSuccess
         );
       } catch (err) {
         console.log(err);
-        setApproveModalStatus("failure");
+        setMintModalStatus("failure");
         setTimeout(() => {
-          setApproveModalOpen(false);
+          setMintModalOpen(false);
         }, 2500);
         return;
       }
@@ -231,19 +231,19 @@ const FormContainer = ({ setShowForm, chainIdInitial, tokenTypeData }) => {
       history.push({
         pathname: "/tokens",
         state: {
-          newlyCreated: true
-        }
+          newlyCreated: true,
+        },
       });
     }
   }, [success]);
 
   return (
     <div className="form_container h-screen flex-col">
-      <ApproveModal
-        open={approveModalOpen}
-        setOpen={setApproveModalOpen}
-        approveModalStatus={approveModalStatus}
-        setApproveModalStatus={setApproveModalStatus}
+      <MintModal
+        open={mintModalOpen}
+        setOpen={setMintModalOpen}
+        mintModalStatus={mintModalStatus}
+        setMintModalStatus={setMintModalStatus}
       />
       <Header hiddenNav={true} />
       <div
@@ -258,9 +258,6 @@ const FormContainer = ({ setShowForm, chainIdInitial, tokenTypeData }) => {
           <div className="horizontal container">
             <div className="p-10 pb-4 ">{displayStep(currentStep)}</div>
           </div>
-
-          {/* navigation button */}
-
           <StepControls
             handleClick={handleClick}
             currentStep={currentStep}

@@ -25,8 +25,6 @@ const TokenInfo = ({ tokenTypeData }) => {
     tokenIndex = 0;
   }
 
-  console.log("TYTPE", tokenTypeData, tokenIndex);
-
   if (location?.state) {
   } else {
     history.push("/tokens");

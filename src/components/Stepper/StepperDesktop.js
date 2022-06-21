@@ -8,7 +8,6 @@ const Stepper = ({ steps, currentStep }) => {
     const newSteps = [...steps];
     let count = 0;
     while (count < newSteps.length) {
-      //current step
       if (count === stepNumber) {
         newSteps[count] = {
           ...newSteps[count],
@@ -17,10 +16,7 @@ const Stepper = ({ steps, currentStep }) => {
           completed: true,
         };
         count++;
-      }
-
-      //step completed
-      else if (count < stepNumber) {
+      } else if (count < stepNumber) {
         newSteps[count] = {
           ...newSteps[count],
           highlighted: false,
@@ -28,9 +24,7 @@ const Stepper = ({ steps, currentStep }) => {
           completed: true,
         };
         count++;
-      }
-      //step pending
-      else {
+      } else {
         newSteps[count] = {
           ...newSteps[count],
           highlighted: false,
@@ -49,8 +43,8 @@ const Stepper = ({ steps, currentStep }) => {
       Object.assign(
         {},
         {
-            description: step.description,
-            title: step.name,
+          description: step.description,
+          title: step.name,
           completed: false,
           highlighted: index === 0 ? true : false,
           selected: index === 0 ? true : false,
@@ -93,7 +87,9 @@ const Stepper = ({ steps, currentStep }) => {
             }`}
           >
             <div>{step.title}</div>
-            <div className="text-caption-2 text-gray-700 leading-caption-2">{step.description}</div>
+            <div className="text-caption-2 text-gray-700 leading-caption-2">
+              {step.description}
+            </div>
           </div>
         </div>
       </div>
@@ -102,8 +98,10 @@ const Stepper = ({ steps, currentStep }) => {
 
   return (
     <>
-          <div className="p-4 tracking-tight flex-col justify-between items-center">
-              <div className="font-bold text-subheading leading-subheading mb-6">Mint in Four Simple Steps</div>
+      <div className="p-4 tracking-tight flex-col justify-between items-center">
+        <div className="font-bold text-subheading leading-subheading mb-6">
+          Mint in Four Simple Steps
+        </div>
         {stepsDisplay}
       </div>
     </>

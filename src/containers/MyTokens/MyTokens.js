@@ -6,15 +6,13 @@ import MetamaskModal from "../../components/Modal/MetamaskModal/MetamaskModal";
 import TokenCard from "../../components/TokenCard/TokenCard";
 import TokenLoadingCard from "../../components/TokenCard/TokenLoadingCard";
 import React, { useState, useEffect } from "react";
-import { queryTokenForAddress } from "../../contracts/queryToken";
-import { queryTokenForAddressTypes } from "../../contracts/queryTypesOfToken";
+import { queryTokenForAddress } from "../../utils/queryToken";
 import { ERC20_ABI } from "../../contracts/ERC20Token";
 import Fade from "react-reveal/Fade";
-import { Link, useHistory, useLocation } from "react-router-dom";
-
+import { useLocation } from "react-router-dom";
 
 const MyTokens = () => {
-  const history = useHistory();
+
   const { active, account, chainId } = useWeb3React();
   const [tokensData, setTokensData] = useState(-1);
   const [ipfsFetched, setIpfsFetched] = useState([]);
@@ -77,8 +75,7 @@ const MyTokens = () => {
         setTokensData(result);
       }
     }
-
-   
+  
     fetchData();
 
   }, [active, reload]);
@@ -89,7 +86,6 @@ const MyTokens = () => {
     }
     let result;
     try {
-      console.log("TRYING HASH", tokensData[index].documentHash);
       result = await fetch(
         `${process.env.REACT_APP_IPFS_ENDPOINT}${tokensData[index].documentHash}`
       );
@@ -119,8 +115,6 @@ const MyTokens = () => {
       setIpfsLoaded(true);
     }
   }, [ipfsFetched]);
-
-
 
   return (
     <>

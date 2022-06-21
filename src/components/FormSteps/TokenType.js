@@ -15,7 +15,10 @@ export default function TokenType({
   //   document.getElementById(`specialdiv`).scrollIntoView();
   // }, []);
   useEffect(() => {
-    if (userData.tokenType) {
+    console.log("IN UE");
+    if (userData.tokenType)
+    {
+      console.log("IN UE IF", userData.tokenType);
       if (userData.tokenType.substring(0, 1) === "f") {
         setStepSkip(true);
       } else {

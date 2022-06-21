@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import NextIcon from "../../assets/next-black.svg";
 import { getSortBy } from "../../constants/getChainConfig";
-import { useWeb3React, UnsupportedChainIdError } from "@web3-react/core";
-import EthLogo from "../../assets/ethereum-logo.svg"
+import { useWeb3React } from "@web3-react/core";
+import EthLogo from "../../assets/ethereum-logo.svg";
 import MaticLogo from "../../assets/matic-logo.svg";
 import BSCLogo from "../../assets/bsc-logo.svg";
 import AvaLogo from "../../assets/avalanche-logo.svg";
@@ -14,160 +14,89 @@ import Web3 from "web3";
 
 import "./ChooseChain.scss";
 
-const ChooseChain = ({setShowForm, setChainIdInitial}) => {
-    const provider = window.ethereum;
-    const web3 = new Web3(provider);
-    const [sortBy, setSortBy] = useState("Ethereum");
-    const {
-      active,
-      account,
-      library,
-      connector,
-      activate,
-      deactivate,
-      chainId,
-    } = useWeb3React();
+const ChooseChain = ({ setShowForm, setChainIdInitial }) => {
+  const provider = window.ethereum;
+  const web3 = new Web3(provider);
+  const [sortBy, setSortBy] = useState("Ethereum");
+  const { chainId } = useWeb3React();
 
-    useEffect(() => {
-      setSortBy(chainId && getSortBy(chainId));
-    }, [chainId]);
+  useEffect(() => {
+    setSortBy(chainId && getSortBy(chainId));
+  }, [chainId]);
 
-    const chainChange = async (chainName) => {
-      if (chainName === "Ethereum") {
-        try {
-          await web3.givenProvider.request({
-            method: "wallet_switchEthereumChain",
-            params: [{ chainId: "0x5" }],
-          });
-        } catch (error) {}
-      } else if (chainName === "Matic") {
-        try {
-          await web3.givenProvider.request({
-            method: "wallet_addEthereumChain",
-            params: [
-              {
-                chainId: "0x13881",
-                chainName: "Polygon Matic",
-                nativeCurrency: {
-                  name: "MATIC",
-                  symbol: "MATIC",
-                  decimals: 18,
-                },
-                rpcUrls: ["https://polygon-rpc.com/"],
-                blockExplorerUrls: ["https://polygonscan.com/"],
+  const chainChange = async (chainName) => {
+    if (chainName === "Ethereum") {
+      try {
+        await web3.givenProvider.request({
+          method: "wallet_switchEthereumChain",
+          params: [{ chainId: "0x5" }],
+        });
+      } catch (error) {}
+    } else if (chainName === "Matic") {
+      try {
+        await web3.givenProvider.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: "0x13881",
+              chainName: "Polygon Matic",
+              nativeCurrency: {
+                name: "MATIC",
+                symbol: "MATIC",
+                decimals: 18,
               },
-            ],
-          });
-        } catch (error) {
-          console.error(error);
-        }
-      } else if (chainName === "BSC") {
-        try {
-          await web3.givenProvider.request({
-            method: "wallet_addEthereumChain",
-            params: [
-              {
-                chainId: "0x61",
-                chainName: "Binance Smart Chain",
-                nativeCurrency: {
-                  name: "BNB",
-                  symbol: "BNB",
-                  decimals: 18,
-                },
-                rpcUrls: ["https://data-seed-prebsc-1-s3.binance.org:8545"],
-                blockExplorerUrls: ["https://bscscan.com/"],
-              },
-            ],
-          });
-        } catch (error) {
-          console.error(error);
-        }
-      } else if (chainName === "Avalanche") {
-        try {
-          await web3.givenProvider.request({
-            method: "wallet_addEthereumChain",
-            params: [
-              {
-                chainId: "0xA869",
-                chainName: "Avalanche Fuji",
-                nativeCurrency: {
-                  name: "AVAX",
-                  symbol: "AVAX",
-                  decimals: 18,
-                },
-                rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
-                blockExplorerUrls: ["https://snowtrace.io/"],
-              },
-            ],
-          });
-        } catch (error) {
-          console.error(error);
-        }
-      } else if (chainName === "Fantom") {
-        try {
-          await web3.givenProvider.request({
-            method: "wallet_addEthereumChain",
-            params: [
-              {
-                chainId: "0xFA2",
-                chainName: "Fantom",
-                nativeCurrency: {
-                  name: "FTM",
-                  symbol: "FTM",
-                  decimals: 18,
-                },
-                rpcUrls: ["https://rpc.ftm.tools/"],
-                blockExplorerUrls: ["https://ftmscan.com/"],
-              },
-            ],
-          });
-        } catch (error) {
-          console.error(error);
-        }
-      } else if (chainName === "Moonbeam") {
-        try {
-          await web3.givenProvider.request({
-            method: "wallet_addEthereumChain",
-            params: [
-              {
-                chainId: "0x504",
-                chainName: "Moonbeam",
-                nativeCurrency: {
-                  name: "GLMR",
-                  symbol: "GLMR",
-                  decimals: 18,
-                },
-                rpcUrls: ["https://rpc.api.moonbeam.network"],
-                blockExplorerUrls: ["https://moonscan.io/"],
-              },
-            ],
-          });
-        } catch (error) {
-          console.error(error);
-        }
-      } else if (chainName === "Arbitrum") {
-        try {
-          await web3.givenProvider.request({
-            method: "wallet_addEthereumChain",
-            params: [
-              {
-                chainId: "0xA4B1",
-                chainName: "Arbitrum",
-                nativeCurrency: {
-                  name: "ETH",
-                  symbol: "ETH",
-                  decimals: 18,
-                },
-                rpcUrls: ["https://rpc.ankr.com/arbitrum"],
-                blockExplorerUrls: ["https://testnet.arbiscan.io/"],
-              },
-            ],
-          });
-        } catch (error) {
-          console.error(error);
-        }
+              rpcUrls: ["https://polygon-rpc.com/"],
+              blockExplorerUrls: ["https://polygonscan.com/"],
+            },
+          ],
+        });
+      } catch (error) {
+        console.error(error);
       }
-    };
+    } else if (chainName === "BSC") {
+      try {
+        await web3.givenProvider.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: "0x61",
+              chainName: "Binance Smart Chain",
+              nativeCurrency: {
+                name: "BNB",
+                symbol: "BNB",
+                decimals: 18,
+              },
+              rpcUrls: ["https://data-seed-prebsc-1-s3.binance.org:8545"],
+              blockExplorerUrls: ["https://bscscan.com/"],
+            },
+          ],
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    } else if (chainName === "Avalanche") {
+      try {
+        await web3.givenProvider.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: "0xA869",
+              chainName: "Avalanche Fuji",
+              nativeCurrency: {
+                name: "AVAX",
+                symbol: "AVAX",
+                decimals: 18,
+              },
+              rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
+              blockExplorerUrls: ["https://snowtrace.io/"],
+            },
+          ],
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    } 
+  };
 
   return (
     <div className="vesting_steps h-screen flex choose-chain">
@@ -188,7 +117,6 @@ const ChooseChain = ({setShowForm, setChainIdInitial}) => {
               onClick={() => {
                 chainChange("Ethereum");
               }}
-              
             >
               <div>
                 <img
@@ -299,12 +227,19 @@ const ChooseChain = ({setShowForm, setChainIdInitial}) => {
           className={`
           ${
             sortBy === "Unknown"
-              ? "pointer-events-none create-button-disabled opacity-60"
-              : "bg-capxGreen create-button"
-          } justify-self-end rounded-2xl mt-8 justify-center items-center flex px-4 py-6 w-full cursor-pointer`}
-          onClick={() => { setShowForm(true); setChainIdInitial(chainId) }}
+              ? "create-button-disabled cursor-not-allowed opacity-60"
+              : "bg-capxGreen create-button cursor-pointer"
+          } justify-self-end rounded-2xl mt-8 justify-center items-center flex px-4 py-6 w-full `}
+          onClick={() => {
+            if (sortBy !== "Unknown") {
+              setShowForm(true);
+              setChainIdInitial(chainId);
+            }
+          }}
         >
-          <div className={`text-black button_text phone:text-caption-2 screen:text-caption-1 screen:leading-caption-1 twok:text-subheading twok:leading-text-subheading font-bold`}>
+          <div
+            className={`text-black button_text phone:text-caption-2 screen:text-caption-1 screen:leading-caption-1 twok:text-subheading twok:leading-text-subheading font-bold`}
+          >
             {"Begin Token Creation"}
             <img
               src={NextIcon}

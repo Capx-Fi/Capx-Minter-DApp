@@ -1,7 +1,5 @@
 import NextIcon from "../../assets/next-black.svg";
 import BackIcon from "../../assets/back-black.svg";
-import { useState } from "react";
-
 
 export default function StepControls({
   handleClick,
@@ -9,10 +7,6 @@ export default function StepControls({
   steps,
   disableSteps,
 }) {
-
-  
-
-
   let disabled = false;
   if (currentStep === 1 && disableSteps.first) {
     disabled = true;
@@ -26,7 +20,6 @@ export default function StepControls({
 
   return (
     <div className="container mb-16 flex justify-between px-10">
-     
       <div
         className="back-button w-44 justify-self-end rounded-lg mt-8 justify-center items-center flex gap-x-2 px-5 py-3 cursor-pointer"
         onClick={() => handleClick("back")}
@@ -42,12 +35,16 @@ export default function StepControls({
       <div
         className={`side-button w-44 ${
           disabled
-            ? "side-button-disabled opacity-60 pointer-events-none cursor-not-allowed"
-            : ""
-        }justify-self-end rounded-lg mt-8 justify-center items-center flex gap-x-2 px-5 py-3 cursor-pointer`}
-        onClick={() => handleClick("next")}
+            ? "side-button-disabled opacity-60 cursor-not-allowed"
+            : "cursor-pointer"
+        } justify-self-end rounded-lg mt-8 justify-center items-center flex gap-x-2 px-5 py-3`}
+        onClick={() => {
+          if (!disabled) {
+            handleClick("next");
+          }
+        }}
       >
-        <div className="button_text cursor-pointer text-black text-paragraph-2 leading-paragraph-2 font-bold">
+        <div className="button_text text-black text-paragraph-2 leading-paragraph-2 font-bold">
           {currentStep === steps.length ? "CONFIRM" : "NEXT"}
         </div>
         {currentStep !== steps.length ? (
