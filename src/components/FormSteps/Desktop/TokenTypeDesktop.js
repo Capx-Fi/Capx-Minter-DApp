@@ -177,7 +177,7 @@ export default function TokenType({
                       style={{ background: "#F0F1F0" }}
                     >
                       <div className="text-caption-1 font-semibold w-3/5 leading-caption-1 h-14 flex items-center">
-                        <div className="block">{item.name.substring(4,22)}</div>
+                        <div className="block">{item.name}</div>
                       </div>
                       <div
                         className="flex items-center cursor-pointer"

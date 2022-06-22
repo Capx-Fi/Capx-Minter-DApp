@@ -198,9 +198,9 @@ const TokenInfo = ({ tokenTypeData }) => {
                     </div>
                   </div>
                 </div>
-                <div className="flex justify-between mt-8">
+                <div className="flex justify-between mt-12">
                   <div className="text-paragraph-2 leading-paragraph-2">
-                    <span className="block mt-2">Owner Address:</span>
+                    <span className="block">Owner Address:</span>
                     <span className="font-bold text-paragraph-1 leading-paragraph-1">
                       {`${location?.state?.tokenOwner?.substr(
                         0,
