@@ -24,7 +24,7 @@ export const createNewToken = async (
   documentHash,
   setMintModalStatus,
   setMintModalOpen,
-  setSuccess
+  setCreatedAddress
 ) => {
   // Start Loading
   const web3 = new Web3(Web3.givenProvider);
@@ -91,7 +91,7 @@ export const createNewToken = async (
      }
      setMintModalStatus("success");
      setTimeout(() => {
-       setSuccess(true);
+       setCreatedAddress(tempAddress);
      }, 3000);
   } else {
     try {
@@ -153,7 +153,7 @@ export const createNewToken = async (
     }
     setMintModalStatus("success");
     setTimeout(() => {
-      setSuccess(true);
+      setCreatedAddress(tempAddress);
     }, 3000);
   }
 };

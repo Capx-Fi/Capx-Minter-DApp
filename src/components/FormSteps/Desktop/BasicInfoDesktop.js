@@ -7,6 +7,7 @@ import { useWeb3React } from "@web3-react/core";
 import "../BasicInformation.scss";
 import { useDropzone } from "react-dropzone";
 import { Converter } from "any-number-to-words";
+import { convertToInternationalCurrencySystem } from "../../../utils/convertToInternationalCurrencySystem";
 
 export default function BasicInformation({
   disableSteps,
@@ -365,14 +366,13 @@ export default function BasicInformation({
               errors?.tokenSupply?.length > 0
                 ? "text-red-400 font-semibold"
                 : "text-gray-800"
-            } text-s ml-1`}
-          >
-            {errors?.tokenSupply?.length > 0
+              } text-s ml-1`}
+            dangerouslySetInnerHTML={{__html : errors?.tokenSupply?.length > 0
               ? errors.tokenSupply
               : `${isNaN(
                   parseFloat(userData?.tokenSupply)
-              ) ? "Choose initial supply for your token" : "About " + converter.toWords(parseFloat(userData?.tokenSupply))}`}
-          </span>
+              ) ? "Choose initial supply for your token" : "&asymp; " + convertToInternationalCurrencySystem(userData?.tokenSupply)}`}}
+          />
         </div>
       </div>
 

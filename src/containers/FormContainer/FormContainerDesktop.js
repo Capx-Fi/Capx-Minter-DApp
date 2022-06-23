@@ -31,6 +31,7 @@ const FormContainer = ({ setShowForm, chainIdInitial, tokenTypeData }) => {
 
   const [mintModalOpen, setMintModalOpen] = useState(false);
   const [mintModalStatus, setMintModalStatus] = useState(""); //beware on mobile take this component outside
+  const [createdAddress, setCreatedAddress] = useState("");
 
   useEffect(() => {
     if (chainIdInitial !== chainId) {
@@ -45,8 +46,6 @@ const FormContainer = ({ setShowForm, chainIdInitial, tokenTypeData }) => {
     "Configuration",
     "Summary",
   ];
-
-  const [success, setSuccess] = useState(false);
 
   const stepsd = [
     {
@@ -186,7 +185,7 @@ const FormContainer = ({ setShowForm, chainIdInitial, tokenTypeData }) => {
           pinataHash?.IpfsHash,
           setMintModalStatus,
           setMintModalOpen,
-          setSuccess
+          setCreatedAddress
         );
       } catch (err) {
         console.log(err);
@@ -227,15 +226,16 @@ const FormContainer = ({ setShowForm, chainIdInitial, tokenTypeData }) => {
   };
 
   useEffect(() => {
-    if (success) {
+    if (createdAddress.length > 0) {
       history.push({
         pathname: "/tokens",
         state: {
           newlyCreated: true,
+          createdAddress: createdAddress
         },
       });
     }
-  }, [success]);
+  }, [createdAddress]);
 
   return (
     <div className="form_container h-screen flex-col">

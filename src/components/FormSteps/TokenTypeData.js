@@ -1,4 +1,29 @@
-const tokenTypeData = [
+export const tooltipInfo = {
+  "ERC 20 Compliant": "Information",
+  Mintable: "Information",
+  "Liquidity Generator": "Information",
+  "Verified Source Code": "Information",
+  Burnable: "Information",
+  "Donation (Charity)": "Information",
+  Ownable: "Information",
+  Pausable: "Information",
+  "Yield Generator": "Information",
+  "Capped Total Supply": "Information",
+  "Taxable (Burn Tax)": "Information",
+};
+
+export const checkboxTooltipInfo = {
+  Mintable: "Mintable",
+  Burnabe: "Burnable",
+  Pausable: "Pausable",
+  Capped: "Capped Total Supply",
+  "Liquidity Generator": "Liquidity Generator",
+  "Yield Generator": "Yield Generator",
+  "Donation (Charity)": "Donation (Charity)",
+  "Burn Tax": "Taxable (Burn Tax)",
+}
+
+export const sampleTokenTypeData = [
   {
     id: "f01",
     name: "Standard Token",
@@ -341,4 +366,3 @@ const tokenTypeData = [
   },
 ];
 
-export default tokenTypeData;

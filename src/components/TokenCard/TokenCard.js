@@ -75,7 +75,7 @@ export default function TokenCard({
             <img
               src={hashData?.image64}
               alt="Ethereum Logo"
-              className="inline-block w-8 mr-7"
+              className="inline-block w-14 h-14 mr-7"
             ></img>
           </div>
           <div className="font-bold text-heading-2 leading-heading-2">
@@ -83,9 +83,9 @@ export default function TokenCard({
           </div>
         </div>
         <div>
-          <div className="mt-4 h-16 flex items-center font-semibold text-caption-1 leading-caption-1">
+          <div className="mt-4 h-8 flex items-center font-semibold text-caption-1 leading-caption-1">
             <div>
-              {hashData?.description && parseDesc(hashData.description, 138)}
+              {hashData?.description && parseDesc(hashData.description, 48)}
             </div>
           </div>
         </div>

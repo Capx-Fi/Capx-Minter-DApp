@@ -8,6 +8,7 @@ import Tick from "../../../assets/tick.svg";
 import Cross from "../../../assets/red-cross.svg";
 import InfoIcon from "../../../assets/info-icon.svg";
 import { Tooltip } from "@material-ui/core";
+import { tooltipInfo } from "../TokenTypeData";
 
 const choiceMap = new Map([
   ["Mintable", "Mintable"],
@@ -173,16 +174,14 @@ export default function TokenType({
                 relevantTokenTypes.map((item, index) => (
                   <div className="w-1/2 py-2 pr-2" key={index}>
                     <div
-                      className="rounded-lg flex justify-between px-4 mr-2 py-2"
+                      className="rounded-lg flex justify-between cursor-pointer px-4 mr-2 py-2"
                       style={{ background: "#F0F1F0" }}
+                      onClick={() => handleSelect(item.id)}
                     >
                       <div className="text-caption-1 font-semibold w-3/5 leading-caption-1 h-14 flex items-center">
                         <div className="block">{item.name}</div>
                       </div>
-                      <div
-                        className="flex items-center cursor-pointer"
-                        onClick={() => handleSelect(item.id)}
-                      >
+                      <div className="flex items-center cursor-pointer">
                         <img
                           alt="next_icon"
                           src={NextIcon}

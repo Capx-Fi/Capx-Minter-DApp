@@ -74,7 +74,7 @@ const TokenInfo = ({ tokenTypeData }) => {
                         <img
                           src={location?.state?.hashData?.image64}
                           alt="Ethereum Logo"
-                          className="block ml-4 w-9 mr-7"
+                          className="block ml-4 w-20 mr-7"
                         ></img>
                       </div>
                       <div className="flex flex-col">
@@ -84,11 +84,8 @@ const TokenInfo = ({ tokenTypeData }) => {
                             {location?.state?.tokenSymbol})
                           </div>
                         </div>
-                        <div>
-                          {`${location?.state?.address?.substr(
-                            0,
-                            6
-                          )}...${location?.state?.address?.substr(-4)}`}{" "}
+                        <div className="mt-2 text-paragraph-2">
+                          {`${location?.state?.address}`}{" "}
                           <CopyToClipboard
                             text={location?.state?.address}
                             onCopy={() => setCopiedToken(true)}
@@ -119,36 +116,62 @@ const TokenInfo = ({ tokenTypeData }) => {
                       location.state.hashData.website.length > 0 ? (
                         <div className="flex-col">
                           <div className="font-bold">Website:</div>
-                              <div><a href={location.state.hashData.website} target="_blank">{location.state.hashData.website}</a></div>
+                          <div>
+                            <a
+                              href={location.state.hashData.website}
+                              target="_blank"
+                            >
+                              {location.state.hashData.website}
+                            </a>
+                          </div>
                         </div>
                       ) : null}
                       {location?.state?.hashData?.twitter &&
                       location.state.hashData.twitter.length > 0 ? (
                         <div className="flex-col">
                           <div className="font-bold">Twitter:</div>
-                          <div><a href={location.state.hashData.twitter} target="_blank">{location.state.hashData.twitter}</a></div>
+                          <div>
+                            <a
+                              href={location.state.hashData.twitter}
+                              target="_blank"
+                            >
+                              {location.state.hashData.twitter}
+                            </a>
+                          </div>
                         </div>
                       ) : null}
                       {location?.state?.hashData?.telegram &&
                       location.state.hashData.telegram.length > 0 ? (
                         <div className="flex-col">
                           <div className="font-bold">Telegram:</div>
-                          <div><a href={location.state.hashData.telegram} target="_blank">{location.state.hashData.telegram}</a></div>
+                          <div>
+                            <a
+                              href={location.state.hashData.telegram}
+                              target="_blank"
+                            >
+                              {location.state.hashData.telegram}
+                            </a>
+                          </div>
                         </div>
                       ) : null}
                     </div>
                   </div>
                   <div className="flex gap-x-4 mt-2">
-                    <div
-                      className={`bg-capxGreen create-button rounded-lg justify-center w-52 items-center flex px-6 h-11 cursor-pointer`}
-                      onClick={() => console.log("clicked")}
+                    <a
+                        href={`https://goerli.etherscan.io/address/${location?.state?.address}`}
+                        target="_blank"
                     >
                       <div
-                        className={`text-black button_text twok:text-caption-1 twok:leading-text-caption-1 font-semibold`}
+                        className={`bg-capxGreen create-button rounded-lg justify-center w-52 items-center flex px-6 h-11 cursor-pointer`}
+                        onClick={() => console.log("clicked")}
                       >
-                        {"Ropsten Etherscan"}
+                        <div
+                          className={`text-black button_text twok:text-caption-1 twok:leading-text-caption-1 font-semibold`}
+                        >
+                          {"View on Explorer"}
+                        </div>
                       </div>
-                    </div>
+                    </a>
                     <div
                       className={`bg-capxGreen create-button rounded-lg justify-center w-52 items-center flex px-6 h-11 cursor-pointer`}
                       onClick={() => console.log("clicked")}
