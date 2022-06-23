@@ -118,7 +118,7 @@ const TokenInfo = ({ tokenTypeData }) => {
                           <div className="font-bold">Website:</div>
                           <div>
                             <a
-                              href={location.state.hashData.website}
+                              href={"//" + location.state.hashData.website}
                               target="_blank"
                             >
                               {location.state.hashData.website}
@@ -132,7 +132,7 @@ const TokenInfo = ({ tokenTypeData }) => {
                           <div className="font-bold">Twitter:</div>
                           <div>
                             <a
-                              href={location.state.hashData.twitter}
+                              href={"//" + location.state.hashData.twitter}
                               target="_blank"
                             >
                               {location.state.hashData.twitter}
@@ -146,7 +146,7 @@ const TokenInfo = ({ tokenTypeData }) => {
                           <div className="font-bold">Telegram:</div>
                           <div>
                             <a
-                              href={location.state.hashData.telegram}
+                              href={"//" + location.state.hashData.telegram}
                               target="_blank"
                             >
                               {location.state.hashData.telegram}
@@ -158,8 +158,8 @@ const TokenInfo = ({ tokenTypeData }) => {
                   </div>
                   <div className="flex gap-x-4 mt-2">
                     <a
-                        href={`https://goerli.etherscan.io/address/${location?.state?.address}`}
-                        target="_blank"
+                      href={`https://goerli.etherscan.io/address/${location?.state?.address}`}
+                      target="_blank"
                     >
                       <div
                         className={`bg-capxGreen create-button rounded-lg justify-center w-52 items-center flex px-6 h-11 cursor-pointer`}
