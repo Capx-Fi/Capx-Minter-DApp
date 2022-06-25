@@ -3,7 +3,7 @@ import Header from "../../Header/Header";
 import Footer from "../../Footer/Footer";
 import { Link } from "react-router-dom";
 import FirefoxIllustration from "../../../assets/FirefoxIllustration.png";
-import NextIcon from "../../../assets/next-black.png";
+import NextIcon from "../../../assets/next.svg";
 import { injected, walletconnect } from "../../../utils/connector";
 import { useWeb3React, UnsupportedChainIdError } from "@web3-react/core";
 import { useSnackbar } from "notistack";
@@ -38,7 +38,7 @@ function MetamaskModal() {
 		<article className="metamaskmodalscreen">
 			<Header hiddenNav landing />
 			<section className="metamaskmodalscreen_maincontainer">
-				<div className="metamaskmodalscreen_maincontainer_herocontainer">
+				<div className="metamaskmodalscreen_maincontainer_herocontainer border border-lightGrayBorder">
 					<div className="metamaskmodalscreen_maincontainer_herocontainer_title">
 						{t("please_connect_metamask")}
 						<br /> {t("please_connect_metamask_2")}

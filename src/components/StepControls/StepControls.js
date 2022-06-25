@@ -1,5 +1,5 @@
-import NextIcon from "../../assets/next-black.svg";
-import BackIcon from "../../assets/back-black.svg";
+import NextIcon from "../../assets/next.svg";
+import BackIcon from "../../assets/back.svg";
 
 export default function StepControls({
   handleClick,
@@ -27,7 +27,7 @@ export default function StepControls({
         <div>
           <img alt="back_icon" src={BackIcon} className="w-5" />
         </div>
-        <div className="button_text cursor-pointe text-black text-paragraph-2 leading-paragraph-2 font-bold">
+        <div className="button_text cursor-pointer text-white text-paragraph-2 leading-paragraph-2 font-bold">
           {"BACK"}
         </div>
       </div>
@@ -44,12 +44,12 @@ export default function StepControls({
           }
         }}
       >
-        <div className="button_text text-black text-paragraph-2 leading-paragraph-2 font-bold">
+        <div className="button_text text-white text-paragraph-2 leading-paragraph-2 font-bold">
           {currentStep === steps.length ? "CONFIRM" : "NEXT"}
         </div>
         {currentStep !== steps.length ? (
           <div>
-            <img alt="next_icon" src={NextIcon} className="w-5" />
+            <img alt="next_icon" src={NextIcon} className="w-3.5" />
           </div>
         ) : null}
       </div>

@@ -250,11 +250,11 @@ const FormContainer = ({ setShowForm, chainIdInitial, tokenTypeData }) => {
         className={`py-32 maincontainer text-black flex gap-x-16 justify-between m-auto mt-auto px-24`}
       >
         <div
-          className={`upper-container h-fit-content rounded-3xl px-14 py-10 w-28v bg-opacity-30 relative`}
+          className={`upper-container border border-lightGrayBorder h-fit-content rounded-3xl px-14 py-10 w-28v bg-opacity-30 relative`}
         >
           <Stepper steps={stepsd} currentStep={currentStep} />
         </div>
-        <div className="herocontainer px-12 py-4 w-60v rounded-3xl bg-opacity-30 relative">
+        <div className="herocontainer px-12 py-4 w-60v rounded-3xl bg-opacity-30 relative border border-lightGrayBorder">
           <div className="horizontal container">
             <div className="p-10 pb-4 ">{displayStep(currentStep)}</div>
           </div>

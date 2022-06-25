@@ -174,7 +174,7 @@ export default function TokenType({
                 relevantTokenTypes.map((item, index) => (
                   <div className="w-1/2 py-2 pr-2" key={index}>
                     <div
-                      className="rounded-lg flex justify-between cursor-pointer px-4 mr-2 py-2"
+                      className="rounded-lg flex justify-between border-lightGrayBorder border cursor-pointer px-4 mr-2 py-2"
                       style={{ background: "#F0F1F0" }}
                       onClick={() => handleSelect(item.id)}
                     >
@@ -241,7 +241,7 @@ export default function TokenType({
             </div>
           </div>
           <div
-            className="w-full font-semibold mt-6 rounded-lg text-subheading leading-subheading px-4 py-4 "
+            className="w-full font-semibold border-lightGrayBorder border mt-6 rounded-lg text-subheading leading-subheading px-4 py-4 "
             style={{ background: "#F0F1F0" }}
           >
             {currentToken?.name}
@@ -260,7 +260,10 @@ export default function TokenType({
                 {currentToken &&
                   Object.keys(currentToken?.features).map((feature, index) => {
                     return (
-                      <div className="w-1/3 flex justify-between" key={index}>
+                      <div
+                        className="w-1/3 flex justify-between"
+                        key={index}
+                      >
                         <div>
                           {feature}
                           <Tooltip title="Information">

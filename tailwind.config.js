@@ -7,7 +7,7 @@ module.exports = {
         scaleUp: {
           "0%, 100%": { transform: "scale(1)" },
           "50%": { transform: "scale(1.01)" },
-        }
+        },
       },
       animation: {
         scaleUp: "scaleUp 0.4s ease-in-out",
@@ -22,13 +22,17 @@ module.exports = {
         },
         landingGreen: "#357702",
         fuscia: "#DD51C6",
+        darkText: "#2F3137",
         cyan: "#19EBD2",
         azure: "#365CF0",
         greyborder: "#2a383c",
+        capxDark: "#2A383C",
         capxGreen: "#8DBC1A",
         capxGreenLight: "#CFEE81",
         capxGreenDark: "#7AA216",
-        greyDark: "#F6F6F8",
+        lightGrayBorder: "#d8d8d9",
+        grayFill: "#f4f5f5",
+        greyDark: "#FAFAFA",
         "error-color": {
           100: "#FBDAE1",
           200: "#F27D95",

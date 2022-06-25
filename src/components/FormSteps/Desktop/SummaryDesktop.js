@@ -15,14 +15,14 @@ export default function Summary({ files, tokenTypeData }) {
   const featuresToDisplay = currentToken.advancedFeatures;
 
   return (
-    <div className="flex flex-col summary">
+    <div className="flex flex-col summary ">
       <div className="font-bold text-heading-2 leading-heading-1 mb-3 ml-2">
         Summary
         <span className="text-greylabel block text-paragraph-1">
           Review your choices and confirm
         </span>
       </div>
-      <div className="bg_translucent w-3/4 my-8 mx-auto bg-opacity-20 p-6 rounded-xl py-10">
+      <div className="bg_translucent border-lightGrayBorder border w-3/4 my-8 mx-auto bg-opacity-20 p-6 rounded-xl py-10">
         <div className="flex flex-row items-stretch w-full gap-x-2">
           <div className="flex items-center px-8">
             <div>

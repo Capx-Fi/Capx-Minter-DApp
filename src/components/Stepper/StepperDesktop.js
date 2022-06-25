@@ -76,7 +76,7 @@ const Stepper = ({ steps, currentStep }) => {
             }`}
           >
             {step.completed ? (
-              <span className="text-black font-bold text-xl">&#10003;</span>
+              <span className="text-white font-bold text-xl">&#10003;</span>
             ) : (
               index + 1
             )}
@@ -98,7 +98,7 @@ const Stepper = ({ steps, currentStep }) => {
 
   return (
     <>
-      <div className="p-4 tracking-tight flex-col justify-between items-center">
+      <div className="p-4 tracking-tight flex-col justify-between items-center ">
         <div className="font-bold text-subheading leading-subheading mb-6">
           Mint in Four Simple Steps
         </div>

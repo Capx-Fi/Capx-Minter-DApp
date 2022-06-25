@@ -56,7 +56,7 @@ const TokenInfo = ({ tokenTypeData }) => {
           <div
             className={`maincontainer text-black flex flex-col justify-center items-center m-auto mt-auto px-24 py-32`}
           >
-            <div className="herocontainer flex flex-col px-10 py-8 w-3/4 rounded-2xl bg-opacity-30 mt-10 relative">
+            <div className="herocontainer flex flex-col px-10 py-8 w-3/4 rounded-2xl bg-opacity-30 mt-10 relative border-lightGrayBorder border">
               <div className="w-full flex flex-row-reverse">
                 <Link to="/tokens">
                   <img
@@ -162,22 +162,22 @@ const TokenInfo = ({ tokenTypeData }) => {
                       target="_blank"
                     >
                       <div
-                        className={`bg-capxGreen create-button rounded-lg justify-center w-52 items-center flex px-6 h-11 cursor-pointer`}
+                        className={`bg-capxGreen rounded-lg justify-center w-52 items-center flex px-6 h-11 cursor-pointer`}
                         onClick={() => console.log("clicked")}
                       >
                         <div
-                          className={`text-black button_text twok:text-caption-1 twok:leading-text-caption-1 font-semibold`}
+                          className={`text-white button_text twok:text-caption-1 twok:leading-text-caption-1 font-semibold`}
                         >
                           {"View on Explorer"}
                         </div>
                       </div>
                     </a>
                     <div
-                      className={`bg-capxGreen create-button rounded-lg justify-center w-52 items-center flex px-6 h-11 cursor-pointer`}
+                      className={`bg-capxGreen rounded-lg justify-center w-52 items-center flex px-6 h-11 cursor-pointer`}
                       onClick={() => console.log("clicked")}
                     >
                       <div
-                        className={`text-black button_text twok:text-caption-1 twok:leading-text-caption-1 font-semibold`}
+                        className={`text-white button_text twok:text-caption-1 twok:leading-text-caption-1 font-semibold`}
                       >
                         {"Download Audit"}
                       </div>

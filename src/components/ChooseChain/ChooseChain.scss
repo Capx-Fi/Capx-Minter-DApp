@@ -1,62 +1,61 @@
-.choose-chain{
-    background-color: #F6F6F8;
+.choose-chain {
+  background-color: #fafafa;
 }
 
 .vesting_steps {
-    .herocontainer {
-
-        .text-container {
-            background: #F0F0F0;
-            
-        }
-
-                .text-container-highlighted {
-                    background: #e9ffb1;
-                    
-                }
+  .herocontainer {
+    .text-container {
+      background: #f0f0f0;
     }
 
-    .side-container {
-        .download-template {
-            background: radial-gradient(143.33% 143.33% at 82.41% -4.96%,
-                    rgba(132, 214, 164, 0.3) 0%,
-                    rgba(18, 28, 32, 0.3) 100%);
-
-            .xldiv {
-                background: radial-gradient(143.33% 143.33% at 82.41% -4.96%,
-                        rgba(132, 214, 164, 0.3) 0%,
-                        rgba(18, 28, 32, 0.3) 100%);
-            }
-
-            .mobile-xldiv {
-                border: 0.5px solid #49c475;
-            }
-        }
-
-        .side-button {
-            background: #8DBC1A;
-        }
-
-        
+    .text-container-highlighted {
+      background: #e9ffb1;
     }
+  }
+
+  .side-container {
+    .download-template {
+      background: radial-gradient(
+        143.33% 143.33% at 82.41% -4.96%,
+        rgba(132, 214, 164, 0.3) 0%,
+        rgba(18, 28, 32, 0.3) 100%
+      );
+
+      .xldiv {
+        background: radial-gradient(
+          143.33% 143.33% at 82.41% -4.96%,
+          rgba(132, 214, 164, 0.3) 0%,
+          rgba(18, 28, 32, 0.3) 100%
+        );
+      }
+
+      .mobile-xldiv {
+        border: 0.5px solid #49c475;
+      }
+    }
+
+    .side-button {
+      background: #8dbc1a;
+    }
+  }
 }
 
-.create-button{
-    background: #bee55d;
+.create-button {
+  background: #8DBC1A;
 }
 
-.create-button-disabled{
-    background: #AEAEAE;
+.create-button-disabled {
+  background: #aeaeae;
 }
 
 .side-button {
-    background: #bee55d;
+  background: #8DBC1A;
 }
 
 .back-button {
-    background: #F0F0F0;
+  background: #8DBC1A;
 }
 
 .side-button-disabled {
-    background: #AEAEAE;
+  background: #aeaeae;
 }

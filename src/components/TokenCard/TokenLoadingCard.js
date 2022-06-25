@@ -18,7 +18,7 @@ export default function TokenCard() {
 
   return (
     <div className="token_card">
-      <div className="herocontainer flex flex-col gap-y-2 px-14 py-10 w-27v rounded-2xl bg-opacity-30 mt-10 relative">
+      <div className="herocontainer flex flex-col gap-y-2 px-14 py-10 w-27v rounded-2xl bg-opacity-30 mt-10 relative border-lightGrayBorder border">
         <div className="w-full flex items-center">
           <div className="mt-3 mb-4 w-10 h-9 mr-4 bg-gray-200 animate-pulse text-gray-200">
             -
@@ -41,7 +41,6 @@ export default function TokenCard() {
               0,
               6
             )}...${"0xF4338A1aB2cEC0dd62fA1A27b5ba28d7a8F9350E".substr(-4)}`}
-            
           </div>
         </div>
         <div className="flex justify-between text-paragraph-2 leading-paragraph-2">
@@ -56,20 +55,19 @@ export default function TokenCard() {
             1,000,000
           </div>
         </div>
-        
-          <div className="w-full">
+
+        <div className="w-full">
+          <div
+            className={`bg-capxGreen cursor-not-allowed create-button-disabled rounded-xl mt-10 justify-center items-center flex px-4 py-3 w-full`}
+            onClick={() => console.log("clicked")}
+          >
             <div
-              className={`bg-capxGreen cursor-not-allowed create-button-disabled rounded-xl mt-10 justify-center items-center flex px-4 py-3 w-full`}
-              onClick={() => console.log("clicked")}
+              className={`text-white button_text twok:text-paragraph-1 twok:leading-paragraph-1 font-semibold`}
             >
-              <div
-                className={`text-black button_text twok:text-paragraph-1 twok:leading-paragraph-1 font-semibold`}
-              >
-                {"View Coin"}
-              </div>
+              {"View Coin"}
             </div>
           </div>
-       
+        </div>
       </div>
     </div>
   );

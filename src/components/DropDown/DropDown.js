@@ -27,7 +27,7 @@ function DropDown({ sortBy, chainChange, setShowMenu }) {
 	return (
     <div className="relative">
       <div
-        className={`header-dropdown-button ${
+        className={`header-dropdown-button border-lightGrayBorder border ${
           open ? "border-success-color-400" : "border-dark-50"
         }`}
       >
@@ -36,7 +36,9 @@ function DropDown({ sortBy, chainChange, setShowMenu }) {
           alt="Chain Logo"
           className="inline-block ml-2 w-4 h-6 mr-4"
         ></img>
-        <span className={`${sortBy === "Unknown" ? "font-bold" : ""}`}>{sortBy}</span>
+        <span className={`${sortBy === "Unknown" ? "font-bold" : ""}`}>
+          {sortBy}
+        </span>
       </div>
     </div>
   );

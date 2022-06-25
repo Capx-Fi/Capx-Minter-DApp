@@ -216,7 +216,7 @@ function Header({hiddenNav, landing, createButton}) {
 
 	return (
     <>
-      <header className={`header z-20`}>
+      <header className={`header z-20 border-b border-lightGrayBorder`}>
         <a href="/">
           <div>
             <img className={`header_logo`} src={CapxLogo} alt="capx logo" />
@@ -226,7 +226,9 @@ function Header({hiddenNav, landing, createButton}) {
           <div className="flex flex-row gap-x-2 ml-44">
             <div className="">
               <div className="flex flex-row w-32 justify-center items-center rounded-lg px-2.5 py-2.5 text-paragraph-1 font-semibold border-dark-200">
-                <a href="https://liquid.capx.fi" target="_blank">Vest </a>
+                <a href="https://liquid.capx.fi" target="_blank">
+                  Vest{" "}
+                </a>
               </div>
             </div>
             {createButton ? (
@@ -255,28 +257,32 @@ function Header({hiddenNav, landing, createButton}) {
                 <div className="mr-4">
                   <DropDown sortBy={sortBy} chainChange={chainChange} />
                 </div>
-                <div className="header_navbar_logoutbutton">
-									{(sortBy !== "Unknown") ? (
-									userBalance !== -1 ?
-											<div className="flex items-center w-32 justify-center balance-div py-1.5 rounded-l-lg">
-											<div className="text-caption-2 font-semibold leading-caption-2 text-center">
-												<span className="">
-													{web3.utils
-														.fromWei(userBalance.toString())
-														.substring(0, 6)}{" "}
-												</span>
-												{currentTicker}
-											</div>
-										</div> : <div className="flex items-center w-32 justify-center balance-div py-1.5 rounded-l-lg">
-											<div className="text-caption-2 text-gray-300 bg-gray-300 animate-pulse font-semibold leading-caption-2 text-center">
-												<span className="">
-													0.4242
-												</span>
-												ETH
-											</div>
-										</div>
+                <div className="header_navbar_logoutbutton border-lightGrayBorder border overflow-hidden">
+                  {sortBy !== "Unknown" ? (
+                    userBalance !== -1 ? (
+                      <div className="flex items-center w-32 justify-center balance-div py-1.5 rounded-l-lg">
+                        <div className="text-caption-2 font-semibold leading-caption-2 text-center">
+                          <span className="">
+                            {web3.utils
+                              .fromWei(userBalance.toString())
+                              .substring(0, 6)}{" "}
+                          </span>
+                          {currentTicker}
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="flex items-center w-32 justify-center balance-div py-1.5 rounded-l-lg">
+                        <div className="text-caption-2 text-gray-300 bg-gray-300 animate-pulse font-semibold leading-caption-2 text-center">
+                          <span className="">0.4242</span>
+                          ETH
+                        </div>
+                      </div>
+                    )
                   ) : null}
-                  <div className="flex items-center rounded-l-lg pl-3 py-1.5" style={{background:"#f0f0f0"}}>
+                  <div
+                    className="flex items-center rounded-l-lg pl-3 py-1.5 "
+                    style={{ background: "#f0f0f0" }}
+                  >
                     <div className="header_navbar_logoutbutton_text">
                       {" "}
                       {`${account.substr(0, 6)}...${account.substr(-4)}`}

@@ -37,6 +37,7 @@ export default function TokenCard({
   tokenCreatedAt,
   tokenDeployer,
   hashData
+
 }) {
   const [copied, setCopied] = useState(false);
 
@@ -69,7 +70,7 @@ export default function TokenCard({
   
   return (
     <div className="token_card">
-      <div className="herocontainer flex flex-col gap-y-2 px-14 py-10 w-27v rounded-2xl bg-opacity-30 mt-10 relative">
+      <div className="herocontainer flex flex-col gap-y-2 px-14 py-10 w-27v rounded-2xl bg-opacity-30 mt-10 relative border-lightGrayBorder border">
         <div className="w-full flex items-center">
           <div className="mt-3 mb-4">
             <img
@@ -129,17 +130,17 @@ export default function TokenCard({
               tokenOwner,
               tokenSymbol,
               hashData,
-              typeOfToken
+              typeOfToken,
             },
           }}
         >
           <div className="w-full">
             <div
-              className={`bg-capxGreen create-button rounded-xl mt-10 justify-center items-center flex px-4 py-3 w-full cursor-pointer`}
+              className={`bg-capxGreen rounded-xl mt-10 justify-center items-center flex px-4 py-3 w-full cursor-pointer`}
               onClick={() => console.log("clicked")}
             >
               <div
-                className={`text-black button_text twok:text-paragraph-1 twok:leading-paragraph-1 font-semibold`}
+                className={`text-white button_text twok:text-paragraph-1 twok:leading-paragraph-1 font-semibold`}
               >
                 {"View Coin"}
               </div>

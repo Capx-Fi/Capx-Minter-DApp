@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import NextIcon from "../../assets/next-black.svg";
+import NextIcon from "../../assets/next.svg";
 import { getSortBy } from "../../constants/getChainConfig";
 import { useWeb3React } from "@web3-react/core";
 import EthLogo from "../../assets/ethereum-logo.svg";
@@ -102,7 +102,7 @@ const ChooseChain = ({ setShowForm, setChainIdInitial }) => {
     <div className="vesting_steps h-screen flex choose-chain">
       <Header />
       <div className="maincontainer flex flex-col justify-center items-center m-auto mt-auto">
-        <div className="herocontainer px-12 py-20 rounded-3xl text-black relative w-60v flex flex-col items-start bg-white">
+        <div className="herocontainer px-12 py-20 rounded-3xl text-black relative w-60v flex flex-col items-start bg-white border border-lightGrayBorder">
           <div className="title text-50px leading-lh-64 font-bold tracking-tight mt-4 w-full text-center">
             {"Choose your network for token creation"}
           </div>
@@ -238,7 +238,7 @@ const ChooseChain = ({ setShowForm, setChainIdInitial }) => {
           }}
         >
           <div
-            className={`text-black button_text phone:text-caption-2 screen:text-caption-1 screen:leading-caption-1 twok:text-subheading twok:leading-text-subheading font-bold`}
+            className={`text-white button_text phone:text-caption-2 screen:text-caption-1 screen:leading-caption-1 twok:text-subheading twok:leading-text-subheading font-bold`}
           >
             {"Begin Token Creation"}
             <img
