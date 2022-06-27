@@ -22,7 +22,7 @@ const MyTokens = () => {
 
   const extraCard = (
     <div className="token_card">
-      <div className="herocontainer flex flex-col gap-y-2 px-14 py-10 w-27v rounded-2xl bg-opacity-30 mt-10 relative">
+      <div className="herocontainer border border-lightGrayBorder flex flex-col gap-y-2 px-14 py-10 w-27v rounded-2xl bg-opacity-30 mt-10 relative">
         <div className="w-full flex items-center">
           <div className="font-bold text-heading-2 leading-heading-2 mt-4">
             Token not found?
@@ -47,7 +47,7 @@ const MyTokens = () => {
               className={`bg-capxGreen create-button rounded-xl mt-10 justify-center items-center flex px-4 py-3 w-full cursor-pointer`}
             >
               <div
-                className={`text-black button_text twok:text-paragraph-1 twok:leading-paragraph-1 font-semibold`}
+                className={`text-white button_text twok:text-paragraph-1 twok:leading-paragraph-1 font-semibold`}
               >
                 {"Reload"}
               </div>
@@ -169,8 +169,7 @@ const MyTokens = () => {
                 ))
               ) : (
                 <div className="mt-20 text-gray-600 text-heading-2 font-semibold leading-heading-2">
-                  No tokens here! If you have just created it, please wait for
-                  it to reflect.
+                  {location?.state?.newlyCreated ? null : "No tokens here! If you have just created it, please wait for it to reflect."}
                 </div>
               )}
               <Fade>

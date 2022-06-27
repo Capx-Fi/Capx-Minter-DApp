@@ -19,13 +19,12 @@
         @apply text-paragraph-2 leading-paragraph-2 tablet:text-heading-1 tablet:leading-heading-1 font-bold laptop:mt-4 screen:text-heading-2 screen:leading-heading-1 desktop:text-40px desktop:leading-lh-54 desktop:font-semibold twok:text-58px twok:leading-display-2 screen:w-full desktop:w-11/12 twok:w-full;
       }
       &_button {
-        @apply rounded-xl justify-center items-center flex tablet:w-56 phone:px-2 twok:py-5 twok:w-96 px-3 py-4 desktop:px-5 desktop:py-3 z-10 desktop:mb-20 phone:mb-12 phone:mt-8 screen:mt-12 desktop:mt-20 w-48 screen:w-64 twok:my-24 desktop:w-72 cursor-pointer;
-        background: #8dbc1a;
+        @apply rounded-3xl justify-center items-center border-2 border-capxGreen flex tablet:w-56 phone:px-2 twok:py-5 twok:w-96 px-3 py-4 desktop:px-5 desktop:py-3 z-10 desktop:mb-20 phone:mb-12 phone:mt-8 screen:mt-12 desktop:mt-20 w-48 screen:w-64 twok:my-24 desktop:w-72 cursor-pointer;
         &_icon {
           @apply w-5 mr-2 inline-block mx-3;
         }
         &_text {
-          @apply text-white font-bold twok:text-subheading twok:leading-subheading desktop:text-paragraph-2 tablet:text-caption-1 text-caption-3;
+          @apply text-capxGreen font-bold twok:text-subheading twok:leading-subheading desktop:text-paragraph-2 tablet:text-caption-1 text-caption-3;
         }
       }
       &_firefoxillustration {

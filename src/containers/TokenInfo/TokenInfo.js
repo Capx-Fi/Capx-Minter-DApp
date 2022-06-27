@@ -13,6 +13,7 @@ import { Tooltip } from "@material-ui/core";
 import InfoIcon from "../../assets/info-icon.svg";
 import { useLocation, useHistory } from "react-router-dom";
 import { tooltipInfo } from "../../components/FormSteps/TokenTypeData";
+import { getExplorer } from "../../constants/getChainConfig";
 
 const TokenInfo = ({ tokenTypeData }) => {
   const { active, account, chainId } = useWeb3React();
@@ -159,7 +160,7 @@ const TokenInfo = ({ tokenTypeData }) => {
                   </div>
                   <div className="flex gap-x-4 mt-2">
                     <a
-                      href={`https://goerli.etherscan.io/address/${location?.state?.address}`}
+                      href={`${getExplorer(chainId)}${location?.state?.address}`}
                       target="_blank"
                     >
                       <div

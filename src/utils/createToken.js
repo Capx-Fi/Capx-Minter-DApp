@@ -54,7 +54,7 @@ export const createNewToken = async (
       }, 3000);
       return;
     }
-    // console.log(deployedAddress);
+     console.log(deployedAddress);
      let tempAddress =
        deployedAddress.events.NewTokenDeployed.returnValues.token;
     //  console.log(tempAddress);

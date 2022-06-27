@@ -15,6 +15,8 @@ import { ERC20_ABI } from "../../contracts/ERC20Token";
 import { CAPX_FACTORY } from "../../contracts/CapxFactory";
 import { createNewToken } from "../../utils/createToken";
 import { useHistory } from "react-router-dom";
+import { getFactoryAddress } from "../../constants/getChainConfig";
+import { Children } from "react";
 const pinataSDK = require("@pinata/sdk");
 
 const FormContainer = ({ setShowForm, chainIdInitial, tokenTypeData }) => {
@@ -160,7 +162,7 @@ const FormContainer = ({ setShowForm, chainIdInitial, tokenTypeData }) => {
           account,
           CAPX_FACTORY,
           ERC20_ABI,
-          process.env.REACT_APP_CAPX_FACTORY_ADDRESS,
+          getFactoryAddress(chainId),
           userData.tokenName,
           userData.tokenSymbol,
           userData.tokenOwner,

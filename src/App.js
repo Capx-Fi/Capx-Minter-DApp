@@ -16,19 +16,18 @@ function App() {
     setTimeout(() => setLoading(false), 1500);
   }, []);
 
-  useEffect(() => {
-    fetchTokenTypes(setTokensData);
-  }, []);
+  
+
 
   return (
     <>
-      {loading || tokensData === -1 ? (
+      {loading ? (
         <LoadingScreen />
       ) : (
         <Router>
           <Switch>
             <Route exact path="/">
-              <Main tokenTypeData={tokensData} />
+              <Main tokenTypeData={tokensData} setTokensData={setTokensData} />
             </Route>
             <Route exact path="/tokens">
               <MyTokens tokenTypeData={tokensData} />

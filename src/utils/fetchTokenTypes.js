@@ -1,3 +1,4 @@
+import { getGraphFetch } from "../constants/getChainConfig";
 import { queryTokenForAddressTypes } from "./queryTypesOfToken";
 
 const parseId = (hex) => {
@@ -10,9 +11,10 @@ const parseId = (hex) => {
   return "s" + decimal;
 };
 
-async function fetchTokenTypes(setTokensData) {
+async function fetchTokenTypes(setTokensData, chainId) {
+  console.log(getGraphFetch(chainId));
   let result = await queryTokenForAddressTypes(
-    "https://api.thegraph.com/subgraphs/name/varun-capx/tokenminter"
+    getGraphFetch(chainId)
   );
   const formattedTokenTypes = result.map((tokenType) => {
     return {

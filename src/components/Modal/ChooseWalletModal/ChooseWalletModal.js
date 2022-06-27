@@ -8,7 +8,6 @@ import "./ChooseWalletModal.scss";
 import { UnsupportedChainIdError, useWeb3React } from "@web3-react/core";
 import { useSnackbar } from "notistack";
 import { injected, walletconnect } from "../../../utils/connector";
-import { CHAIN_NAMES } from "../../../constants/config";
 import { useTranslation } from "react-i18next";
 
 const Landing = () => {
@@ -25,17 +24,9 @@ const Landing = () => {
 	async function connect() {
 		try {
 			await activate(injected);
-			if (unsupportedChainIdError) {
-				enqueueSnackbar(`Please connect to the ${CHAIN_NAMES} Mainnet Chain.`, {
-					variant: "error",
-				});
-			}
+			
 		} catch (ex) {
-			if (error instanceof UnsupportedChainIdError) {
-				enqueueSnackbar(`Please connect to the ${CHAIN_NAMES} Mainnet Chain.`, {
-					variant: "error",
-				});
-			}
+			
 			alert(ex);
 		}
 	}
@@ -43,17 +34,9 @@ const Landing = () => {
 	async function walletConnect() {
 		try {
 			await activate(walletconnect);
-			if (unsupportedChainIdError) {
-				enqueueSnackbar(`Please connect to the ${CHAIN_NAMES} Mainnet Chain.`, {
-					variant: "error",
-				});
-			}
+			
 		} catch (ex) {
-			if (error instanceof UnsupportedChainIdError) {
-				enqueueSnackbar(`Please connect to the ${CHAIN_NAMES} Mainnet Chain.`, {
-					variant: "error",
-				});
-			}
+			
 			console.log(ex);
 		}
 	}

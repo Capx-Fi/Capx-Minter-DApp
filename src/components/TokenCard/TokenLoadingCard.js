@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./TokenCard.scss";
-import EthLogo from "../../assets/ethereum-logo.svg";
-import { Link } from "react-router-dom";
-import { CopyToClipboard } from "react-copy-to-clipboard";
-import CopyIcon from "../../assets/copy-icon.svg";
+
 
 export default function TokenCard() {
   const [copied, setCopied] = useState(false);
