@@ -216,7 +216,7 @@ function Header({hiddenNav, landing, createButton}) {
 
 	return (
     <>
-      <header className={`header z-20 border-b border-lightGrayBorder`}>
+      <header className={`header z-20 border-b border-darkGrayBorder`}>
         <a href="/">
           <div>
             <img className={`header_logo`} src={CapxLogo} alt="capx logo" />
@@ -257,7 +257,7 @@ function Header({hiddenNav, landing, createButton}) {
                 <div className="mr-4">
                   <DropDown sortBy={sortBy} chainChange={chainChange} />
                 </div>
-                <div className="header_navbar_logoutbutton border-lightGrayBorder border overflow-hidden">
+                <div className="header_navbar_logoutbutton border-darkerGrayBorder border overflow-hidden">
                   {sortBy !== "Unknown" ? (
                     userBalance !== -1 ? (
                       <div className="flex items-center w-32 justify-center balance-div py-1.5 rounded-l-lg">
@@ -280,7 +280,7 @@ function Header({hiddenNav, landing, createButton}) {
                     )
                   ) : null}
                   <div
-                    className="flex items-center rounded-l-lg pl-3 py-1.5 "
+                    className="flex items-center rounded-l-lg pl-3 py-1.5 border-l border-darkerGrayBorder"
                     style={{ background: "#f0f0f0" }}
                   >
                     <div className="header_navbar_logoutbutton_text">

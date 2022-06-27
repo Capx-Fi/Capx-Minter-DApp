@@ -3,7 +3,7 @@ import "./Footer.scss";
 function Footer({centered }) {
   return (
     <footer
-      className={`${"footer border-t border-lightGrayBorder"} ${
+      className={`${"footer border-t border-darkGrayBorder"} ${
         centered ? "centered" : "notcentered"
       } z-30`}
     >

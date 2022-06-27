@@ -12,6 +12,7 @@ import CrossIcon from "../../assets/modal-cross-grey.svg";
 import { Tooltip } from "@material-ui/core";
 import InfoIcon from "../../assets/info-icon.svg";
 import { useLocation, useHistory } from "react-router-dom";
+import { tooltipInfo } from "../../components/FormSteps/TokenTypeData";
 
 const TokenInfo = ({ tokenTypeData }) => {
   const { active, account, chainId } = useWeb3React();
@@ -93,7 +94,7 @@ const TokenInfo = ({ tokenTypeData }) => {
                             <button className="inline-block">
                               <Tooltip
                                 title={
-                                  <span className="text-caption-2 block p-1 font-medium">
+                                  <span className="text-caption-2 text-white block p-1 font-medium">
                                     Copied
                                   </span>
                                 }
@@ -207,7 +208,14 @@ const TokenInfo = ({ tokenTypeData }) => {
                             >
                               <span className="text-capxGreenDark">
                                 {item}
-                                <Tooltip title="Information">
+                                <Tooltip
+                                  arrow
+                                  title={
+                                    <span className="text-caption-2 block p-1 font-medium">
+                                      {tooltipInfo[item]}
+                                    </span>
+                                  }
+                                >
                                   <img
                                     src={InfoIcon}
                                     alt="info"

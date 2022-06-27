@@ -140,7 +140,7 @@ const MyTokens = () => {
             <div className="text-40px leading-lh-64 font-bold tracking-tight mt-4 w-full">
               My Tokens
             </div>
-            <div className="flex flex-wrap gap-x-16">
+            <div className="flex flex-wrap gap-x-16 gap-y-6">
               {tokensData === -1 || !ipfsLoaded ? (
                 <>
                   <TokenLoadingCard />

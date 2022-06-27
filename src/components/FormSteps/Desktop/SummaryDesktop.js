@@ -3,6 +3,7 @@ import "../Summary.scss";
 import { useStepperContext } from "../../../contexts/StepperContext";
 import { Tooltip } from "@material-ui/core";
 import InfoIcon from "../../../assets/info-icon.svg";
+import { tooltipInfo } from "../TokenTypeData";
 
 export default function Summary({ files, tokenTypeData }) {
   const { userData, setUserData } = useStepperContext();
@@ -83,7 +84,14 @@ export default function Summary({ files, tokenTypeData }) {
                 currentToken.features[item] ? (
                   <div className="w-1/2" key={index}>
                     {item}
-                    <Tooltip title="Information">
+                    <Tooltip
+                      arrow
+                      title={
+                        <span className="text-caption-2 block p-1 font-medium">
+                          {tooltipInfo[item]}
+                        </span>
+                      }
+                    >
                       <img
                         src={InfoIcon}
                         alt="info"

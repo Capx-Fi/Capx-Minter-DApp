@@ -31,6 +31,8 @@ module.exports = {
         capxGreenLight: "#CFEE81",
         capxGreenDark: "#7AA216",
         lightGrayBorder: "#d8d8d9",
+        darkGrayBorder: "#B5B6B8",
+        darkerGrayBorder: "#4A6269",
         grayFill: "#f4f5f5",
         greyDark: "#FAFAFA",
         "error-color": {

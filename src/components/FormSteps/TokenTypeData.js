@@ -14,7 +14,7 @@ export const tooltipInfo = {
 
 export const checkboxTooltipInfo = {
   Mintable: "Mintable",
-  Burnabe: "Burnable",
+  Burnable: "Burnable",
   Pausable: "Pausable",
   Capped: "Capped Total Supply",
   "Liquidity Generator": "Liquidity Generator",

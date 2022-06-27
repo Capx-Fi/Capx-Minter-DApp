@@ -1,9 +1,9 @@
 import React from "react";
 import { Tooltip } from "@material-ui/core";
 import InfoIcon from "../../assets/info-icon.svg";
+import { checkboxTooltipInfo } from "./TokenTypeData";
 
-
-const MultiselectCheckbox = ({onChange, data, setData }) => {
+const MultiselectCheckbox = ({ onChange, data, setData }) => {
   const toggle = (index) => {
     const newData = [...data];
     newData.splice(index, 1, {
@@ -34,7 +34,14 @@ const MultiselectCheckbox = ({onChange, data, setData }) => {
               }}
             />
             {item.label}
-            <Tooltip title="Information">
+            <Tooltip
+              title={
+                <span className="text-caption-2 block p-1 font-medium">
+                  {checkboxTooltipInfo[item.label]}
+                </span>
+              }
+              arrow
+            >
               <img
                 src={InfoIcon}
                 alt="info"
@@ -46,7 +53,6 @@ const MultiselectCheckbox = ({onChange, data, setData }) => {
       ))}
       <div
         className="text-paragraph-2 font-medium my-1 mt-3 cursor-pointer rounded-lg px-4 w-fit-content"
-      
         onClick={() => {
           const newData = [...data];
           newData.forEach((item) => {

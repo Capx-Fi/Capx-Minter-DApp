@@ -27,7 +27,7 @@ function DropDown({ sortBy, chainChange, setShowMenu }) {
 	return (
     <div className="relative">
       <div
-        className={`header-dropdown-button border-lightGrayBorder border ${
+        className={`header-dropdown-button border-darkerGrayBorder border ${
           open ? "border-success-color-400" : "border-dark-50"
         }`}
       >

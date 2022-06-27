@@ -54,41 +54,41 @@ export const createNewToken = async (
       }, 3000);
       return;
     }
-     console.log(deployedAddress);
+    // console.log(deployedAddress);
      let tempAddress =
        deployedAddress.events.NewTokenDeployed.returnValues.token;
-     console.log(tempAddress);
-     if (tempAddress) {
-       const token = new web3.eth.Contract(ERC20_ABI, tempAddress);
-       let checkResult;
-       try {
-         checkResult = await token.methods.name().call();
-       } catch (error) {
-         console.error("Token Not deployed Properly 3", error);
-         setMintModalStatus("failure");
-         setTimeout(() => {
-           setMintModalOpen(false);
-         }, 3000);
-         return;
-       }
-       console.log(checkResult);
-       if (checkResult === tokenName) {
-       } else {
-         console.error("Token Not deployed Properly 1");
-         setMintModalStatus("failure");
-         setTimeout(() => {
-           setMintModalOpen(false);
-         }, 3000);
-         return;
-       }
-     } else {
-       console.error("Token Not deployed Properly 2");
-       setMintModalStatus("failure");
-       setTimeout(() => {
-         setMintModalOpen(false);
-       }, 3000);
-       return;
-     }
+    //  console.log(tempAddress);
+    //  if (tempAddress) {
+    //    const token = new web3.eth.Contract(ERC20_ABI, tempAddress);
+    //    let checkResult;
+    //    try {
+    //      checkResult = await token.methods.name().call();
+    //    } catch (error) {
+    //      console.error("Token Not deployed Properly 3", error);
+    //      setMintModalStatus("failure");
+    //      setTimeout(() => {
+    //        setMintModalOpen(false);
+    //      }, 3000);
+    //      return;
+    //    }
+    //    console.log(checkResult);
+    //    if (checkResult === tokenName) {
+    //    } else {
+    //      console.error("Token Not deployed Properly 1");
+    //      setMintModalStatus("failure");
+    //      setTimeout(() => {
+    //        setMintModalOpen(false);
+    //      }, 3000);
+    //      return;
+    //    }
+    //  } else {
+    //    console.error("Token Not deployed Properly 2");
+    //    setMintModalStatus("failure");
+    //    setTimeout(() => {
+    //      setMintModalOpen(false);
+    //    }, 3000);
+    //    return;
+    //  }
      setMintModalStatus("success");
      setTimeout(() => {
        setCreatedAddress(tempAddress);
@@ -116,41 +116,41 @@ export const createNewToken = async (
       return;
     }
     // Change modal from deploying to checking
-    console.log(deployedAddress);
+    // console.log(deployedAddress);
     let tempAddress =
       deployedAddress.events.NewTokenDeployed.returnValues.token;
-    console.log(tempAddress);
-    if (tempAddress) {
-      const token = new web3.eth.Contract(ERC20_ABI, tempAddress);
-      let checkResult;
-      try {
-        checkResult = await token.methods.name().call();
-      } catch (error) {
-        console.error("Token Not deployed Properly 3", error);
-        setMintModalStatus("failure");
-        setTimeout(() => {
-          setMintModalOpen(false);
-        }, 3000);
-        return;
-      }
-      console.log(checkResult);
-      if (checkResult == tokenName) {
-      } else {
-        console.error("Token Not deployed Properly 1");
-        setMintModalStatus("failure");
-        setTimeout(() => {
-          setMintModalOpen(false);
-        }, 3000);
-        return;
-      }
-    } else {
-      console.error("Token Not deployed Properly 2");
-      setMintModalStatus("failure");
-      setTimeout(() => {
-        setMintModalOpen(false);
-      }, 3000);
-      return;
-    }
+    // console.log(tempAddress);
+    // if (tempAddress) {
+    //   const token = new web3.eth.Contract(ERC20_ABI, tempAddress);
+    //   let checkResult;
+    //   try {
+    //     checkResult = await token.methods.name().call();
+    //   } catch (error) {
+    //     console.error("Token Not deployed Properly 3", error);
+    //     setMintModalStatus("failure");
+    //     setTimeout(() => {
+    //       setMintModalOpen(false);
+    //     }, 3000);
+    //     return;
+    //   }
+    //   console.log(checkResult);
+    //   if (checkResult == tokenName) {
+    //   } else {
+    //     console.error("Token Not deployed Properly 1");
+    //     setMintModalStatus("failure");
+    //     setTimeout(() => {
+    //       setMintModalOpen(false);
+    //     }, 3000);
+    //     return;
+    //   }
+    // } else {
+    //   console.error("Token Not deployed Properly 2");
+    //   setMintModalStatus("failure");
+    //   setTimeout(() => {
+    //     setMintModalOpen(false);
+    //   }, 3000);
+    //   return;
+    // }
     setMintModalStatus("success");
     setTimeout(() => {
       setCreatedAddress(tempAddress);

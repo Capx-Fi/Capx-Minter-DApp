@@ -260,13 +260,17 @@ export default function TokenType({
                 {currentToken &&
                   Object.keys(currentToken?.features).map((feature, index) => {
                     return (
-                      <div
-                        className="w-1/3 flex justify-between"
-                        key={index}
-                      >
+                      <div className="w-1/3 flex justify-between" key={index}>
                         <div>
                           {feature}
-                          <Tooltip title="Information">
+                          <Tooltip
+                            arrow
+                            title={
+                              <span className="text-caption-2 block p-1 font-medium">
+                                {tooltipInfo[feature]}
+                              </span>
+                            }
+                          >
                             <img
                               src={InfoIcon}
                               alt="info"
