@@ -9,6 +9,7 @@ import Cross from "../../../assets/red-cross.svg";
 import InfoIcon from "../../../assets/info-icon.svg";
 import { Tooltip } from "@material-ui/core";
 import { tooltipInfo } from "../TokenTypeData";
+import NoTokensFound from "../../../assets/No-Tokens-Found.svg";
 
 const choiceMap = new Map([
   ["Mintable", "Mintable"],
@@ -192,8 +193,9 @@ export default function TokenType({
                   </div>
                 ))
               ) : (
-                <div className="flex-col text-center items-center justify-center mt-20 w-full text-subheading font-semibold text-gray-500">
-                  <div>No Tokens with these set of features</div>
+                <div className="flex-col text-center items-center justify-center mt-6 w-full text-subheading font-semibold text-gray-500">
+                    <div className="flex justify-center mb-6"><img alt="no tokens" src={NoTokensFound} className="block w-44"/></div>
+                    <div>No Tokens with these set of features</div>
                   <div
                     className="text-paragraph-1 cursor-pointer text-black"
                     onClick={() => {

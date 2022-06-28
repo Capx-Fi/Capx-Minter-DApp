@@ -9,10 +9,13 @@ import React, { useState, useEffect } from "react";
 import { queryTokenForAddress } from "../../utils/queryToken";
 import { ERC20_ABI } from "../../contracts/ERC20Token";
 import Fade from "react-reveal/Fade";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import NoTokensMinted from "../../assets/No-Tokens-Minted.svg";
+import { getGraphFetch } from "../../constants/getChainConfig";
 
 const MyTokens = () => {
   const { active, account, chainId } = useWeb3React();
+  const history = useHistory();
   const [tokensData, setTokensData] = useState(-1);
   const [ipfsFetched, setIpfsFetched] = useState([]);
   const [ipfsLoaded, setIpfsLoaded] = useState(false);
@@ -63,7 +66,7 @@ const MyTokens = () => {
       if (active) {
         let result = await queryTokenForAddress(
           account,
-          "https://api.thegraph.com/subgraphs/name/varun-capx/tokenminter",
+          getGraphFetch(chainId),
           ERC20_ABI,
           tokensData,
           setTokensData
@@ -167,9 +170,19 @@ const MyTokens = () => {
                     />
                   </Fade>
                 ))
-              ) : (
-                <div className="mt-20 text-gray-600 text-heading-2 font-semibold leading-heading-2">
-                  {location?.state?.newlyCreated ? null : "No tokens here! If you have just created it, please wait for it to reflect."}
+              ) : location?.state?.newlyCreated ? null : (
+                <div className="mt-16 text-gray-600 text-heading-2 font-semibold leading-heading-2 w-full">
+                  <div className="flex justify-center w-full">
+                    <img
+                      src={NoTokensMinted}
+                      className="block w-80"
+                      alt="no tokens"
+                    />
+                  </div>
+                  <div className="text-center flex justify-center flex-col items-center mt-10">
+                          <div>Sorry, nothing to show here!</div>
+                          <div onClick={() => history.push('/')} className="mt-10 create-button text-white text-subheading tracking-wider px-6 py-4 rounded-2xl cursor-pointer">Begin Minting Now</div>
+                  </div>
                 </div>
               )}
               <Fade>

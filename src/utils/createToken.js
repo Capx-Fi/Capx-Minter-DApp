@@ -54,7 +54,7 @@ export const createNewToken = async (
       }, 3000);
       return;
     }
-     console.log(deployedAddress);
+     console.log("DEPLYED ADD", deployedAddress);
      let tempAddress =
        deployedAddress.events.NewTokenDeployed.returnValues.token;
     //  console.log(tempAddress);
@@ -117,6 +117,8 @@ export const createNewToken = async (
     }
     // Change modal from deploying to checking
     // console.log(deployedAddress);
+    console.log("DEPLYED ADD", deployedAddress);
+
     let tempAddress =
       deployedAddress.events.NewTokenDeployed.returnValues.token;
     // console.log(tempAddress);

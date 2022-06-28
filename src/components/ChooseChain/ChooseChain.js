@@ -45,7 +45,7 @@ const ChooseChain = ({ setShowForm, setChainIdInitial }) => {
                 symbol: "MATIC",
                 decimals: 18,
               },
-              rpcUrls: ["https://polygon-rpc.com/"],
+              rpcUrls: [process.env.REACT_APP_MATIC_RPC_URL],
               blockExplorerUrls: ["https://polygonscan.com/"],
             },
           ],
@@ -66,7 +66,7 @@ const ChooseChain = ({ setShowForm, setChainIdInitial }) => {
                 symbol: "BNB",
                 decimals: 18,
               },
-              rpcUrls: ["https://data-seed-prebsc-1-s3.binance.org:8545"],
+              rpcUrls: [process.env.REACT_APP_BSC_RPC_URL],
               blockExplorerUrls: ["https://bscscan.com/"],
             },
           ],
@@ -87,7 +87,7 @@ const ChooseChain = ({ setShowForm, setChainIdInitial }) => {
                 symbol: "AVAX",
                 decimals: 18,
               },
-              rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
+              rpcUrls: [process.env.REACT_APP_AVALANCHE_RPC_URL],
               blockExplorerUrls: ["https://snowtrace.io/"],
             },
           ],
@@ -95,7 +95,7 @@ const ChooseChain = ({ setShowForm, setChainIdInitial }) => {
       } catch (error) {
         console.error(error);
       }
-    } 
+    }
   };
 
   return (

@@ -12,7 +12,7 @@ const parseId = (hex) => {
 };
 
 async function fetchTokenTypes(setTokensData, chainId) {
-  console.log(getGraphFetch(chainId));
+  console.log("GRAPH_URL", getGraphFetch(chainId));
   let result = await queryTokenForAddressTypes(
     getGraphFetch(chainId)
   );

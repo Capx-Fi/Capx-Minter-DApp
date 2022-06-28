@@ -130,7 +130,7 @@ const FormContainer = ({ setShowForm, chainIdInitial, tokenTypeData }) => {
           account,
           CAPX_FACTORY,
           ERC20_ABI,
-          process.env.REACT_APP_CAPX_FACTORY_ADDRESS,
+          getFactoryAddress(chainId),
           userData.tokenName,
           userData.tokenSymbol,
           userData.tokenOwner,
@@ -158,6 +158,7 @@ const FormContainer = ({ setShowForm, chainIdInitial, tokenTypeData }) => {
           ],
           pinataHash?.IpfsHash
         );
+        console.log("FACTORY ADDRESS", getFactoryAddress(chainId));
         createNewToken(
           account,
           CAPX_FACTORY,
