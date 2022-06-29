@@ -1,4 +1,5 @@
 import Header from "../../components/Header/Header";
+import { ACALA_CHAIN_ID } from "../../constants/config";
 import Footer from "../../components/Footer/Footer";
 import "./MyTokens.scss";
 import { useWeb3React } from "@web3-react/core";
@@ -12,6 +13,7 @@ import Fade from "react-reveal/Fade";
 import { useHistory, useLocation } from "react-router-dom";
 import NoTokensMinted from "../../assets/No-Tokens-Minted.svg";
 import { getGraphFetch } from "../../constants/getChainConfig";
+import { fetchTokensForAddress } from "../../utils/acalaEVM/fetchTokensForAddress";
 
 const MyTokens = () => {
   const { active, account, chainId } = useWeb3React();
@@ -64,14 +66,21 @@ const MyTokens = () => {
   useEffect(() => {
     async function fetchData() {
       if (active) {
-        let result = await queryTokenForAddress(
-          account,
-          getGraphFetch(chainId),
-          ERC20_ABI,
-          tokensData,
-          setTokensData
-        );
-
+        let result = null;
+        if(chainId?.toString() === ACALA_CHAIN_ID.toString()) {
+          result = await fetchTokensForAddress(
+            account,
+            getGraphFetch(chainId),
+            ERC20_ABI,
+          );
+        } else {
+          result = await queryTokenForAddress(
+            account,
+            getGraphFetch(chainId),
+            ERC20_ABI,
+          );
+        }
+        console.log("MyTokens",result);
         let ipfsStatus = [];
         result?.forEach(() => {
           ipfsStatus.push({ fetched: false });

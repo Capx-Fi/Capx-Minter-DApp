@@ -1,13 +1,14 @@
 import BigNumber from "bignumber.js";
 import Web3 from "web3";
 import { useHistory } from "react-router-dom";
+import {ACALA_CHAIN_ID} from "../constants/config";
+import { fetchGasPrice } from "./acalaEVM/fetchGasPrice";
 
 BigNumber.config({
   ROUNDING_MODE: 3,
   DECIMAL_PLACES: 18,
   EXPONENTIAL_AT: [-18, 36],
 });
-
 export const createNewToken = async (
   account,
   FACTORY_ABI,
@@ -22,18 +23,21 @@ export const createNewToken = async (
   typeOfToken,
   parameters, // list of 6 parameters
   documentHash,
+  chainId,
   setMintModalStatus,
   setMintModalOpen,
   setCreatedAddress
 ) => {
   // Start Loading
   const web3 = new Web3(Web3.givenProvider);
-
   const factory = new web3.eth.Contract(FACTORY_ABI, FACTORY_ADDRESS);
-
   let deployedAddress = null;
   if (typeOfToken > 12) {
     try {
+      let gasPriceResponse = null;
+      if(chainId?.toString() === ACALA_CHAIN_ID.toString()){
+        gasPriceResponse = await fetchGasPrice();
+      }
       deployedAddress = await factory.methods
         .createReflectiveToken(
           tokenName,
@@ -45,7 +49,15 @@ export const createNewToken = async (
           typeOfToken,
           documentHash
         )
-        .send({ from: account });
+        .send(
+          chainId?.toString() === ACALA_CHAIN_ID.toString() 
+          ? {
+            from: account,
+            gasPrice: gasPriceResponse.gasPrice,
+            gas: gasPriceResponse.gasLimit,
+            }
+          : { from: account }
+        );
     } catch (error) {
       console.error("Create Reflective token error: ", error);
       setMintModalStatus("failure");

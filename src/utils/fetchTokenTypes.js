@@ -1,5 +1,7 @@
+import {ACALA_CHAIN_ID} from "../constants/config";
 import { getGraphFetch } from "../constants/getChainConfig";
 import { queryTokenForAddressTypes } from "./queryTypesOfToken";
+import { queryTokensForAcala } from "./acalaEVM/fetchTypesOfToken";
 
 const parseId = (hex) => {
   const decimal =
@@ -13,9 +15,16 @@ const parseId = (hex) => {
 
 async function fetchTokenTypes(setTokensData, chainId) {
   console.log("GRAPH_URL", getGraphFetch(chainId));
-  let result = await queryTokenForAddressTypes(
-    getGraphFetch(chainId)
-  );
+  let result =null;
+  if(chainId?.toString() === ACALA_CHAIN_ID.toString()){
+    result = await queryTokensForAcala(
+      getGraphFetch(chainId)
+    );
+  } else {
+    result = await queryTokenForAddressTypes(
+      getGraphFetch(chainId)
+    );
+  }
   const formattedTokenTypes = result.map((tokenType) => {
     return {
       id: parseId(tokenType.id),

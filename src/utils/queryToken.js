@@ -12,8 +12,6 @@ export const queryTokenForAddress = async (
     accountAddress,
     factoryURL,
     ERC20_ABI,
-    tokensData,
-    setTokensData
 ) => {
     // Start Loading
     const client = new ApolloClient({

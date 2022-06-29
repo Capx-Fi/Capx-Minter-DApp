@@ -186,6 +186,7 @@ const FormContainer = ({ setShowForm, chainIdInitial, tokenTypeData }) => {
               : "0x0000000000000000000000000000000000000000",
           ],
           pinataHash?.IpfsHash,
+          chainId,
           setMintModalStatus,
           setMintModalOpen,
           setCreatedAddress

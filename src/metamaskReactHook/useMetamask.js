@@ -31,7 +31,6 @@ const useMetamask = () => {
 	let provider = null;
 
 	provider = window.ethereum;
-	console.log(provider);
 	useEffect(() => {
 		return () => {
 			_isMounted.current = false;
@@ -40,7 +39,7 @@ const useMetamask = () => {
 
 	const connect = async (Web3Interface, settings = {}) => {
 		if (!provider) throw Error("Metamask is not available.");
-		console.log(_isMounted);
+		// console.log(_isMounted);
 		if (!Web3Interface)
 			throw Error(
 				"Web3 Provider is required. You can use either ethers.js or web3.js."
@@ -55,7 +54,7 @@ const useMetamask = () => {
 		);
 
 		const account = await getAccounts({ requestPermission: true });
-		console.log(account);
+		// console.log(account);
 		const chainDet = await getChain();
 
 		dispatch({
@@ -81,7 +80,7 @@ const useMetamask = () => {
 		{ requestPermission } = { requestPermission: false }
 	) => {
 		if (!provider) {
-			console.warn("Metamask is not available.");
+			// console.warn("Metamask is not available.");
 			return;
 		}
 		try {
@@ -97,7 +96,7 @@ const useMetamask = () => {
 
 	const getChain = async () => {
 		if (!provider) {
-			console.warn("Metamask is not available.");
+			// console.warn("Metamask is not available.");
 			return;
 		}
 		try {

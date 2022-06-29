@@ -1,16 +1,29 @@
 import "./Header.scss";
 import CapxLogo from "../../assets/capx-mint-logo-dark.svg";
 import LogoutIcon from "../../assets/logout.svg";
-import { useSnackbar } from "notistack";
 import Web3 from "web3";
 import { useMetamask } from "../../metamaskReactHook/index";
 import { useWeb3React, UnsupportedChainIdError } from "@web3-react/core";
 import { injected } from "../../utils/connector";
 import DropDown from "../DropDown/DropDown";
-import { Tooltip, withStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { CHAIN_NAMES } from "../../constants/config";
+import {
+	MATIC_RPC,
+	BSC_RPC,
+	AVALANCHE_RPC,
+	ACALA_RPC,
+	ACALA_CHAIN_ID,
+	AVALANCHE_CHAIN_ID,
+	BSC_CHAIN_ID,
+	ETHEREUM_CHAIN_ID,
+	MATIC_CHAIN_ID,
+	EXPLORER_AVALANCHE,
+	EXPLORER_BSC,
+	EXPLORER_MATIC,
+	EXPLORER_ACALA,
+	IS_TESTNET
+} from "../../constants/config";
 
 import { getSortBy } from "../../constants/getChainConfig";
 
@@ -18,8 +31,6 @@ function Header({hiddenNav, landing, createButton}) {
 	const { active, account, library, connector, activate, deactivate, chainId } =
 		useWeb3React();
 	const { metaState, getChain } = useMetamask();
-	const desiredChainId = "4";
-	const currentChainId = metaState.chain.id?.toString();
 	const [dashboardModal, setDashboardModal] = useState(false);
 	const [sortBy, setSortBy] = useState("Ethereum");
 	const handleCloseSelectDashboard = () => {
@@ -42,13 +53,14 @@ function Header({hiddenNav, landing, createButton}) {
 				}
 				);
 			}
-
 			if (sortBy === "Matic") {
 				setCurrentTicker("MATIC");
 			} else if (sortBy === "Avalanche") {
 				setCurrentTicker("AVAX");
 			} else if (sortBy === "BSC") {
 				setCurrentTicker("BNB");
+			} else if (sortBy === "Acala") {
+				setCurrentTicker("ACA");
 			} else {
 				setCurrentTicker("ETH");
 			}
@@ -74,7 +86,7 @@ function Header({hiddenNav, landing, createButton}) {
 			try {
 				await web3.givenProvider.request({
 					method: "wallet_switchEthereumChain",
-					params: [{ chainId: "0x1" }],
+					params: [{ chainId: ETHEREUM_CHAIN_ID.toString(16) }],
 				});
 			} catch (error) {}
 		} else if (chainName === "Matic") {
@@ -83,15 +95,15 @@ function Header({hiddenNav, landing, createButton}) {
 					method: "wallet_addEthereumChain",
 					params: [
 						{
-							chainId: "0x89",
-							chainName: "Polygon Matic",
+							chainId: MATIC_CHAIN_ID.toString(16),
+							chainName: "Polygon".concat(IS_TESTNET ? " Testnet" : ""),
 							nativeCurrency: {
 								name: "MATIC",
 								symbol: "MATIC",
 								decimals: 18,
 							},
-							rpcUrls: ["https://polygon-rpc.com/"],
-							blockExplorerUrls: ["https://polygonscan.com/"],
+							rpcUrls: [MATIC_RPC.toString()],
+							blockExplorerUrls: [EXPLORER_MATIC.replace("token/","")],
 						},
 					],
 				});
@@ -104,15 +116,15 @@ function Header({hiddenNav, landing, createButton}) {
 					method: "wallet_addEthereumChain",
 					params: [
 						{
-							chainId: "0x38",
-							chainName: "Binance Smart Chain",
+							chainId: BSC_CHAIN_ID.toString(16),
+							chainName: "BSC".concat(IS_TESTNET ? " Testnet" : ""),
 							nativeCurrency: {
 								name: "BNB",
 								symbol: "BNB",
 								decimals: 18,
 							},
-							rpcUrls: ["https://bsc-dataseed.binance.org/"],
-							blockExplorerUrls: ["https://bscscan.com/"],
+							rpcUrls: [BSC_RPC.toString()],
+							blockExplorerUrls: [EXPLORER_BSC.replace("token/","")],
 						},
 					],
 				});
@@ -125,78 +137,36 @@ function Header({hiddenNav, landing, createButton}) {
 					method: "wallet_addEthereumChain",
 					params: [
 						{
-							chainId: "0xA86A",
-							chainName: "Avalanche Fuji",
+							chainId: AVALANCHE_CHAIN_ID.toString(16),
+							chainName: "Avalanche".concat(IS_TESTNET ? " Testnet" : ""),
 							nativeCurrency: {
 								name: "AVAX",
 								symbol: "AVAX",
 								decimals: 18,
 							},
-							rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
-							blockExplorerUrls: ["https://snowtrace.io/"],
+							rpcUrls: [AVALANCHE_RPC.toString()],
+							blockExplorerUrls: [EXPLORER_AVALANCHE.replace("token/","")],
 						},
 					],
 				});
 			} catch (error) {
 				console.error(error);
 			}
-		} else if (chainName === "Fantom") {
+		} else if (chainName === "Acala") {
 			try {
-				await web3.givenProvider.request({
+				await web3.currentProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
-							chainId: "0xFA",
-							chainName: "Fantom",
+							chainId: ACALA_CHAIN_ID.toString(16),
+							chainName: "Acala".concat(IS_TESTNET ? " Testnet" : ""),
 							nativeCurrency: {
-								name: "FTM",
-								symbol: "FTM",
+								name: "ACA",
+								symbol: "ACA",
 								decimals: 18,
 							},
-							rpcUrls: ["https://rpc.ftm.tools/"],
-							blockExplorerUrls: ["https://ftmscan.com/"],
-						},
-					],
-				});
-			} catch (error) {
-				console.error(error);
-			}
-		} else if (chainName === "Moonbeam") {
-			try {
-				await web3.givenProvider.request({
-					method: "wallet_addEthereumChain",
-					params: [
-						{
-							chainId: "0x504",
-							chainName: "Moonbeam",
-							nativeCurrency: {
-								name: "GLMR",
-								symbol: "GLMR",
-								decimals: 18,
-							},
-							rpcUrls: ["https://rpc.api.moonbeam.network"],
-							blockExplorerUrls: ["https://moonscan.io/"],
-						},
-					],
-				});
-			} catch (error) {
-				console.error(error);
-			}
-		} else if (chainName === "Arbitrum") {
-			try {
-				await web3.givenProvider.request({
-					method: "wallet_addEthereumChain",
-					params: [
-						{
-							chainId: "0xA4B1",
-							chainName: "Arbitrum",
-							nativeCurrency: {
-								name: "ETH",
-								symbol: "ETH",
-								decimals: 18,
-							},
-							rpcUrls: ["https://rpc.ankr.com/arbitrum"],
-							blockExplorerUrls: ["https://testnet.arbiscan.io/"],
+							rpcUrls: [ACALA_RPC.toString()],
+							blockExplorerUrls: [EXPLORER_ACALA.replace("token/","")],
 						},
 					],
 				});
