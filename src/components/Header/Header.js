@@ -223,9 +223,9 @@ function Header({hiddenNav, landing, createButton}) {
           </div>
         </a>
         {active && !hiddenNav && (
-          <div className="flex flex-row gap-x-2 ml-44">
+          <div className="flex flex-row gap-x-4 desktop:gap-x-8 twok:gap-x-2 ml-44">
             <div className="">
-              <div className="flex flex-row w-32 justify-center items-center rounded-lg px-2.5 py-2.5 text-paragraph-1 font-semibold border-dark-200">
+              <div className="flex flex-row twok:w-32 justify-center items-center rounded-lg px-1 twok:px-2.5 py-1 twok:py-2.5 text-lg desktop:text-paragraph-2 twok:text-paragraph-1 font-semibold border-dark-200">
                 <a href="https://liquid.capx.fi" target="_blank">
                   Vest{" "}
                 </a>
@@ -234,7 +234,7 @@ function Header({hiddenNav, landing, createButton}) {
             {createButton ? (
               <div className="">
                 <Link to="/">
-                  <div className="flex flex-row w-40 justify-center items-center rounded-lg px-2.5 py-2.5 text-paragraph-1 font-semibold border-dark-200">
+                  <div className="flex flex-row twok:w-40 justify-center items-center rounded-lg px-1 twok:px-2.5 py-1 twok:py-2.5 text-lg desktop:text-paragraph-2 twok:text-paragraph-1 font-semibold border-dark-200">
                     Mint Tokens
                   </div>
                 </Link>
@@ -242,7 +242,7 @@ function Header({hiddenNav, landing, createButton}) {
             ) : (
               <div className="">
                 <Link to="/tokens">
-                  <div className="flex flex-row w-40 justify-center items-center rounded-lg px-2.5 py-2.5 text-paragraph-1 font-semibold border-dark-200">
+                  <div className="flex flex-row twok:w-40 justify-center items-center rounded-lg px-1 twok:px-2.5 py-1 twok:py-2.5 text-lg desktop:text-paragraph-2 twok:text-paragraph-1 font-semibold border-dark-200">
                     My Tokens
                   </div>
                 </Link>
@@ -260,8 +260,8 @@ function Header({hiddenNav, landing, createButton}) {
                 <div className="header_navbar_logoutbutton border-darkerGrayBorder border overflow-hidden">
                   {sortBy !== "Unknown" ? (
                     userBalance !== -1 ? (
-                      <div className="flex items-center w-32 justify-center balance-div py-1.5 rounded-l-lg">
-                        <div className="text-caption-2 font-semibold leading-caption-2 text-center">
+                      <div className="flex items-center screen:w-24 desktop:w-28 twok:w-32 justify-center balance-div py-1.5 rounded-l-lg">
+                        <div className="text-caption-3 desktop:text-caption-2 font-semibold leading-caption-2 text-center">
                           <span className="">
                             {web3.utils
                               .fromWei(userBalance.toString())
@@ -271,8 +271,8 @@ function Header({hiddenNav, landing, createButton}) {
                         </div>
                       </div>
                     ) : (
-                      <div className="flex items-center w-32 justify-center balance-div py-1.5 rounded-l-lg">
-                        <div className="text-caption-2 text-gray-300 bg-gray-300 animate-pulse font-semibold leading-caption-2 text-center">
+                      <div className="flex items-center screen:w-24 desktop:w-28 twok:w-32 justify-center balance-div py-1.5 rounded-l-lg">
+                        <div className="text-caption-3 desktop:text-caption-2 text-gray-300 bg-gray-300 animate-pulse font-semibold leading-caption-2 text-center">
                           <span className="">0.4242</span>
                           ETH
                         </div>

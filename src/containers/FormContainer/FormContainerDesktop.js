@@ -250,7 +250,7 @@ const FormContainer = ({ setShowForm, chainIdInitial, tokenTypeData }) => {
       />
       <Header hiddenNav={true} />
       <div
-        className={`py-32 maincontainer text-black flex gap-x-16 justify-between m-auto mt-auto px-24`}
+        className={`py-32 maincontainer text-black flex gap-x-16 justify-between m-auto mt-auto screen:px-16 desktop:px-20 twok:px-24`}
       >
         <div
           className={`upper-container border border-lightGrayBorder h-fit-content rounded-3xl px-14 py-10 w-28v bg-opacity-30 relative`}

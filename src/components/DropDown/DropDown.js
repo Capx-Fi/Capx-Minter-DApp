@@ -34,9 +34,9 @@ function DropDown({ sortBy, chainChange, setShowMenu }) {
         <img
           src={image}
           alt="Chain Logo"
-          className="inline-block ml-2 w-4 h-6 mr-4"
+          className="inline-block ml-2 w-2.5 desktop:w-3.5 twok:w-4 h-6 screen:mr-2.5 twok:mr-4"
         ></img>
-        <span className={`${sortBy === "Unknown" ? "font-bold" : ""}`}>
+        <span className={`${sortBy === "Unknown" ? "font-bold" : ""} mr-1`}>
           {sortBy}
         </span>
       </div>

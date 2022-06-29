@@ -4,7 +4,7 @@
 	background-color: #e5e4e4;
 	}
 
-	@apply desktop:h-20 screen:h-16 h-16 top-0 left-0 fixed flex w-full px-8 tablet:px-12 laptop:px-20 desktop:px-24 justify-between items-center bg-white;
+	@apply desktop:h-20 screen:h-16 h-16 top-0 left-0 fixed flex w-full px-8 tablet:px-12 screen:px-16 desktop:px-20 twok:px-24 justify-between items-center bg-white;
 	&_logo {
 		@apply h-7 screen:h-7 desktop:h-8 twok:h-9;
 	}
