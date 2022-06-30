@@ -51,11 +51,13 @@ export default function BasicInformation({
   );
 
   const shortenedNumber = (number) => {
-    if(isNaN(number)) return number;
+    if (isNaN(number)) return number;
     if (number > 1000) {
-      return number - number%(Math.pow(10, Math.floor(Math.log10(number))-1));
+      return (
+        number - (number % Math.pow(10, Math.floor(Math.log10(number)) - 1))
+      );
     }
-  }
+  };
 
   const { account } = useWeb3React();
   const [infocus, setInfocus] = useState({});
@@ -89,7 +91,6 @@ export default function BasicInformation({
       valid = false;
     }
     if (!(userData?.tokenSymbol && userData?.tokenSymbol?.length > 0)) {
-
       valid = false;
     }
     if (!(userData?.description && userData?.description?.length > 0)) {
@@ -240,13 +241,13 @@ export default function BasicInformation({
 
   return (
     <div className="flex flex-col">
-      <div className="font-bold text-heading-2 leading-heading-1 mb-3 ml-2">
+      <div className="font-bold text-2xl leading-heading-2 twok:text-heading-2 twok:leading-heading-1 mb-3 ml-2">
         Basic Token Information
       </div>
 
       <div className="flex">
         <div className="mx-2 w-full flex-1 mt-2 text-black">
-          <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+          <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
             Token Name
           </div>
           <input
@@ -256,7 +257,7 @@ export default function BasicInformation({
             onFocus={handleFocus}
             onBlur={handleBlur}
             placeholder="eg. Capx Coin"
-            className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
+            className={`w-full appearance-none text-sm py-1.5 px-2 my-1 desktop:py-2 desktop:px-3 desktop:my-2 border-2 ${
               errors?.tokenName?.length > 0
                 ? "border-red-300"
                 : infocus?.tokenName
@@ -269,7 +270,7 @@ export default function BasicInformation({
               errors?.tokenName?.length > 0
                 ? "text-red-400 font-semibold"
                 : "text-gray-800"
-            } text-s ml-1`}
+            } text-xs desktop:text-sm twok:text-base ml-1`}
           >
             {errors?.tokenName?.length > 0
               ? errors.tokenName
@@ -278,7 +279,7 @@ export default function BasicInformation({
         </div>
 
         <div className="mx-2 w-full flex-1 mt-2">
-          <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+          <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
             Token Symbol
           </div>
           <input
@@ -288,7 +289,7 @@ export default function BasicInformation({
             onFocus={handleFocus}
             onBlur={handleBlur}
             placeholder="eg. CPX"
-            className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
+            className={`w-full appearance-none text-sm py-1.5 px-2 my-1.5 desktop:py-2 desktop:px-3 desktop:my-2 border-2 ${
               errors?.tokenSymbol?.length > 0
                 ? "border-red-300"
                 : infocus?.tokenSymbol
@@ -301,7 +302,7 @@ export default function BasicInformation({
               errors?.tokenSymbol?.length > 0
                 ? "text-red-400 font-semibold"
                 : "text-gray-800"
-            } text-s ml-1`}
+            } text-xs desktop:text-sm twok:text-base ml-1`}
           >
             {errors?.tokenSymbol?.length > 0
               ? errors.tokenSymbol
@@ -312,7 +313,7 @@ export default function BasicInformation({
 
       <div className="flex">
         <div className="mx-2 w-full flex-1 mt-2">
-          <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+          <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
             Token Decimal
           </div>
           <input
@@ -322,7 +323,7 @@ export default function BasicInformation({
             onFocus={handleFocus}
             onBlur={handleBlur}
             placeholder="8-18"
-            className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
+            className={`w-full appearance-none text-sm py-1.5 px-2 my-1.5 desktop:py-2 desktop:px-3 desktop:my-2 border-2 ${
               errors?.tokenDecimal?.length > 0
                 ? "border-red-300"
                 : infocus?.tokenDecimal
@@ -335,7 +336,7 @@ export default function BasicInformation({
               errors?.tokenDecimal?.length > 0
                 ? "text-red-400 font-semibold"
                 : "text-gray-800"
-            } text-s ml-1`}
+            } text-xs desktop:text-sm twok:text-base ml-1`}
           >
             {errors?.tokenDecimal?.length > 0
               ? errors.tokenDecimal
@@ -343,7 +344,7 @@ export default function BasicInformation({
           </span>
         </div>
         <div className="mx-2 w-full flex-1 mt-2">
-          <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+          <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
             Token Supply
           </div>
           <input
@@ -353,7 +354,7 @@ export default function BasicInformation({
             onFocus={handleFocus}
             onBlur={handleBlur}
             placeholder="Initial token supply"
-            className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
+            className={`w-full appearance-none text-sm py-1.5 px-2 my-1.5 desktop:py-2 desktop:px-3 desktop:my-2 border-2 ${
               errors?.tokenSupply?.length > 0
                 ? "border-red-300"
                 : infocus?.tokenSupply
@@ -366,18 +367,26 @@ export default function BasicInformation({
               errors?.tokenSupply?.length > 0
                 ? "text-red-400 font-semibold"
                 : "text-gray-800"
-              } text-s ml-1`}
-            dangerouslySetInnerHTML={{__html : errors?.tokenSupply?.length > 0
-              ? errors.tokenSupply
-              : `${isNaN(
-                  parseFloat(userData?.tokenSupply)
-              ) ? "Choose initial supply for your token" : "&asymp; " + convertToInternationalCurrencySystem(userData?.tokenSupply)}`}}
+            } text-xs desktop:text-sm twok:text-base ml-1`}
+            dangerouslySetInnerHTML={{
+              __html:
+                errors?.tokenSupply?.length > 0
+                  ? errors.tokenSupply
+                  : `${
+                      isNaN(parseFloat(userData?.tokenSupply))
+                        ? "Choose initial supply for your token"
+                        : "&asymp; " +
+                          convertToInternationalCurrencySystem(
+                            userData?.tokenSupply
+                          )
+                    }`,
+            }}
           />
         </div>
       </div>
 
       <div className="mx-2 w-full flex-1 mt-2">
-        <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+        <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
           Token Owner
         </div>
         <input
@@ -387,7 +396,7 @@ export default function BasicInformation({
           onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder="0xf321..."
-          className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
+          className={`w-full appearance-none text-sm py-1.5 px-2 my-1.5 desktop:py-2 desktop:px-3 desktop:my-2 border-2 ${
             errors?.tokenOwner?.length > 0
               ? "border-red-300"
               : infocus?.tokenOwner
@@ -400,7 +409,7 @@ export default function BasicInformation({
             errors?.tokenOwner?.length > 0
               ? "text-red-400 font-semibold"
               : "text-gray-800"
-          } text-s ml-1`}
+          } text-xs desktop:text-sm twok:text-base ml-1`}
         >
           {errors?.tokenOwner?.length > 0
             ? errors.tokenOwner
@@ -410,19 +419,19 @@ export default function BasicInformation({
 
       <div className="flex">
         <div className="mx-2 w-full flex-1 mt-2">
-          <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+          <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
             Token Image
           </div>
           <div className="my-2 flex flex-row rounded-lg items-center gap-x-6 mt-4">
             {files?.length > 0 ? (
               <img
-                className="w-16 h-16 rounded-lg"
+                className="w-12 h-12 desktop:w-16 desktop:h-16 rounded-lg"
                 src={URL.createObjectURL(files[0])}
                 alt="snapshot view"
               />
             ) : (
               <img
-                className="w-16 h-16 rounded-lg"
+                className="w-12 h-12 desktop:w-16 desktop:h-16 rounded-lg"
                 src={UnknownLogo}
                 alt="snapshot view"
               />
@@ -433,18 +442,20 @@ export default function BasicInformation({
                 <div
                   {...getRootProps({
                     className:
-                      "border-2 border-grey py-4 px-5 dropzone rounded-lg",
+                      "border-2 border-grey py-3 px-5 desktop:py-4 desktop:px-5 dropzone rounded-lg",
                   })}
                 >
                   <input {...getInputProps()} />
-                  <p>Drop the file here, or click to select files</p>
+                  <p className="text-caption-3">
+                    Drop the file here, or click to select files
+                  </p>
                 </div>
               </section>
             </div>
           </div>
         </div>
         <div className="mx-2 w-full flex-1 mt-2">
-          <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+          <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
             Description
           </div>
           <textarea
@@ -455,7 +466,7 @@ export default function BasicInformation({
             onFocus={handleFocus}
             onBlur={handleBlur}
             placeholder="eg. Token for internal use"
-            className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
+            className={`w-full appearance-none text-sm py-1.5 px-2 my-1.5 desktop:py-2 desktop:px-3 desktop:my-2 border-2 ${
               errors?.description?.length > 0
                 ? "border-red-300"
                 : infocus?.description
@@ -468,7 +479,7 @@ export default function BasicInformation({
               errors?.description?.length > 0
                 ? "text-red-400 font-semibold"
                 : "text-gray-800"
-            } text-s ml-1`}
+            } text-xs desktop:text-sm twok:text-base ml-1`}
           >
             {errors?.description?.length > 0
               ? errors.description
@@ -477,7 +488,7 @@ export default function BasicInformation({
         </div>
       </div>
       <div className="w-full mx-2 my-2 optional-toggle flex gap-x-4 mt-4">
-        <div className="inline-block text-caption-1 tracking-wider font-semibold leading-2 flex items-center">
+        <div className="inline-block text-caption-2 desktop:text-caption-1 twok:tracking-wider font-semibold leading-2 flex items-center">
           <div>Advanced Options</div>
         </div>
         <div className="flex items-center">
@@ -497,7 +508,7 @@ export default function BasicInformation({
         <>
           <div className="flex">
             <div className="mx-2 w-full flex-1 mt-2">
-              <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+              <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
                 Website (Optional)
               </div>
               <input
@@ -507,7 +518,7 @@ export default function BasicInformation({
                 onFocus={handleFocus}
                 onBlur={handleBlur}
                 placeholder="eg. www.capx.fi"
-                className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
+                className={`w-full appearance-none text-sm py-1.5 px-2 my-1.5 desktop:py-2 desktop:px-3 desktop:my-2 border-2 ${
                   errors?.website?.length > 0
                     ? "border-red-300"
                     : infocus?.website
@@ -520,7 +531,7 @@ export default function BasicInformation({
                   errors?.website?.length > 0
                     ? "text-red-400 font-semibold"
                     : "text-gray-800"
-                } text-s ml-1`}
+                } text-xs desktop:text-sm twok:text-base ml-1`}
               >
                 {errors?.website?.length > 0
                   ? errors.website
@@ -529,7 +540,7 @@ export default function BasicInformation({
             </div>
 
             <div className="mx-2 w-full flex-1 mt-2">
-              <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+              <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
                 Twitter (Optional)
               </div>
               <input
@@ -539,7 +550,7 @@ export default function BasicInformation({
                 onFocus={handleFocus}
                 onBlur={handleBlur}
                 placeholder="eg. www.twitter.com/abcd"
-                className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
+                className={`w-full appearance-none text-sm py-1.5 px-2 my-1.5 desktop:py-2 desktop:px-3 desktop:my-2 border-2 ${
                   errors?.twitter?.length > 0
                     ? "border-red-300"
                     : infocus?.twitter
@@ -552,7 +563,7 @@ export default function BasicInformation({
                   errors?.twitter?.length > 0
                     ? "text-red-400 font-semibold"
                     : "text-gray-800"
-                } text-s ml-1`}
+                } text-xs desktop:text-sm twok:text-base ml-1`}
               >
                 {errors?.twitter?.length > 0
                   ? errors.twitter
@@ -562,7 +573,7 @@ export default function BasicInformation({
           </div>
 
           <div className="mx-2 w-1/2 flex-1 mt-2">
-            <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+            <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
               Telegram (Optional)
             </div>
             <input
@@ -572,7 +583,7 @@ export default function BasicInformation({
               onFocus={handleFocus}
               onBlur={handleBlur}
               placeholder="eg. t.me/abcd"
-              className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
+              className={`w-full appearance-none text-sm py-1.5 px-2 my-1.5 desktop:py-2 desktop:px-3 desktop:my-2 border-2 ${
                 errors?.telegram?.length > 0
                   ? "border-red-300"
                   : infocus?.telegram
@@ -585,7 +596,7 @@ export default function BasicInformation({
                 errors?.telegram?.length > 0
                   ? "text-red-400 font-semibold"
                   : "text-gray-800"
-              } text-s ml-1`}
+              } text-xs desktop:text-sm twok:text-base ml-1`}
             >
               {errors?.telegram?.length > 0
                 ? errors.telegram

@@ -118,14 +118,14 @@ export default function TokenType({
 
   return (
     <div className="flex flex-col text-black">
-      <div className="font-bold text-heading-2 leading-10 ml-2">
+      <div className="font-bold text-2xl twok:text-heading-2 leading-8 desktop:leading-10 ml-2">
         <div
           className={`flex flex-col titleContainer ${
             userData?.tokenType ? "hidden" : "block"
           }`}
         >
           <span className="text-black">Select Features for your Token</span>
-          <span className="text-greylabel text-caption-1">
+          <span className="text-greylabel text-caption-2 desktop:text-caption-1">
             Choose the additional functionality from the 15+ templates below
           </span>
         </div>
@@ -134,7 +134,7 @@ export default function TokenType({
           className={`flex mt-6 ${userData?.tokenType ? "hidden" : "block"}`}
         >
           <div className="w-1/4 border-gray-300 border-r-2">
-            <div className="text-subheading mb-6">Features</div>
+            <div className="text-2xl twok:text-subheading mb-6">Features</div>
 
             <MultiselectCheckbox
               data={checkboxOptions}
@@ -169,35 +169,43 @@ export default function TokenType({
             />
           </div>
           <div className="w-3/4 pl-10">
-            <span className="text-subheading">Available Token Types</span>
+            <span className="text-2xl twok:text-subheading">
+              Available Token Types
+            </span>
             <div className="flex flex-wrap mt-6">
               {relevantTokenTypes.length > 0 ? (
                 relevantTokenTypes.map((item, index) => (
                   <div className="w-1/2 py-2 pr-2" key={index}>
                     <div
-                      className="rounded-lg flex justify-between border-lightGrayBorder border cursor-pointer px-4 mr-2 py-2"
+                      className="rounded-lg flex justify-between border-lightGrayBorder border cursor-pointer px-3 py-1 desktop:py-1.5 twok:px-4 mr-2 twok:py-2"
                       style={{ background: "#F0F1F0" }}
                       onClick={() => handleSelect(item.id)}
                     >
-                      <div className="text-caption-1 font-semibold w-3/5 leading-caption-1 h-14 flex items-center">
+                      <div className="text-caption-3 leading-caption-3 desktop:text-caption-2 desktop:ledaing-caption-2 twok:text-caption-1 font-semibold w-4/5 desktop:w-3/5 twok:leading-caption-1 h-12 desktop:h-12 twok:h-14 flex items-center">
                         <div className="block">{item.name}</div>
                       </div>
                       <div className="flex items-center cursor-pointer">
                         <img
                           alt="next_icon"
                           src={NextIcon}
-                          className="w-5 block"
+                          className="w-4 twok:w-5 block"
                         />
                       </div>
                     </div>
                   </div>
                 ))
               ) : (
-                <div className="flex-col text-center items-center justify-center mt-6 w-full text-subheading font-semibold text-gray-500">
-                    <div className="flex justify-center mb-6"><img alt="no tokens" src={NoTokensFound} className="block w-44"/></div>
-                    <div>No Tokens with these set of features</div>
+                <div className="flex-col text-center items-center justify-center mt-6 w-full text-paragraph-2 desktop:text-subheading font-semibold text-gray-500">
+                  <div className="flex justify-center mb-6">
+                    <img
+                      alt="no tokens"
+                      src={NoTokensFound}
+                      className="block w-36 desktop:w-44"
+                    />
+                  </div>
+                  <div>No Tokens with these set of features</div>
                   <div
-                    className="text-paragraph-1 cursor-pointer text-black"
+                    className="text-paragraph-2 desktop:text-paragraph-1 cursor-pointer text-black"
                     onClick={() => {
                       const newData = [...checkboxOptions];
                       newData.forEach((item) => {
@@ -221,15 +229,15 @@ export default function TokenType({
         >
           <div className="flex justify-between text-caption-1 w-full">
             {
-              <div className="titleContainer flex flex-col text-heading-2 leading-10">
+              <div className="titleContainer flex flex-col text-2xl twok:text-heading-2 leading-8 desktop:leading-10">
                 <span className="text-black">Feature List</span>
-                <span className="text-greylabel text-caption-1">
+                <span className="text-greylabel text-caption-2 desktop:text-caption-1">
                   Features correspoing to your selected token type
                 </span>
               </div>
             }
             <div
-              className="flex block text-caption-1 justify-center items-center cursor-pointer"
+              className="flex block text-caption-2 desktop:text-caption-1 justify-center items-center cursor-pointer"
               onClick={() => {
                 setUserData({ ...userData, tokenType: null });
               }}
@@ -237,18 +245,18 @@ export default function TokenType({
               <img
                 alt="back_icon"
                 src={BackIcon}
-                className="w-5 mx-2 inline-block"
+                className="w-4 desktop:w-5 mx-2 inline-block"
               />
               Back to all tokens
             </div>
           </div>
           <div
-            className="w-full font-semibold border-lightGrayBorder border mt-6 rounded-lg text-subheading leading-subheading px-4 py-4 "
+            className="w-full font-semibold border-lightGrayBorder border mt-6 rounded-lg text-paragraph-2 leading-paragraph-2 desktop:text-paragraph-1 desktop:leading-paragraph-1 twok:text-subheading twok:leading-subheading px-4 py-3 desktop:py-4 "
             style={{ background: "#F0F1F0" }}
           >
             {currentToken?.name}
           </div>
-          <div className="w-full flex flex-col border-2 border-grey mt-6 rounded-lg text-caption-2 leading-caption-2 font-medium px-6 py-6 ">
+          <div className="w-full flex flex-col border-2 border-grey mt-6 rounded-lg text-caption-3 leading-caption-2 desktop:text-caption-2 desktop:leading-caption-2 font-medium px-6 py-6 ">
             <div className="w-full">
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry's standard dummy text
@@ -268,7 +276,7 @@ export default function TokenType({
                           <Tooltip
                             arrow
                             title={
-                              <span className="text-caption-2 block p-1 font-medium">
+                              <span className="text-caption-3 twok:text-caption-2 block p-1 font-medium">
                                 {tooltipInfo[feature]}
                               </span>
                             }
@@ -276,20 +284,24 @@ export default function TokenType({
                             <img
                               src={InfoIcon}
                               alt="info"
-                              className="inline-block w-4 ml-3"
+                              className="inline-block w-2.5 desktop:w-3 twok:w-4 ml-2 twok:ml-3"
                             />
                           </Tooltip>
                         </div>
                         {currentToken?.features[feature] ? (
-                          <div className="pr-12 text-green-600">
-                            <img alt="tick" src={Tick} className="w-4 block" />
+                          <div className="pr-8 twok:pr-12">
+                            <img
+                              alt="tick"
+                              src={Tick}
+                              className="w-2.5 desktop:w-3.5 twok:w-4 w-4 block mt-1 twok:mt-0"
+                            />
                           </div>
                         ) : (
-                          <div className="pr-12">
+                          <div className="pr-8 twok:pr-12">
                             <img
                               alt="cross"
                               src={Cross}
-                              className="w-4 block"
+                              className="w-2.5 desktop:w-3.5 twok:w-4 w-4 block mt-1 twok:mt-0"
                             />
                           </div>
                         )}

@@ -67,9 +67,9 @@ const Stepper = ({ steps, currentStep }) => {
             : "flex items-center"
         }
       >
-        <div className="flex gap-x-12">
+        <div className="flex gap-x-6 twok:gap-x-12">
           <div
-            className={`rounded-full transition duration-500 ease-in-out border-4 border-capxGreen h-12 w-12 flex items-center justify-center py-3 ${
+            className={`rounded-full transition duration-500 ease-in-out border-4 border-capxGreen h-10 w-10 twok:h-12 twok:w-12 flex items-center justify-center py-3 ${
               step.selected
                 ? "bg-capxGreen text-black font-bold border border-capxGreen "
                 : ""
@@ -82,12 +82,12 @@ const Stepper = ({ steps, currentStep }) => {
             )}
           </div>
           <div
-            className={`flex flex-col justify-center text-black text-paragraph-1 leading-paragraph-1 tracking-tight font-medium ${
+            className={`flex flex-col justify-center text-black text-paragraph-2 leading-paragraph-2 twok:text-paragraph-1 twok:leading-paragraph-1 tracking-tight font-medium ${
               step.highlighted ? "font-bold" : ""
             }`}
           >
             <div>{step.title}</div>
-            <div className="text-caption-2 text-gray-700 leading-caption-2">
+            <div className="text-caption-3 leading-caption-3 twok:text-caption-2 text-gray-700 twok:leading-caption-2">
               {step.description}
             </div>
           </div>
@@ -99,7 +99,7 @@ const Stepper = ({ steps, currentStep }) => {
   return (
     <>
       <div className="p-4 tracking-tight flex-col justify-between items-center ">
-        <div className="font-bold text-subheading leading-subheading mb-6">
+        <div className="font-bold text-paragraph-1 leading-paragraph-1 twok:text-subheading twok:leading-subheading mb-6">
           Mint in Four Simple Steps
         </div>
         {stepsDisplay}

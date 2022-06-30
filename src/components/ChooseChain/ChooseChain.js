@@ -8,7 +8,10 @@ import EthLogo from "../../assets/ethereum-logo.svg";
 import MaticLogo from "../../assets/matic-logo.svg";
 import BSCLogo from "../../assets/bsc-logo.svg";
 import AvaLogo from "../../assets/avalanche-logo.svg";
+import AcalaLogo from "../../assets/acala.svg";
 import CheckMark from "../../assets/check-mark-green.svg";
+
+
 
 import Web3 from "web3";
 
@@ -18,7 +21,7 @@ const ChooseChain = ({ setShowForm, setChainIdInitial }) => {
   const provider = window.ethereum;
   const web3 = new Web3(provider);
   const [sortBy, setSortBy] = useState("Ethereum");
-  const { chainId } = useWeb3React();
+  const { chainId, account } = useWeb3React();
 
   useEffect(() => {
     setSortBy(chainId && getSortBy(chainId));
@@ -89,6 +92,27 @@ const ChooseChain = ({ setShowForm, setChainIdInitial }) => {
               },
               rpcUrls: [process.env.REACT_APP_AVALANCHE_RPC_URL],
               blockExplorerUrls: ["https://snowtrace.io/"],
+            },
+          ],
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    }else if(chainName === "Acala"){
+      try {
+        await web3.givenProvider.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: "0x253",
+              chainName: "Acala",
+              nativeCurrency: {
+                name: "ACA",
+                symbol: "ACA",
+                decimals: 18,
+              },
+              rpcUrls: [process.env.REACT_APP_ACALA_RPC_URL],
+              blockExplorerUrls: ["https://acala.io/"],
             },
           ],
         });
@@ -221,6 +245,41 @@ const ChooseChain = ({ setShowForm, setChainIdInitial }) => {
                 </div>
               )}
             </div>
+            <div
+              className={`${
+                sortBy === "Acala"
+                  ? " text-container border-2 border-capxGreen"
+                  : ""
+              } text-container  font-semibold text-lg desktop:text-xl twok:text-2xl px-4 twok:px-6 m-3 py-4 rounded-lg cursor-pointer w-2/5 h-14 desktop:h-16 twok:h-20 flex items-center justify-between`}
+              onClick={() => {
+                chainChange("Acala");
+              }}
+            >
+              <div>
+                <img
+                  src={AcalaLogo}
+                  alt="Acala Logo"
+                  className="inline-block ml-3 twok:ml-1.5 w-10 -ml-0.5 twok:w-12 mr-5 twok:mr-7"
+                ></img>
+                {"Acala"}
+              </div>
+              {sortBy === "Acala" && (
+                <div>
+                  <img
+                    src={CheckMark}
+                    alt="Checkmark"
+                    className="inline-block ml-3 twok:ml-4 w-5 twok:w-7 mr-5 twok:mr-7 self-end"
+                  ></img>
+                </div>
+              )}
+            </div>
+            <div
+              className={`text-container cursor-not-allowed text-center font-semibold text-lg desktop:text-xl twok:text-2xl px-4 twok:px-6 m-3 py-4 rounded-lg cursor-pointer w-2/5 h-14 desktop:h-16 twok:h-20 flex items-center justify-between`}
+            >
+              <div className="">
+                {"Coming Soon"}
+              </div>
+            </div>
           </div>
         </div>
         <div
@@ -233,7 +292,7 @@ const ChooseChain = ({ setShowForm, setChainIdInitial }) => {
           onClick={() => {
             if (sortBy !== "Unknown") {
               setShowForm(true);
-              setChainIdInitial(chainId);
+              setChainIdInitial({chainId: chainId, account: account});
             }
           }}
         >

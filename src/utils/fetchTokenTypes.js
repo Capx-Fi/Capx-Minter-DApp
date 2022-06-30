@@ -16,7 +16,8 @@ const parseId = (hex) => {
 async function fetchTokenTypes(setTokensData, chainId) {
   console.log("GRAPH_URL", getGraphFetch(chainId));
   let result =null;
-  if(chainId?.toString() === ACALA_CHAIN_ID.toString()){
+  try {
+    if(chainId?.toString() === ACALA_CHAIN_ID.toString()){
     result = await queryTokensForAcala(
       getGraphFetch(chainId)
     );
@@ -25,7 +26,11 @@ async function fetchTokenTypes(setTokensData, chainId) {
       getGraphFetch(chainId)
     );
   }
-  const formattedTokenTypes = result.map((tokenType) => {
+  } catch(e) {
+    console.log("error", e);
+  }
+  
+  if (result !== null && Array.isArray(result)) { const formattedTokenTypes = result.map((tokenType) => {
     return {
       id: parseId(tokenType.id),
       name: tokenType.name,
@@ -49,7 +54,10 @@ async function fetchTokenTypes(setTokensData, chainId) {
   formattedTokenTypes.sort((a, b) => {
     return a.id.localeCompare(b.id);
   });
-  setTokensData(formattedTokenTypes);
+    setTokensData(formattedTokenTypes);
+  } else {
+    setTokensData(0); //error state
+  }
 }
 
 export default fetchTokenTypes;

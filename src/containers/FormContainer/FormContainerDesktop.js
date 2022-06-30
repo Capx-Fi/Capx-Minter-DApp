@@ -36,7 +36,8 @@ const FormContainer = ({ setShowForm, chainIdInitial, tokenTypeData }) => {
   const [createdAddress, setCreatedAddress] = useState("");
 
   useEffect(() => {
-    if (chainIdInitial !== chainId) {
+    if (chainIdInitial.chainId !== chainId || chainIdInitial.account !== account) {
+      console.log("chainIdInitial", chainIdInitial);
       setShowForm(false);
       setUserData({});
     }
@@ -251,16 +252,16 @@ const FormContainer = ({ setShowForm, chainIdInitial, tokenTypeData }) => {
       />
       <Header hiddenNav={true} />
       <div
-        className={`py-32 maincontainer text-black flex gap-x-16 justify-between m-auto mt-auto screen:px-16 desktop:px-20 twok:px-24`}
+        className={`py-32 maincontainer text-black flex gap-x-10 twok:gap-x-16 justify-between m-auto mt-auto screen:px-16 desktop:px-20 twok:px-24`}
       >
         <div
-          className={`upper-container border border-lightGrayBorder h-fit-content rounded-3xl px-14 py-10 w-28v bg-opacity-30 relative`}
+          className={`upper-container border border-lightGrayBorder h-fit-content rounded-3xl px-6 py-6 twok:px-14 twok:py-10 w-30v twok:w-28v bg-opacity-30 relative`}
         >
           <Stepper steps={stepsd} currentStep={currentStep} />
         </div>
-        <div className="herocontainer px-12 py-4 w-60v rounded-3xl bg-opacity-30 relative border border-lightGrayBorder">
+        <div className="herocontainer px-6 py-5 twok:px-12 twok:py-4 w-62v twok:w-60v rounded-3xl bg-opacity-30 relative border border-lightGrayBorder">
           <div className="horizontal container">
-            <div className="p-10 pb-4 ">{displayStep(currentStep)}</div>
+            <div className="p-4 twok:p-10 pb-4 ">{displayStep(currentStep)}</div>
           </div>
           <StepControls
             handleClick={handleClick}

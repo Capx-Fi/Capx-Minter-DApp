@@ -215,12 +215,12 @@ export default function Configuration({
 
   return (
     <div className="flex flex-col text-black">
-      <div className="font-bold text-heading-2 leading-heading-1 mb-3 ml-2">
+      <div className="font-bold text-2xl leading-heading-2 twok:text-heading-2 twok:leading-heading-1 mb-3 ml-2">
         Advanced Token Configuration
       </div>
       {featuresToDisplay.substring(1, 2) === "1" ? (
         <div className="mx-2 w-full flex-1 mt-2">
-          <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+          <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
             Initial Supply
           </div>
           <input
@@ -230,7 +230,7 @@ export default function Configuration({
             onFocus={handleFocus}
             onBlur={handleBlur}
             placeholder=""
-            className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
+            className={`w-full appearance-none text-sm py-1.5 px-2 my-1.5 desktop:py-2 desktop:px-3 desktop:my-2 border-2 ${
               errors?.initialSupply?.length > 0
                 ? "border-red-300"
                 : infocus?.initialSupply
@@ -243,7 +243,7 @@ export default function Configuration({
               errors?.initialSupply?.length > 0
                 ? "text-red-400 font-semibold"
                 : "text-gray-800"
-            } text-s ml-1`}
+            } text-xs desktop:text-sm twok:text-base ml-1`}
             dangerouslySetInnerHTML={{
               __html:
                 errors?.initialSupply?.length > 0
@@ -263,7 +263,7 @@ export default function Configuration({
 
       {featuresToDisplay.substring(1, 2) === "1" ? (
         <div className="mx-2 w-full flex-1 mt-2">
-          <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+          <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
             Total Supply
           </div>
           <input
@@ -277,7 +277,7 @@ export default function Configuration({
               errors?.initialSupply?.length > 0
             }
             placeholder=""
-            className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${
+            className={`w-full appearance-none text-sm py-1.5 px-2 my-1.5 desktop:py-2 desktop:px-3 desktop:my-2 border-2 border-transparent ${
               errors?.totalSupply?.length > 0
                 ? "border-red-300"
                 : infocus?.totalSupply
@@ -290,7 +290,7 @@ export default function Configuration({
               errors?.totalSupply?.length > 0
                 ? "text-red-400 font-semibold"
                 : "text-gray-800"
-            } text-s ml-1`}
+            } text-xs desktop:text-sm twok:text-base ml-1`}
             dangerouslySetInnerHTML={{
               __html:
                 userData?.initialSupply?.length === 0 ||
@@ -313,7 +313,7 @@ export default function Configuration({
 
       {featuresToDisplay.substring(2, 3) === "1" ? (
         <div className="mx-2 w-full flex-1 mt-2">
-          <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+          <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
             Tax Fee Percentage
           </div>
           <input
@@ -323,7 +323,7 @@ export default function Configuration({
             onFocus={handleFocus}
             onBlur={handleBlur}
             placeholder=""
-            className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${
+            className={`w-full appearance-none text-sm py-1.5 px-2 my-1.5 desktop:py-2 desktop:px-3 desktop:my-2 border-2 border-transparent ${
               errors?.taxFeePercentage?.length > 0
                 ? "border-red-300"
                 : infocus?.taxFeePercentage
@@ -336,7 +336,7 @@ export default function Configuration({
               errors?.taxFeePercentage?.length > 0
                 ? "text-red-400 font-semibold"
                 : "text-gray-800"
-            } text-s ml-1`}
+            } text-xs desktop:text-sm twok:text-base ml-1`}
           >
             {errors?.taxFeePercentage?.length > 0
               ? errors.taxFeePercentage
@@ -347,7 +347,7 @@ export default function Configuration({
 
       {featuresToDisplay.substring(3, 4) === "1" ? (
         <div className="mx-2 w-full flex-1 mt-2">
-          <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+          <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
             Burn Fee Percentage
           </div>
           <input
@@ -357,7 +357,7 @@ export default function Configuration({
             onFocus={handleFocus}
             onBlur={handleBlur}
             placeholder=""
-            className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${
+            className={`w-full appearance-none text-sm py-1.5 px-2 my-1.5 desktop:py-2 desktop:px-3 desktop:my-2 border-2 border-transparent ${
               errors?.burnFeePercentage?.length > 0
                 ? "border-red-300"
                 : infocus?.burnFeePercentage
@@ -370,7 +370,7 @@ export default function Configuration({
               errors?.burnFeePercentage?.length > 0
                 ? "text-red-400 font-semibold"
                 : "text-gray-800"
-            } text-s ml-1`}
+            } text-xs desktop:text-sm twok:text-base ml-1`}
           >
             {errors?.burnFeePercentage?.length > 0
               ? errors.burnFeePercentage
@@ -381,7 +381,7 @@ export default function Configuration({
 
       {featuresToDisplay.substring(4, 5) === "1" ? (
         <div className="mx-2 w-full flex-1 mt-2">
-          <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+          <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
             Liquidity Fee Percentage
           </div>
           <input
@@ -391,7 +391,7 @@ export default function Configuration({
             onFocus={handleFocus}
             onBlur={handleBlur}
             placeholder=""
-            className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${
+            className={`w-full appearance-none text-sm py-1.5 px-2 my-1.5 desktop:py-2 desktop:px-3 desktop:my-2 border-2 border-transparent ${
               errors?.liquidityFeePercentage?.length > 0
                 ? "border-red-300"
                 : infocus?.liquidityFeePercentage
@@ -404,7 +404,7 @@ export default function Configuration({
               errors?.liquidityFeePercentage?.length > 0
                 ? "text-red-400 font-semibold"
                 : "text-gray-800"
-            } text-s ml-1`}
+            } text-xs desktop:text-sm twok:text-base ml-1`}
           >
             {errors?.liquidityFeePercentage?.length > 0
               ? errors.liquidityFeePercentage
@@ -415,7 +415,7 @@ export default function Configuration({
 
       {featuresToDisplay.substring(5, 6) === "1" ? (
         <div className="mx-2 w-full flex-1 mt-2">
-          <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+          <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
             Marketing Fee Percentage
           </div>
           <input
@@ -425,7 +425,7 @@ export default function Configuration({
             onFocus={handleFocus}
             onBlur={handleBlur}
             placeholder=""
-            className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${
+            className={`w-full appearance-none text-sm py-1.5 px-2 my-1.5 desktop:py-2 desktop:px-3 desktop:my-2 border-2 border-transparent ${
               errors?.marketingFeePercentage?.length > 0
                 ? "border-red-300"
                 : infocus?.marketingFeePercentage
@@ -438,7 +438,7 @@ export default function Configuration({
               errors?.marketingFeePercentage?.length > 0
                 ? "text-red-400 font-semibold"
                 : "text-gray-800"
-            } text-s ml-1`}
+            } text-xs desktop:text-sm twok:text-base ml-1`}
           >
             {errors?.marketingFeePercentage?.length > 0
               ? errors.marketingFeePercentage
@@ -449,7 +449,7 @@ export default function Configuration({
 
       {featuresToDisplay.substring(6, 7) === "1" ? (
         <div className="mx-2 w-full flex-1 mt-2">
-          <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+          <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
             AutoLP Threshold
           </div>
           <input
@@ -459,7 +459,7 @@ export default function Configuration({
             onFocus={handleFocus}
             onBlur={handleBlur}
             placeholder=""
-            className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${
+            className={`w-full appearance-none text-sm py-1.5 px-2 my-1.5 desktop:py-2 desktop:px-3 desktop:my-2 border-2 border-transparent ${
               errors?.autoLPThreshold?.length > 0
                 ? "border-red-300"
                 : infocus?.autoLPThreshold
@@ -472,7 +472,7 @@ export default function Configuration({
               errors?.autoLPThreshold?.length > 0
                 ? "text-red-400 font-semibold"
                 : "text-gray-800"
-            } text-s ml-1`}
+            } text-xs desktop:text-sm twok:text-base ml-1`}
           >
             {errors?.autoLPThreshold?.length > 0
               ? errors.autoLPThreshold
@@ -483,7 +483,7 @@ export default function Configuration({
 
       {featuresToDisplay.substring(7) === "1" ? (
         <div className="mx-2 w-full flex-1 mt-2">
-          <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+          <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
             Marketing Wallet Address
           </div>
           <input
@@ -493,7 +493,7 @@ export default function Configuration({
             onFocus={handleFocus}
             onBlur={handleBlur}
             placeholder="0xf321..."
-            className={`w-full appearance-none py-2 px-3 my-2 border-2 border-transparent ${
+            className={`w-full appearance-none text-sm py-1.5 px-2 my-1.5 desktop:py-2 desktop:px-3 desktop:my-2 border-2 border-transparent ${
               errors?.marketingWalletAddress?.length > 0
                 ? "border-red-300"
                 : infocus?.marketingWalletAddress
@@ -506,7 +506,7 @@ export default function Configuration({
               errors?.marketingWalletAddress?.length > 0
                 ? "text-red-400 font-semibold"
                 : "text-gray-800"
-            } text-s ml-1`}
+            } text-xs desktop:text-sm twok:text-base ml-1`}
           >
             {errors?.marketingWalletAddress?.length > 0
               ? errors.marketingWalletAddress

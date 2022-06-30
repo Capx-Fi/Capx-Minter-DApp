@@ -1,9 +1,9 @@
 import EthLogo from "../../assets/ethereum-logo.svg";
-import "./Summary.scss"
+import "./Summary.scss";
 import { useStepperContext } from "../../contexts/StepperContext";
 import tokenTypeData from "./TokenTypeData";
 
-export default function Summary({files}) {
+export default function Summary({ files }) {
   const { userData, setUserData } = useStepperContext();
   const currentToken = tokenTypeData.find((item) => {
     return item.id === userData.tokenType;
@@ -13,7 +13,7 @@ export default function Summary({files}) {
 
   return (
     <div className="flex flex-col summary">
-      <div className="font-bold text-heading-2 leading-heading-1 mb-3 ml-2">
+      <div className="font-bold text-2xl leading-heading-2 twok:text-heading-2 twok:leading-heading-1 mb-3 ml-2">
         Summary
       </div>
       <div className="bg_translucent bg-opacity-20 p-6 rounded-xl mt-4 py-10">

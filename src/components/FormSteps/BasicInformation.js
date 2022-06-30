@@ -7,29 +7,29 @@ import { useWeb3React } from "@web3-react/core";
 import "./BasicInformation.scss";
 import { useDropzone } from "react-dropzone";
 
-
-
-
-export default function BasicInformation({ disableSteps, setDisableSteps, files, setFiles }) {
-   const { getRootProps, getInputProps } = useDropzone({
+export default function BasicInformation({
+  disableSteps,
+  setDisableSteps,
+  files,
+  setFiles,
+}) {
+  const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
-     onDrop: (acceptedFiles) => {
-       setFiles(
-         acceptedFiles.map((file) =>
-           Object.assign(file, {
-             preview: URL.createObjectURL(file),
-           })
-         )
-       );
-     },
-   });
+    onDrop: (acceptedFiles) => {
+      setFiles(
+        acceptedFiles.map((file) =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file),
+          })
+        )
+      );
+    },
+  });
 
-
-   useEffect(() => {
-     // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
-     return () => files.forEach((file) => URL.revokeObjectURL(file.preview));
-   }, []);
-
+  useEffect(() => {
+    // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
+    return () => files.forEach((file) => URL.revokeObjectURL(file.preview));
+  }, []);
 
   const { userData, setUserData } = useStepperContext();
   const defaultWeb3 = new Web3(
@@ -90,7 +90,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
     if (files === null || files.length === 0) {
       valid = false;
     }
-    setDisableSteps({...disableSteps, first:!valid});
+    setDisableSteps({ ...disableSteps, first: !valid });
   }, [userData, errors, files]);
 
   const handleChange = (e) => {
@@ -119,7 +119,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
         const toSet = parseFloat(value.trim());
         if (!isNaN(toSet)) {
           if (toSet >= 0 && toSet === parseInt(toSet)) {
-            if(toSet === 0){
+            if (toSet === 0) {
               setErrors({ ...errors, [name]: "Value cannot be zero" });
               setUserData({ ...userData, [name]: "0" });
             } else if (toSet > 18 || toSet < 8) {
@@ -160,7 +160,9 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
     } else if (name === "website") {
       const toSet = value.trim();
       if (
-        !(/^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$/.test(toSet))
+        !/^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$/.test(
+          toSet
+        )
       ) {
         if (toSet.length > 0) {
           setErrors({ ...errors, [name]: "Please enter a valid URL" });
@@ -173,7 +175,9 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
       setUserData({ ...userData, [name]: toSet });
     } else if (name === "twitter") {
       const toSet = value.trim();
-      if (!(/http(?:s)?:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_]+)/.test(toSet))) {
+      if (
+        !/http(?:s)?:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_]+)/.test(toSet)
+      ) {
         if (toSet.length > 0) {
           setErrors({
             ...errors,
@@ -188,11 +192,18 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
       setUserData({ ...userData, [name]: toSet });
     } else if (name === "telegram") {
       const toSet = value.trim();
-      if (!(/(https?:\/\/)?(www[.])?(telegram|t)\.me\/([a-zA-Z0-9_-]*)\/?$/.test(toSet))) {
+      if (
+        !/(https?:\/\/)?(www[.])?(telegram|t)\.me\/([a-zA-Z0-9_-]*)\/?$/.test(
+          toSet
+        )
+      ) {
         if (toSet.length > 0) {
-            setErrors({ ...errors, [name]: "Please enter a valid telegram link" });
+          setErrors({
+            ...errors,
+            [name]: "Please enter a valid telegram link",
+          });
         } else {
-            setErrors({ ...errors, [name]: "" });
+          setErrors({ ...errors, [name]: "" });
         }
       } else {
         setErrors({ ...errors, [name]: "" });
@@ -213,12 +224,12 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
 
   return (
     <div className="flex flex-col ">
-      <div className="font-bold text-heading-2 leading-heading-1 mb-3 ml-2">
+      <div className="font-bold text-2xl leading-heading-2 twok:text-heading-2 twok:leading-heading-1 mb-3 ml-2">
         Basic Token Information
       </div>
 
       <div className="mx-2 w-full flex-1 mt-2 text-black">
-        <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+        <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
           Token Name
         </div>
         <input
@@ -228,7 +239,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
           onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder="eg. Capx Coin"
-          className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
+          className={`w-full appearance-none text-sm py-1.5 px-2 my-1.5 desktop:py-2 desktop:px-3 desktop:my-2 border-2 ${
             errors?.tokenName?.length > 0
               ? "border-red-300"
               : infocus?.tokenName
@@ -241,7 +252,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
             errors?.tokenName?.length > 0
               ? "text-red-400 font-semibold"
               : "text-gray-800"
-          } text-s ml-1`}
+          } text-xs desktop:text-sm twok:text-base ml-1`}
         >
           {errors?.tokenName?.length > 0
             ? errors.tokenName
@@ -250,7 +261,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
       </div>
 
       <div className="mx-2 w-full flex-1 mt-2">
-        <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+        <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
           Token Symbol
         </div>
         <input
@@ -260,7 +271,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
           onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder="eg. CPX"
-          className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
+          className={`w-full appearance-none text-sm py-1.5 px-2 my-1.5 desktop:py-2 desktop:px-3 desktop:my-2 border-2 ${
             errors?.tokenSymbol?.length > 0
               ? "border-red-300"
               : infocus?.tokenSymbol
@@ -273,7 +284,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
             errors?.tokenSymbol?.length > 0
               ? "text-red-400 font-semibold"
               : "text-gray-800"
-          } text-s ml-1`}
+          } text-xs desktop:text-sm twok:text-base ml-1`}
         >
           {errors?.tokenSymbol?.length > 0
             ? errors.tokenSymbol
@@ -282,7 +293,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
       </div>
 
       <div className="mx-2 w-full flex-1 mt-2">
-        <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+        <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
           Token Decimal
         </div>
         <input
@@ -292,7 +303,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
           onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder="8-18"
-          className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
+          className={`w-full appearance-none text-sm py-1.5 px-2 my-1.5 desktop:py-2 desktop:px-3 desktop:my-2 border-2 ${
             errors?.tokenDecimal?.length > 0
               ? "border-red-300"
               : infocus?.tokenDecimal
@@ -305,7 +316,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
             errors?.tokenDecimal?.length > 0
               ? "text-red-400 font-semibold"
               : "text-gray-800"
-          } text-s ml-1`}
+          } text-xs desktop:text-sm twok:text-base ml-1`}
         >
           {errors?.tokenDecimal?.length > 0
             ? errors.tokenDecimal
@@ -314,7 +325,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
       </div>
 
       <div className="mx-2 w-full flex-1 mt-2">
-        <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+        <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
           Token Supply
         </div>
         <input
@@ -324,7 +335,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
           onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder="Initial token supply"
-          className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
+          className={`w-full appearance-none text-sm py-1.5 px-2 my-1.5 desktop:py-2 desktop:px-3 desktop:my-2 border-2 ${
             errors?.tokenSupply?.length > 0
               ? "border-red-300"
               : infocus?.tokenSupply
@@ -337,7 +348,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
             errors?.tokenSupply?.length > 0
               ? "text-red-400 font-semibold"
               : "text-gray-800"
-          } text-s ml-1`}
+          } text-xs desktop:text-sm twok:text-base ml-1`}
         >
           {errors?.tokenSupply?.length > 0
             ? errors.tokenSupply
@@ -346,7 +357,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
       </div>
 
       <div className="mx-2 w-full flex-1 mt-2">
-        <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+        <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
           Token Owner
         </div>
         <input
@@ -356,7 +367,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
           onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder="0xf321..."
-          className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
+          className={`w-full appearance-none text-sm py-1.5 px-2 my-1.5 desktop:py-2 desktop:px-3 desktop:my-2 border-2 ${
             errors?.tokenOwner?.length > 0
               ? "border-red-300"
               : infocus?.tokenOwner
@@ -369,7 +380,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
             errors?.tokenOwner?.length > 0
               ? "text-red-400 font-semibold"
               : "text-gray-800"
-          } text-s ml-1`}
+          } text-xs desktop:text-sm twok:text-base ml-1`}
         >
           {errors?.tokenOwner?.length > 0
             ? errors.tokenOwner
@@ -378,7 +389,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
       </div>
 
       <div className="mx-2 w-full flex-1 mt-2">
-        <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+        <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
           Token Image
         </div>
         <div className="my-2 flex flex-row rounded-lg items-center gap-x-6 mt-4">
@@ -413,7 +424,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
       </div>
 
       <div className="mx-2 w-full flex-1 mt-2">
-        <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+        <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
           Description
         </div>
         <input
@@ -423,7 +434,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
           onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder="eg. Token for internal use"
-          className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
+          className={`w-full appearance-none text-sm py-1.5 px-2 my-1.5 desktop:py-2 desktop:px-3 desktop:my-2 border-2 ${
             errors?.description?.length > 0
               ? "border-red-300"
               : infocus?.description
@@ -436,7 +447,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
             errors?.description?.length > 0
               ? "text-red-400 font-semibold"
               : "text-gray-800"
-          } text-s ml-1`}
+          } text-xs desktop:text-sm twok:text-base ml-1`}
         >
           {errors?.description?.length > 0
             ? errors.description
@@ -445,7 +456,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
       </div>
 
       <div className="mx-2 w-full flex-1 mt-2">
-        <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+        <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
           Website (Optional)
         </div>
         <input
@@ -455,7 +466,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
           onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder="www.capx.fi"
-          className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
+          className={`w-full appearance-none text-sm py-1.5 px-2 my-1.5 desktop:py-2 desktop:px-3 desktop:my-2 border-2 ${
             errors?.website?.length > 0
               ? "border-red-300"
               : infocus?.website
@@ -468,7 +479,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
             errors?.website?.length > 0
               ? "text-red-400 font-semibold"
               : "text-gray-800"
-          } text-s ml-1`}
+          } text-xs desktop:text-sm twok:text-base ml-1`}
         >
           {errors?.website?.length > 0
             ? errors.website
@@ -477,7 +488,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
       </div>
 
       <div className="mx-2 w-full flex-1 mt-2">
-        <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+        <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
           Twitter (Optional)
         </div>
         <input
@@ -487,7 +498,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
           onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder="eg. www.twitter.com/abcd"
-          className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
+          className={`w-full appearance-none text-sm py-1.5 px-2 my-1.5 desktop:py-2 desktop:px-3 desktop:my-2 border-2 ${
             errors?.twitter?.length > 0
               ? "border-red-300"
               : infocus?.twitter
@@ -500,7 +511,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
             errors?.twitter?.length > 0
               ? "text-red-400 font-semibold"
               : "text-gray-800"
-          } text-s ml-1`}
+          } text-xs desktop:text-sm twok:text-base ml-1`}
         >
           {errors?.twitter?.length > 0
             ? errors.twitter
@@ -509,7 +520,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
       </div>
 
       <div className="mx-2 w-full flex-1 mt-2">
-        <div className="mt-3 h-6 text-caption-1 tracking-wider font-semibold leading-2">
+        <div className="mt-3 h-6 text-sm desktop:text-caption-1 tracking-wider font-semibold leading-2">
           Telegram (Optional)
         </div>
         <input
@@ -519,7 +530,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
           onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder="eg. t.me/abcd"
-          className={`w-full appearance-none py-2 px-3 my-2 border-2 ${
+          className={`w-full appearance-none text-sm py-1.5 px-2 my-1.5 desktop:py-2 desktop:px-3 desktop:my-2 border-2 ${
             errors?.telegram?.length > 0
               ? "border-red-300"
               : infocus?.telegram
@@ -532,7 +543,7 @@ export default function BasicInformation({ disableSteps, setDisableSteps, files,
             errors?.telegram?.length > 0
               ? "text-red-400 font-semibold"
               : "text-gray-800"
-          } text-s ml-1`}
+          } text-xs desktop:text-sm twok:text-base ml-1`}
         >
           {errors?.telegram?.length > 0
             ? errors.telegram

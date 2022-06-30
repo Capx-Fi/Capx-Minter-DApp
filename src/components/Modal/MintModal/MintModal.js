@@ -28,8 +28,8 @@ const useStyles = makeStyles((theme) => ({
     padding: "0",
     outline: "none",
     width: "800px",
-    "@media (max-width:1023px)": {
-      width: "500px",
+    "@media (max-width:1300px)": {
+      width: "600px",
       borderRadius: "24px",
     },
     "@media (max-width:640px)": {
@@ -74,7 +74,7 @@ function MintModal({
       Your tokens are being minted!
       <br />
       <span
-        className="screen:text-caption-1 text-caption-2 phone:text-10px tablet:text-caption-3 breakpoint:text-caption-2"
+        className="screen:text-caption-1 screen:leading-caption-3 text-caption-2 phone:text-10px tablet:text-caption-3 breakpoint:text-caption-2"
         style={{ color: "#2f3137" }}
       >
         Please do not reload or refresh the page.
@@ -87,7 +87,7 @@ function MintModal({
       Oops! We have encountered an error.
       <br />
       <span
-        className="screen:text-caption-1 text-caption-2 phone:text-10px tablet:text-caption-3 breakpoint:text-caption-2"
+        className="screen:text-caption-1 leading-caption-1 text-caption-2 phone:text-10px tablet:text-caption-3 breakpoint:text-caption-2"
         style={{ color: "#2f3137" }}
       >
         {" "}
@@ -113,13 +113,13 @@ function MintModal({
     >
       <Fade in={open}>
         <div className={classes.paper}>
-          <div className="flex justify-between w-full items-center laptop:h-80 items-stretch">
+          <div className="flex justify-between w-full items-center h-64 desktop:h-80 items-stretch">
             <div
               style={{ background: "#2F3137" }}
               className="w-2/5 flex justify-center items-center"
             >
               <Lottie
-                className="w-24 tablet:w-32 laptop:w-48"
+                className="w-24 screen:w-32 desktop:w-48"
                 loop={true}
                 animationData={
                   mintModalStatus === "success"
@@ -130,7 +130,7 @@ function MintModal({
                 }
               />
             </div>
-            <div className="text-darkText text-left flex justify-center items-center w-3/5 pr-20 pl-12 leading-paragraph-2 screen:text-heading-2 screen:leading-heading-1 tablet:text-caption-1 tablet:leading-heading-1 desktop:text-heading-2 font-semibold w-8/12 laptop:w-6/12 desktop:w-8/12">
+            <div className="text-darkText text-left flex justify-center items-center w-full desktop:w-3/5 pl-2 pr-12 desktop:pr-20 desktop:pl-12 leading-paragraph-2 screen:text-paragraph-1 screen:leading-paragraph-2 desktop:leading-heading-1 tablet:text-caption-1 tablet:leading-heading-1 desktop:text-heading-2 font-semibold w-8/12 laptop:w-6/12 desktop:w-8/12">
               <div>
                 {mintModalStatus === "success"
                   ? "Your tokens are now successfully minted"

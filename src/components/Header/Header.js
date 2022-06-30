@@ -9,182 +9,279 @@ import DropDown from "../DropDown/DropDown";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
-	MATIC_RPC,
-	BSC_RPC,
-	AVALANCHE_RPC,
-	ACALA_RPC,
-	ACALA_CHAIN_ID,
-	AVALANCHE_CHAIN_ID,
-	BSC_CHAIN_ID,
-	ETHEREUM_CHAIN_ID,
-	MATIC_CHAIN_ID,
-	EXPLORER_AVALANCHE,
-	EXPLORER_BSC,
-	EXPLORER_MATIC,
-	EXPLORER_ACALA,
-	IS_TESTNET
+  MATIC_RPC,
+  BSC_RPC,
+  AVALANCHE_RPC,
+  ACALA_RPC,
+  ACALA_CHAIN_ID,
+  AVALANCHE_CHAIN_ID,
+  BSC_CHAIN_ID,
+  ETHEREUM_CHAIN_ID,
+  MATIC_CHAIN_ID,
+  EXPLORER_AVALANCHE,
+  EXPLORER_BSC,
+  EXPLORER_MATIC,
+  EXPLORER_ACALA,
+  IS_TESTNET,
 } from "../../constants/config";
 
 import { getSortBy } from "../../constants/getChainConfig";
+import DropDownSwitch from "../DropDown/DropDownSwitch";
 
-function Header({hiddenNav, landing, createButton}) {
-	const { active, account, library, connector, activate, deactivate, chainId } =
-		useWeb3React();
-	const { metaState, getChain } = useMetamask();
-	const [dashboardModal, setDashboardModal] = useState(false);
-	const [sortBy, setSortBy] = useState("Ethereum");
-	const handleCloseSelectDashboard = () => {
-		setDashboardModal(false);
-	};
-	const [userBalance, setUserBalance] = useState(-1);
-	const provider = window.ethereum;
-	const web3 = new Web3(provider);
+function Header({ hiddenNav, landing, createButton, myTokens }) {
+  const { active, account, library, connector, activate, deactivate, chainId } =
+    useWeb3React();
+  const { metaState, getChain } = useMetamask();
+  const [dashboardModal, setDashboardModal] = useState(false);
+  const [sortBy, setSortBy] = useState("Ethereum");
+  const handleCloseSelectDashboard = () => {
+    setDashboardModal(false);
+  };
+  const [userBalance, setUserBalance] = useState(-1);
+  const provider = window.ethereum;
+  const web3 = new Web3(provider);
 
-	const [currentTicker, setCurrentTicker] = useState("");
+  const [currentTicker, setCurrentTicker] = useState("");
+  const [showMenu, setShowMenu] = useState(false);
 
+  useEffect(() => {
+    if (active) {
+      if (account.length > 0) {
+        web3.eth
+          .getBalance(account)
+          .then((balance) => {
+            setUserBalance(balance);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+      if (sortBy === "Matic") {
+        setCurrentTicker("MATIC");
+      } else if (sortBy === "Avalanche") {
+        setCurrentTicker("AVAX");
+      } else if (sortBy === "BSC") {
+        setCurrentTicker("BNB");
+      } else if (sortBy === "Acala") {
+        setCurrentTicker("ACA");
+      } else {
+        setCurrentTicker("ETH");
+      }
+    }
+  }, [active, account, sortBy]);
 
-	useEffect(() => {
-		if (active) {
-			if (account.length > 0) {
-				web3.eth.getBalance(account).then((balance) => {
-					setUserBalance(balance);
-				}).catch((err) => {
-					console.log(err);
-				}
-				);
-			}
-			if (sortBy === "Matic") {
-				setCurrentTicker("MATIC");
-			} else if (sortBy === "Avalanche") {
-				setCurrentTicker("AVAX");
-			} else if (sortBy === "BSC") {
-				setCurrentTicker("BNB");
-			} else if (sortBy === "Acala") {
-				setCurrentTicker("ACA");
-			} else {
-				setCurrentTicker("ETH");
-			}
-		}
-	}, [active, account, sortBy]);
+  useEffect(() => {
+    setSortBy(chainId && getSortBy(chainId));
+  }, [chainId]);
 
-	useEffect(() => {
-		setSortBy(chainId && getSortBy(chainId));
-	}, [chainId]);
+  async function connect() {
+    try {
+      await activate(injected);
+    } catch (ex) {
+      if (ex instanceof UnsupportedChainIdError) {
+      }
+    }
+  }
 
-	async function connect() {
-		try {
-			await activate(injected);
-		} catch (ex) {
-			if (ex instanceof UnsupportedChainIdError) {
-			
-			}
-		}
-	}
+  const chooseChain = async (chainName) => {
+    if (chainName === "Ethereum") {
+      try {
+        await web3.givenProvider.request({
+          method: "wallet_switchEthereumChain",
+          params: [{ chainId: "0x5" }],
+        });
+      } catch (error) {}
+    } else if (chainName === "Matic") {
+      try {
+        await web3.givenProvider.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: "0x13881",
+              chainName: "Polygon Matic",
+              nativeCurrency: {
+                name: "MATIC",
+                symbol: "MATIC",
+                decimals: 18,
+              },
+              rpcUrls: [process.env.REACT_APP_MATIC_RPC_URL],
+              blockExplorerUrls: ["https://polygonscan.com/"],
+            },
+          ],
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    } else if (chainName === "BSC") {
+      try {
+        await web3.givenProvider.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: "0x61",
+              chainName: "Binance Smart Chain",
+              nativeCurrency: {
+                name: "BNB",
+                symbol: "BNB",
+                decimals: 18,
+              },
+              rpcUrls: [process.env.REACT_APP_BSC_RPC_URL],
+              blockExplorerUrls: ["https://bscscan.com/"],
+            },
+          ],
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    } else if (chainName === "Avalanche") {
+      try {
+        await web3.givenProvider.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: "0xA869",
+              chainName: "Avalanche Fuji",
+              nativeCurrency: {
+                name: "AVAX",
+                symbol: "AVAX",
+                decimals: 18,
+              },
+              rpcUrls: [process.env.REACT_APP_AVALANCHE_RPC_URL],
+              blockExplorerUrls: ["https://snowtrace.io/"],
+            },
+          ],
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    } else if (chainName === "Acala") {
+      try {
+        await web3.givenProvider.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: "0x253",
+              chainName: "Acala",
+              nativeCurrency: {
+                name: "ACA",
+                symbol: "ACA",
+                decimals: 18,
+              },
+              rpcUrls: [process.env.REACT_APP_ACALA_RPC_URL],
+              blockExplorerUrls: ["https://acala.io/"],
+            },
+          ],
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
 
-	const chainChange = async (chainName) => {
-		if (chainName === "Ethereum") {
-			try {
-				await web3.givenProvider.request({
-					method: "wallet_switchEthereumChain",
-					params: [{ chainId: ETHEREUM_CHAIN_ID.toString(16) }],
-				});
-			} catch (error) {}
-		} else if (chainName === "Matic") {
-			try {
-				await web3.givenProvider.request({
-					method: "wallet_addEthereumChain",
-					params: [
-						{
-							chainId: MATIC_CHAIN_ID.toString(16),
-							chainName: "Polygon".concat(IS_TESTNET ? " Testnet" : ""),
-							nativeCurrency: {
-								name: "MATIC",
-								symbol: "MATIC",
-								decimals: 18,
-							},
-							rpcUrls: [MATIC_RPC.toString()],
-							blockExplorerUrls: [EXPLORER_MATIC.replace("token/","")],
-						},
-					],
-				});
-			} catch (error) {
-				console.error(error);
-			}
-		} else if (chainName === "BSC") {
-			try {
-				await web3.givenProvider.request({
-					method: "wallet_addEthereumChain",
-					params: [
-						{
-							chainId: BSC_CHAIN_ID.toString(16),
-							chainName: "BSC".concat(IS_TESTNET ? " Testnet" : ""),
-							nativeCurrency: {
-								name: "BNB",
-								symbol: "BNB",
-								decimals: 18,
-							},
-							rpcUrls: [BSC_RPC.toString()],
-							blockExplorerUrls: [EXPLORER_BSC.replace("token/","")],
-						},
-					],
-				});
-			} catch (error) {
-				console.error(error);
-			}
-		} else if (chainName === "Avalanche") {
-			try {
-				await web3.givenProvider.request({
-					method: "wallet_addEthereumChain",
-					params: [
-						{
-							chainId: AVALANCHE_CHAIN_ID.toString(16),
-							chainName: "Avalanche".concat(IS_TESTNET ? " Testnet" : ""),
-							nativeCurrency: {
-								name: "AVAX",
-								symbol: "AVAX",
-								decimals: 18,
-							},
-							rpcUrls: [AVALANCHE_RPC.toString()],
-							blockExplorerUrls: [EXPLORER_AVALANCHE.replace("token/","")],
-						},
-					],
-				});
-			} catch (error) {
-				console.error(error);
-			}
-		} else if (chainName === "Acala") {
-			try {
-				await web3.currentProvider.request({
-					method: "wallet_addEthereumChain",
-					params: [
-						{
-							chainId: ACALA_CHAIN_ID.toString(16),
-							chainName: "Acala".concat(IS_TESTNET ? " Testnet" : ""),
-							nativeCurrency: {
-								name: "ACA",
-								symbol: "ACA",
-								decimals: 18,
-							},
-							rpcUrls: [ACALA_RPC.toString()],
-							blockExplorerUrls: [EXPLORER_ACALA.replace("token/","")],
-						},
-					],
-				});
-			} catch (error) {
-				console.error(error);
-			}
-		}
-	};
+  const chainChange = async (chainName) => {
+    if (chainName === "Ethereum") {
+      try {
+        await web3.givenProvider.request({
+          method: "wallet_switchEthereumChain",
+          params: [{ chainId: ETHEREUM_CHAIN_ID.toString(16) }],
+        });
+      } catch (error) {}
+    } else if (chainName === "Matic") {
+      try {
+        await web3.givenProvider.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: MATIC_CHAIN_ID.toString(16),
+              chainName: "Polygon".concat(IS_TESTNET ? " Testnet" : ""),
+              nativeCurrency: {
+                name: "MATIC",
+                symbol: "MATIC",
+                decimals: 18,
+              },
+              rpcUrls: [MATIC_RPC.toString()],
+              blockExplorerUrls: [EXPLORER_MATIC.replace("token/", "")],
+            },
+          ],
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    } else if (chainName === "BSC") {
+      try {
+        await web3.givenProvider.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: BSC_CHAIN_ID.toString(16),
+              chainName: "BSC".concat(IS_TESTNET ? " Testnet" : ""),
+              nativeCurrency: {
+                name: "BNB",
+                symbol: "BNB",
+                decimals: 18,
+              },
+              rpcUrls: [BSC_RPC.toString()],
+              blockExplorerUrls: [EXPLORER_BSC.replace("token/", "")],
+            },
+          ],
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    } else if (chainName === "Avalanche") {
+      try {
+        await web3.givenProvider.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: AVALANCHE_CHAIN_ID.toString(16),
+              chainName: "Avalanche".concat(IS_TESTNET ? " Testnet" : ""),
+              nativeCurrency: {
+                name: "AVAX",
+                symbol: "AVAX",
+                decimals: 18,
+              },
+              rpcUrls: [AVALANCHE_RPC.toString()],
+              blockExplorerUrls: [EXPLORER_AVALANCHE.replace("token/", "")],
+            },
+          ],
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    } else if (chainName === "Acala") {
+      try {
+        await web3.currentProvider.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: ACALA_CHAIN_ID.toString(16),
+              chainName: "Acala".concat(IS_TESTNET ? " Testnet" : ""),
+              nativeCurrency: {
+                name: "ACA",
+                symbol: "ACA",
+                decimals: 18,
+              },
+              rpcUrls: [ACALA_RPC.toString()],
+              blockExplorerUrls: [EXPLORER_ACALA.replace("token/", "")],
+            },
+          ],
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
 
-	async function disconnect() {
-		try {
-			deactivate();
-		} catch (ex) {
-			console.log(ex);
-		}
-	}
+  async function disconnect() {
+    try {
+      deactivate();
+    } catch (ex) {
+      console.log(ex);
+    }
+  }
 
-	return (
+  return (
     <>
       <header className={`header z-20 border-b border-darkGrayBorder`}>
         <a href="/">
@@ -192,7 +289,7 @@ function Header({hiddenNav, landing, createButton}) {
             <img className={`header_logo`} src={CapxLogo} alt="capx logo" />
           </div>
         </a>
-        {active && !hiddenNav && (
+        {active && !hiddenNav && sortBy !== "Unknown" && (
           <div className="flex flex-row gap-x-4 desktop:gap-x-8 twok:gap-x-2 ml-44">
             <div className="">
               <div className="flex flex-row twok:w-32 justify-center items-center rounded-lg px-1 twok:px-2.5 py-1 twok:py-2.5 text-lg desktop:text-paragraph-2 twok:text-paragraph-1 font-semibold border-dark-200">
@@ -225,7 +322,15 @@ function Header({hiddenNav, landing, createButton}) {
             {active ? (
               <>
                 <div className="mr-4">
-                  <DropDown sortBy={sortBy} chainChange={chainChange} />
+                  {myTokens ? (
+                    <DropDownSwitch
+                      sortBy={sortBy}
+                      chainChange={chooseChain}
+                      setShowMenu={setShowMenu}
+                    />
+                  ) : (
+                    <DropDown sortBy={sortBy} />
+                  )}
                 </div>
                 <div className="header_navbar_logoutbutton border-darkerGrayBorder border overflow-hidden">
                   {sortBy !== "Unknown" ? (

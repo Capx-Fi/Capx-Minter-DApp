@@ -16,9 +16,6 @@ function App() {
     setTimeout(() => setLoading(false), 1500);
   }, []);
 
-  
-
-
   return (
     <>
       {loading ? (
@@ -30,7 +27,7 @@ function App() {
               <Main tokenTypeData={tokensData} setTokensData={setTokensData} />
             </Route>
             <Route exact path="/tokens">
-              <MyTokens tokenTypeData={tokensData} />
+              <MyTokens />
             </Route>
             <Route exact path="/tokenInformation">
               <TokenInfo tokenTypeData={tokensData} />
