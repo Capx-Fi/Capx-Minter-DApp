@@ -7,6 +7,9 @@ import Main from "./containers/Main/Main";
 import MyTokens from "./containers/MyTokens/MyTokens";
 import TokenInfo from "./containers/TokenInfo/TokenInfo";
 import fetchTokenTypes from "./utils/fetchTokenTypes";
+import Header from "./components/Header/Header";
+import BreakPoint from "./containers/Breakpoint";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -22,18 +25,28 @@ function App() {
         <LoadingScreen />
       ) : (
         <Router>
-          <Switch>
-            <Route exact path="/">
-              <Main tokenTypeData={tokensData} setTokensData={setTokensData} />
-            </Route>
-            <Route exact path="/tokens">
-              <MyTokens />
-            </Route>
-            <Route exact path="/tokenInformation">
-              <TokenInfo tokenTypeData={tokensData} />
-            </Route>
-            <Route path="*" component={PageNotFound} />
-          </Switch>
+          <div className="hidden screen:block">
+            <Switch>
+              <Route exact path="/">
+                <Main
+                  tokenTypeData={tokensData}
+                  setTokensData={setTokensData}
+                />
+              </Route>
+              <Route exact path="/tokens">
+                <MyTokens />
+              </Route>
+              <Route exact path="/tokenInformation">
+                <TokenInfo tokenTypeData={tokensData} />
+              </Route>
+              <Route path="*" component={PageNotFound} />
+            </Switch>
+          </div>
+          <div className="screen:hidden">
+            <Header landing={true} />
+            <BreakPoint />
+            <Footer />
+          </div>
         </Router>
       )}
     </>
