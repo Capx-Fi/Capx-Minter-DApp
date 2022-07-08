@@ -11,17 +11,30 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 
 import "./FormContainer.scss";
-
-const FormContainer = ({ setShowForm, chainIdInitial }) => {
+import { useHistory } from "react-router";
+const pinataSDK = require("@pinata/sdk");
+const FormContainer = ({ setShowForm, chainIdInitial, tokenTypeData }) => {
+  const history = useHistory();
+  const pinata = pinataSDK(
+    process.env.REACT_APP_PINATA_API_KEY,
+    process.env.REACT_APP_PINATA_API_SECRET
+  );
   const [currentStep, setCurrentStep] = useState(1);
   const [stepSkip, setStepSkip] = useState(true);
   const [files, setFiles] = useState([]);
   const { chainId, account } = useWeb3React();
   const { userData, setUserData } = useStepperContext();
 
+  const [mintModalOpen, setMintModalOpen] = useState(false);
+  const [mintModalStatus, setMintModalStatus] = useState(""); //beware on mobile take this component outside
+  const [createdAddress, setCreatedAddress] = useState("");
 
   useEffect(() => {
-    if (chainIdInitial !== chainId) {
+    if (
+      chainIdInitial.chainId !== chainId ||
+      chainIdInitial.account !== account
+    ) {
+      console.log("chainIdInitial", chainIdInitial);
       setShowForm(false);
       setUserData({});
     }
@@ -32,6 +45,25 @@ const FormContainer = ({ setShowForm, chainIdInitial }) => {
     "Choose Token Type",
     "Configuration",
     "Summary",
+  ];
+
+  const stepsd = [
+    {
+      name: "Basic Information",
+      description: "Enter the basic details for your token",
+    },
+    {
+      name: "Choose Token Type",
+      description: "Select the type of token you want to create",
+    },
+    {
+      name: "Configuration",
+      description: "Advenced configuration of the token",
+    },
+    {
+      name: "Summary",
+      description: "Review your token and confirm",
+    },
   ];
 
   const [disableSteps, setDisableSteps] = useState({
@@ -58,6 +90,7 @@ const FormContainer = ({ setShowForm, chainIdInitial }) => {
             disableSteps={disableSteps}
             setStepSkip={setStepSkip}
             setDisableSteps={setDisableSteps}
+            tokenTypeData={tokenTypeData}
           />
         );
       case 3:
@@ -65,10 +98,11 @@ const FormContainer = ({ setShowForm, chainIdInitial }) => {
           <Configuration
             disableSteps={disableSteps}
             setDisableSteps={setDisableSteps}
+            tokenTypeData={tokenTypeData}
           />
         );
       case 4:
-        return <Summary files={files} />;
+        return <Summary files={files} tokenTypeData={tokenTypeData} />;
       default:
     }
   };
@@ -145,6 +179,6 @@ const FormContainer = ({ setShowForm, chainIdInitial }) => {
       <Footer />
     </div>
   );
-};;
+};
 
 export default FormContainer;

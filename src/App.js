@@ -25,7 +25,7 @@ function App() {
         <LoadingScreen />
       ) : (
         <Router>
-          <div className="hidden screen:block">
+          <div className=" ">
             <Switch>
               <Route exact path="/">
                 <Main
@@ -42,7 +42,7 @@ function App() {
               <Route path="*" component={PageNotFound} />
             </Switch>
           </div>
-          <div className="screen:hidden">
+          <div className="hidden">
             <Header landing={true} />
             <BreakPoint />
             <Footer />

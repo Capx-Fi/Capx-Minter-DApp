@@ -6,6 +6,7 @@ import Web3 from "web3";
 import { useWeb3React } from "@web3-react/core";
 import "./BasicInformation.scss";
 import { useDropzone } from "react-dropzone";
+import { Converter } from "any-number-to-words";
 
 export default function BasicInformation({
   disableSteps,
@@ -13,9 +14,21 @@ export default function BasicInformation({
   files,
   setFiles,
 }) {
+  const converter = new Converter();
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFiles) => {
+      let file = acceptedFiles[0];
+
+      const reader = new FileReader();
+      reader.onabort = () => console.log("file reading was aborted");
+      reader.onerror = () => console.log("file reading has failed");
+      reader.onload = () => {
+        const binaryStr = reader.result;
+        setUserData({ ...userData, image64: binaryStr });
+      };
+      reader.readAsDataURL(file);
+
       setFiles(
         acceptedFiles.map((file) =>
           Object.assign(file, {
@@ -36,9 +49,20 @@ export default function BasicInformation({
     "https://rinkeby.infura.io/v3/6351bb49adde41ec86bd60b451b9f1c5"
   );
 
+  const shortenedNumber = (number) => {
+    if (isNaN(number)) return number;
+    if (number > 1000) {
+      return (
+        number - (number % Math.pow(10, Math.floor(Math.log10(number)) - 1))
+      );
+    }
+  };
+
   const { account } = useWeb3React();
   const [infocus, setInfocus] = useState({});
   const [errors, setErrors] = useState({});
+
+  const [advancedToggle, setAdvancedToggle] = useState(false);
 
   const handleFocus = (e) => {
     const { name } = e.target;
@@ -58,7 +82,6 @@ export default function BasicInformation({
     let valid = true;
     Object.values(errors).forEach((entry) => {
       if (entry !== "") {
-        console.log("due to error");
         valid = false;
       }
     });
@@ -67,23 +90,18 @@ export default function BasicInformation({
       valid = false;
     }
     if (!(userData?.tokenSymbol && userData?.tokenSymbol?.length > 0)) {
-      console.log("due to symbol");
       valid = false;
     }
     if (!(userData?.description && userData?.description?.length > 0)) {
-      console.log("due to desc");
       valid = false;
     }
     if (isNaN(parseFloat(userData?.tokenSupply))) {
       valid = false;
-      console.log("due to supp");
     }
     if (!(userData?.tokenOwner && userData?.tokenOwner?.length > 0)) {
       valid = false;
-      console.log("due to tokown");
     }
     if (isNaN(parseFloat(userData?.tokenDecimal))) {
-      console.log("due deci");
       valid = false;
     }
 
@@ -175,9 +193,7 @@ export default function BasicInformation({
       setUserData({ ...userData, [name]: toSet });
     } else if (name === "twitter") {
       const toSet = value.trim();
-      if (
-        !/http(?:s)?:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_]+)/.test(toSet)
-      ) {
+      if (!/(https?:\/\/)?(www[.])?twitter\.com\/([a-zA-Z0-9_]+)/.test(toSet)) {
         if (toSet.length > 0) {
           setErrors({
             ...errors,

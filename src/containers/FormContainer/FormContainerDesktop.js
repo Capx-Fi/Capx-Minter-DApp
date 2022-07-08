@@ -19,7 +19,11 @@ import { getFactoryAddress } from "../../constants/getChainConfig";
 import { Children } from "react";
 const pinataSDK = require("@pinata/sdk");
 
-const FormContainer = ({ setShowForm, chainIdInitial, tokenTypeData }) => {
+const FormContainerDesktop = ({
+  setShowForm,
+  chainIdInitial,
+  tokenTypeData,
+}) => {
   const history = useHistory();
   const pinata = pinataSDK(
     process.env.REACT_APP_PINATA_API_KEY,
@@ -36,7 +40,10 @@ const FormContainer = ({ setShowForm, chainIdInitial, tokenTypeData }) => {
   const [createdAddress, setCreatedAddress] = useState("");
 
   useEffect(() => {
-    if (chainIdInitial.chainId !== chainId || chainIdInitial.account !== account) {
+    if (
+      chainIdInitial.chainId !== chainId ||
+      chainIdInitial.account !== account
+    ) {
       console.log("chainIdInitial", chainIdInitial);
       setShowForm(false);
       setUserData({});
@@ -236,7 +243,7 @@ const FormContainer = ({ setShowForm, chainIdInitial, tokenTypeData }) => {
         pathname: "/tokens",
         state: {
           newlyCreated: true,
-          createdAddress: createdAddress
+          createdAddress: createdAddress,
         },
       });
     }
@@ -261,7 +268,9 @@ const FormContainer = ({ setShowForm, chainIdInitial, tokenTypeData }) => {
         </div>
         <div className="herocontainer px-6 py-5 twok:px-12 twok:py-4 w-62v twok:w-60v rounded-3xl bg-opacity-30 relative border border-lightGrayBorder">
           <div className="horizontal container">
-            <div className="p-4 twok:p-10 pb-4 ">{displayStep(currentStep)}</div>
+            <div className="p-4 twok:p-10 pb-4 ">
+              {displayStep(currentStep)}
+            </div>
           </div>
           <StepControls
             handleClick={handleClick}
@@ -276,4 +285,4 @@ const FormContainer = ({ setShowForm, chainIdInitial, tokenTypeData }) => {
   );
 };
 
-export default FormContainer;
+export default FormContainerDesktop;
