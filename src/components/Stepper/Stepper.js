@@ -15,7 +15,7 @@ const Stepper = ({ steps, currentStep }) => {
           ...newSteps[count],
           highlighted: true,
           selected: true,
-          completed: true,
+          completed: false,
         };
         count++;
       }
@@ -61,6 +61,7 @@ const Stepper = ({ steps, currentStep }) => {
     stepsRef.current = stepsState;
     const current = updateStep(currentStep - 1, stepsRef.current);
     setNewStep(current);
+    console.log(currentStep, current);
   }, [steps, currentStep]);
 
   const stepsDisplay = newStep.map((step, index) => {
@@ -87,13 +88,15 @@ const Stepper = ({ steps, currentStep }) => {
               index + 1
             )}
           </div>
-          <div
-            className={`absolute top-0 text-center text-black mt-16 w-32 text-caption-2 leading-caption-2 tracking-tight font-medium ${
-              step.highlighted ? "font-bold" : ""
-            }`}
-          >
-            {step.description}
-          </div>
+          {currentStep === index + 1 && (
+            <div
+              className={`absolute top-0 text-center text-black mt-16  text-caption-3 leading-caption-3 tracking-tight font-medium ${
+                step.highlighted ? "font-bold" : ""
+              }`}
+            >
+              {step.description}
+            </div>
+          )}
         </div>
         <div
           className={`flex-auto border-t-4 transition duration-500 ease-in-out  ${
@@ -106,11 +109,7 @@ const Stepper = ({ steps, currentStep }) => {
 
   return (
     <>
-      
-      <div
-        className="mx-4 p-4 flex justify-between items-center"
-        
-      >
+      <div className="mx-4 p-4 flex justify-between items-center">
         {stepsDisplay}
       </div>
     </>

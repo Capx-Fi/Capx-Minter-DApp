@@ -11,8 +11,6 @@ import AvaLogo from "../../assets/avalanche-logo.svg";
 import AcalaLogo from "../../assets/acala.svg";
 import CheckMark from "../../assets/check-mark-green.svg";
 
-
-
 import Web3 from "web3";
 
 import "./ChooseChain.scss";
@@ -98,7 +96,7 @@ const ChooseChain = ({ setShowForm, setChainIdInitial }) => {
       } catch (error) {
         console.error(error);
       }
-    }else if(chainName === "Acala"){
+    } else if (chainName === "Acala") {
       try {
         await web3.givenProvider.request({
           method: "wallet_addEthereumChain",
@@ -123,11 +121,11 @@ const ChooseChain = ({ setShowForm, setChainIdInitial }) => {
   };
 
   return (
-    <div className="vesting_steps h-screen flex choose-chain">
+    <div className="vesting_steps h-screen flex choose-chain my-10 xl:my-0">
       <Header />
       <div className="maincontainer flex flex-col justify-center items-center m-auto mt-auto">
-        <div className="herocontainer px-6 desktop:px-2 twok:px-12 py-10 twok:py-20 rounded-3xl text-black relative w-55v twok:w-60v flex flex-col items-start bg-white border border-lightGrayBorder">
-          <div className="title text-3xl desktop:text-heading-2 leading-heading-2 twok:text-50px twok:leading-lh-64 font-bold tracking-tight mt-4 w-full text-center">
+        <div className="herocontainer px-6 desktop:px-2 twok:px-12 py-10 twok:py-20 rounded-3xl text-black relative w-11/12 mt-16 xl:mt-0 xl:w-55v twok:w-60v flex flex-col items-start bg-white border border-lightGrayBorder">
+          <div className="title text-2xl desktop:text-heading-2 leading-heading-2 twok:text-50px twok:leading-lh-64 font-bold tracking-tight mt-4 w-full text-center">
             {"Choose your network for token creation"}
           </div>
 
@@ -137,7 +135,7 @@ const ChooseChain = ({ setShowForm, setChainIdInitial }) => {
                 sortBy === "Ethereum"
                   ? " text-container border-2 border-capxGreen"
                   : ""
-              } text-container bg-opacity-50 cursor-pointer font-semibold text-lg desktop:text-xl twok:text-2xl px-4 twok:px-6 m-3 py-4 rounded-lg cursor-pointer w-2/5 h-14 desktop:h-16 twok:h-20 flex items-center justify-between`}
+              } text-container bg-opacity-50 cursor-pointer font-semibold text-lg desktop:text-xl twok:text-2xl px-4 twok:px-6 m-3 py-4 rounded-lg w-11/12 xl:w-2/5 h-14 desktop:h-16 twok:h-20 flex items-center justify-between`}
               onClick={() => {
                 chainChange("Ethereum");
               }}
@@ -166,7 +164,7 @@ const ChooseChain = ({ setShowForm, setChainIdInitial }) => {
                 sortBy === "BSC"
                   ? " text-container border-2 border-capxGreen"
                   : ""
-              } text-container font-semibold text-lg desktop:text-xl twok:text-2xl px-4 twok:px-6 m-3 py-4 rounded-lg cursor-pointer w-2/5 h-14 desktop:h-16 twok:h-20 flex items-center justify-between`}
+              } text-container font-semibold text-lg desktop:text-xl twok:text-2xl px-4 twok:px-6 m-3 py-4 rounded-lg cursor-pointer w-11/12 xl:w-2/5 h-14 desktop:h-16 twok:h-20 flex items-center justify-between`}
               onClick={() => {
                 chainChange("BSC");
               }}
@@ -194,7 +192,7 @@ const ChooseChain = ({ setShowForm, setChainIdInitial }) => {
                 sortBy === "Matic"
                   ? " text-container border-2 border-capxGreen"
                   : ""
-              } text-container  font-semibold text-lg desktop:text-xl twok:text-2xl px-4 twok:px-6 m-3 py-4 rounded-lg cursor-pointer w-2/5 h-14 desktop:h-16 twok:h-20 flex items-center justify-between`}
+              } text-container  font-semibold text-lg desktop:text-xl twok:text-2xl px-4 twok:px-6 m-3 py-4 rounded-lg cursor-pointer w-11/12 xl:w-2/5 h-14 desktop:h-16 twok:h-20 flex items-center justify-between`}
               onClick={() => {
                 chainChange("Matic");
               }}
@@ -222,7 +220,7 @@ const ChooseChain = ({ setShowForm, setChainIdInitial }) => {
                 sortBy === "Avalanche"
                   ? " text-container border-2 border-capxGreen"
                   : ""
-              } text-container  font-semibold text-lg desktop:text-xl twok:text-2xl px-4 twok:px-6 m-3 py-4 rounded-lg cursor-pointer w-2/5 h-14 desktop:h-16 twok:h-20 flex items-center justify-between`}
+              } text-container  font-semibold text-lg desktop:text-xl twok:text-2xl px-4 twok:px-6 m-3 py-4 rounded-lg cursor-pointer w-11/12 xl:w-2/5 h-14 desktop:h-16 twok:h-20 flex items-center justify-between`}
               onClick={() => {
                 chainChange("Avalanche");
               }}
@@ -250,7 +248,7 @@ const ChooseChain = ({ setShowForm, setChainIdInitial }) => {
                 sortBy === "Acala"
                   ? " text-container border-2 border-capxGreen"
                   : ""
-              } text-container  font-semibold text-lg desktop:text-xl twok:text-2xl px-4 twok:px-6 m-3 py-4 rounded-lg cursor-pointer w-2/5 h-14 desktop:h-16 twok:h-20 flex items-center justify-between`}
+              } text-container  font-semibold text-lg desktop:text-xl twok:text-2xl px-4 twok:px-6 m-3 py-4 rounded-lg cursor-pointer w-11/12 xl:w-2/5 h-14 desktop:h-16 twok:h-20 flex items-center justify-between`}
               onClick={() => {
                 chainChange("Acala");
               }}
@@ -274,11 +272,9 @@ const ChooseChain = ({ setShowForm, setChainIdInitial }) => {
               )}
             </div>
             <div
-              className={`text-container cursor-not-allowed text-center font-semibold text-lg desktop:text-xl twok:text-2xl px-4 twok:px-6 m-3 py-4 rounded-lg cursor-pointer w-2/5 h-14 desktop:h-16 twok:h-20 flex items-center justify-between`}
+              className={`text-container cursor-not-allowed text-center font-semibold text-lg desktop:text-xl twok:text-2xl px-4 twok:px-6 m-3 py-4 rounded-lg cursor-pointer w-11/12 xl:w-2/5 h-14 desktop:h-16 twok:h-20 flex items-center justify-between`}
             >
-              <div className="">
-                {"Coming Soon"}
-              </div>
+              <div className="">{"Coming Soon"}</div>
             </div>
           </div>
         </div>
@@ -288,16 +284,16 @@ const ChooseChain = ({ setShowForm, setChainIdInitial }) => {
             sortBy === "Unknown"
               ? "create-button-disabled cursor-not-allowed opacity-60"
               : "bg-capxGreen create-button cursor-pointer"
-          } justify-self-end rounded-2xl mt-6 twok:mt-8 justify-center items-center flex px-4 py-3.5 desktop:py-4.5 twok:py-6 w-full `}
+          } justify-self-end rounded-2xl mb-16 xl:mb-0 mt-6 twok:mt-8 justify-center items-center flex px-4 py-3.5 desktop:py-4.5 twok:py-6 w-11/12 mx-auto xl:w-full `}
           onClick={() => {
             if (sortBy !== "Unknown") {
               setShowForm(true);
-              setChainIdInitial({chainId: chainId, account: account});
+              setChainIdInitial({ chainId: chainId, account: account });
             }
           }}
         >
           <div
-            className={`text-white button_text phone:text-caption-2 screen:text-paragraph-1 screen:leading-paragraph-1 twok:text-subheading twok:leading-text-subheading font-bold`}
+            className={`text-white  button_text phone:text-caption-2 screen:text-paragraph-1 screen:leading-paragraph-1 twok:text-subheading twok:leading-text-subheading font-bold`}
           >
             {"Begin Token Creation"}
             <img

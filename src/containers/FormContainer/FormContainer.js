@@ -146,24 +146,16 @@ const FormContainer = ({ setShowForm, chainIdInitial, tokenTypeData }) => {
     <div className="form_container h-screen flex-col">
       <Header hiddenNav={true} />
       <div
-        className={`${
-          currentStep === 2 ? "overflow-y-hidden pt-32 pb-8" : "py-32"
-        } maincontainer text-black flex flex-col justify-center items-center m-auto mt-auto `}
+        className={`pt-28 pb-16 maincontainer text-black flex flex-col justify-center items-center mt-auto `}
       >
-        {currentStep === 2 && (
-          <div className="h-32 text-transparent" id="specialdiv">
-            HELLO
-          </div>
-        )}
-
         <div
-          className={`mt upper-container horizontal container rounded-3xl px-14 py-4 pb-12 w-40v bg-opacity-30 relative`}
+          className={`mt upper-container horizontal container rounded-3xl xl:px-14 py-4 pb-12 w-full xl:w-40v bg-opacity-30 relative`}
         >
           <Stepper steps={steps} currentStep={currentStep} />
         </div>
-        <div className="herocontainer px-14 w-40v rounded-3xl bg-opacity-30 mt-10 relative">
+        <div className="herocontainer px-14 w-full xl:w-40v rounded-3xl bg-opacity-30 mt-10 relative">
           <div className="horizontal container mt-5 ">
-            <div className="p-10 pb-4 ">{displayStep(currentStep)}</div>
+            <div className="xl:p-10 pb-4 ">{displayStep(currentStep)}</div>
           </div>
 
           {/* navigation button */}

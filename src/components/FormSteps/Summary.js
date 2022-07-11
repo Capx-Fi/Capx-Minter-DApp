@@ -14,6 +14,9 @@ export default function Summary({ files, tokenTypeData }) {
     <div className="flex flex-col summary">
       <div className="font-bold text-2xl leading-heading-2 twok:text-heading-2 twok:leading-heading-1 mb-3 ml-2">
         Summary
+        <span className="text-greylabel block text-paragraph-2 twok:text-paragraph-1">
+          Review your choices and confirm
+        </span>
       </div>
       <div className="bg_translucent bg-opacity-20 p-6 rounded-xl mt-4 py-10">
         <div className="flex flex-row items-stretch w-full gap-x-2">
@@ -71,10 +74,10 @@ export default function Summary({ files, tokenTypeData }) {
             <span className="font-bold text-capxGreen text-paragraph-2">
               Token Features
             </span>
-            <div className="flex flex-wrap w-full mt-2 gap-y-2">
+            <div className="flex flex-col flex-wrap w-full mt-2 gap-y-2">
               {Object.keys(currentToken.features).map((item, index) =>
                 currentToken.features[item] ? (
-                  <div className="w-1/2" key={index}>
+                  <div className="w-full" key={index}>
                     {item}
                   </div>
                 ) : null
@@ -83,7 +86,7 @@ export default function Summary({ files, tokenTypeData }) {
           </div>
         </div>
 
-        <div className="w-full border-t-2 border-black w-full mt-4 pt-4 px-4">
+        <div className="w-full border-t-2 border-black  mt-4 pt-4 px-4">
           <div className="text-caption-1 leadign-caption-1">
             <span className="font-bold text-capxGreen text-paragraph-2">
               Advanced Details
@@ -92,7 +95,12 @@ export default function Summary({ files, tokenTypeData }) {
           <div className="flex flex-wrap w-full mt-2 gap-y-1">
             <div className="w-full mb-2">
               <span className="font-bold">Owner</span> :{" "}
-              <span className="inline-block">{userData.tokenOwner}</span>
+              <span className="inline-block">
+                {userData.tokenOwner
+                  .substring(0, 4)
+                  .concat("...")
+                  .concat(userData.tokenOwner.substring(12, 16))}
+              </span>
             </div>
             {featuresToDisplay.substring(7) === "1" ? (
               <div className="w-full mb-2">
